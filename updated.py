@@ -62,7 +62,11 @@ def read_inp(inp_dir_path, user, inp_dir):
         inp_files = os.listdir(inp_dir_path)
     else:
         print("Can't open the current directory")
+<<<<<<< HEAD
     print(inp_files)
+=======
+    # print(inp_files)
+>>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
 
     inp_files2 = []
     for file in inp_files:
@@ -84,6 +88,7 @@ def read_inp(inp_dir_path, user, inp_dir):
         if curr_date2 in nedate:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = 'N/A'
+<<<<<<< HEAD
             for inp_name in inp_files:
                 inp_name = inp_name.strip()
                 inp_file = "{}/{}".format(inp_dir_path, inp_name)
@@ -100,11 +105,15 @@ def read_inp(inp_dir_path, user, inp_dir):
 
         
                         # print("yes==============")
+=======
+            print("yes==============")
+>>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
         else:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = issue1
 
 
+<<<<<<< HEAD
     # print(inp_dir_path, user, inp_dir)
     print("==================","1")
 
@@ -123,11 +132,17 @@ def tape(data, date1, date2, inp_dir_path):
         status = 'Fail'
         fail_reason = 'BURA_BACKUP Failure'
     return status, fail_reason
+=======
+    print(parsed_hash)
+    # print(inp_dir_path, user, inp_dir)
+    print("==================")
+>>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
 
 
 if __name__ == '__main__':
     global users_details
     global parsed_hash
+<<<<<<< HEAD
 
     month_date = str(datetime.today().strftime('%b %e'))
     curr_date = str(datetime.today().strftime('%Y-%m-%d'))
@@ -136,6 +151,10 @@ if __name__ == '__main__':
     curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
 
     print(curr_date)
+=======
+    curr_date2 = str(datetime.today().strftime('%Y%m%d'))
+
+>>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
     issue1 = 'Connectivity/Password Issue'
     parsed_hash = {}
     users_details = set_users_conf()
