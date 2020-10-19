@@ -1,0 +1,5 @@
+cmd-24-start
+find /data/ccn/CcnStorage0/CdrOutput/archive/ -type f -mmin -60 | wc -l
+76
+Proc_m1_s7$ 
+cmd-24-end

@@ -62,11 +62,9 @@ def read_inp(inp_dir_path, user, inp_dir):
         inp_files = os.listdir(inp_dir_path)
     else:
         print("Can't open the current directory")
-<<<<<<< HEAD
     print(inp_files)
-=======
+
     # print(inp_files)
->>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
 
     inp_files2 = []
     for file in inp_files:
@@ -88,7 +86,6 @@ def read_inp(inp_dir_path, user, inp_dir):
         if curr_date2 in nedate:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = 'N/A'
-<<<<<<< HEAD
             for inp_name in inp_files:
                 inp_name = inp_name.strip()
                 inp_file = "{}/{}".format(inp_dir_path, inp_name)
@@ -103,22 +100,52 @@ def read_inp(inp_dir_path, user, inp_dir):
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
                     
 
+                ##----------------- MINSAT fs and db Check -----------------##
+                if 'minsat' in user_l:
+                    status = ''
+                    fail_reason = ''
+
+                    if 'fs.inp' in inp_name:
+                        status = filesystem(file_data, curr_date6)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+                    if 'db_backup.inp' in inp_name:
+                        status = dbn(file_data, pre_date1, '')
+                        parsed_hash[user][host][ip][inp_name] = status
+
+
+                ##----------------- NGVS geo-redundancy, nfs and cassendra Check -----------------##
+                if 'ngvs' in user_l:
+                    status = ''
+                    if 'fs.inp' in inp_name:
+                        status = dbn(file_data, curr_date6, curr_date)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+                    if 'db3.inp' in inp_name:
+                        status = tape(file_data, pre_date1, month_date)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+                    if 'fs.inp' in inp_name:
+                        status = $status = zoo(file_data, curr_date, curr_date4)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+
         
-                        # print("yes==============")
-=======
+
             print("yes==============")
->>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
         else:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = issue1
+            print("No==============")
 
 
-<<<<<<< HEAD
+
     # print(inp_dir_path, user, inp_dir)
     print("==================","1")
 
 
 def tape(data, date1, date2, inp_dir_path):
+    """Used for backup.inp and fs_occ_backup.inp"""
     status = ""
     fail_reason = ""
     regex = '{}.*?voucherHistory'.format(month_date)
@@ -132,29 +159,54 @@ def tape(data, date1, date2, inp_dir_path):
         status = 'Fail'
         fail_reason = 'BURA_BACKUP Failure'
     return status, fail_reason
-=======
-    print(parsed_hash)
-    # print(inp_dir_path, user, inp_dir)
-    print("==================")
->>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
+    
+
+def filesystem(data, date):
+    """Used for fs.inp"""
+    status = ""
+    regex  = '{}.*?Backup completed'.format(curr_date6)
+    if len(re.findall(regex, data))>0:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+
+def dbn(data, date1, date2):
+    """Used for db_backup.inp"""
+    regex = "cfbackup.*?{}.*?log".format(curr_date2)
+    status = ''
+    if 'ScheduledBackup'+date1 in data:
+        status = 'Success'
+    elif 'INFO:root:Filesystem backup ended at '+date2 in data:
+        status = 'Success'
+    elif 'Recovery Manager complete' in data:
+        status = 'Success'  
+    elif 'HISTDG' in data or 'rman' in data:
+        status = Success
+    elif len(re.findall(regex, data))>0:
+        status = 'Success'
+    elif 'DUMP is complete' in data:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
 
 
 if __name__ == '__main__':
     global users_details
     global parsed_hash
-<<<<<<< HEAD
+
 
     month_date = str(datetime.today().strftime('%b %e'))
+    pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
     curr_date = str(datetime.today().strftime('%Y-%m-%d'))
     curr_date2 = str(datetime.today().strftime('%Y%m%d'))
+    curr_date4 = str(datetime.today().strftime('%y%m%d'))
     curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
+    curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
     curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
 
-    print(curr_date)
-=======
-    curr_date2 = str(datetime.today().strftime('%Y%m%d'))
-
->>>>>>> 50959fab6b73a66f3c306e91ad8e4ca90d2b86f2
     issue1 = 'Connectivity/Password Issue'
     parsed_hash = {}
     users_details = set_users_conf()

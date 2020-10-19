@@ -1,0 +1,24 @@
+cmd-8-start
+cat /backup1/dbdumps/PPLE_SYB.`date +%Y.%m.%d`*/dump.log | tail -20
+1> dump tran sybsystemprocs with no_log
+1> dump tran sybsystemprocs with truncate_only
+dbdump: dump of database 'sybsystemprocs' done 02:01.41
+dbdump: dump of database 'master' started 02:01.41...
+1> dump database master to "compress::3::/backup1/dbdumps/PPLE_SYB/master.dump"
+WARNING: In order to LOAD the master database, the ASE must run in single-user mode. If the master database dump uses multiple volumes, you must execute sp_volchanged on another ASE at LOAD time in order to signal volume changes.
+Backup Server session id is: 54. Use this value when executing the 'sp_volchanged' system stored procedure after fulfilling any volume change request from the Backup Server.
+Backup Server: 4.132.1.1: Attempting to open byte stream device: 'compress::3::/backup1/dbdumps/PPLE_SYB/master.dump::000'
+Backup Server: 6.28.1.1: Dumpfile name 'master2029301C85 ' section number 1 mounted on byte stream 'compress::3::/backup1/dbdumps/PPLE_SYB/master.dump::000'
+Backup Server: 4.188.1.1: Database master: 1386 kilobytes (12%) DUMPED.
+Backup Server: 4.188.1.1: Database master: 7104 kilobytes (100%) DUMPED.
+Backup Server: 3.43.1.1: Dump phase number 1 completed.
+Backup Server: 3.43.1.1: Dump phase number 2 completed.
+Backup Server: 3.43.1.1: Dump phase number 3 completed.
+Backup Server: 4.188.1.1: Database master: 7114 kilobytes (100%) DUMPED.
+Backup Server: 3.42.1.1: DUMP is complete (database master).
+1> dump tran master with no_log
+1> dump tran master with truncate_only
+dbdump: dump of database 'master' done 02:01.42
+dbdump: dump of 'PPLE_SYB' finished at 2020-10-19 02:01.42;
+bash-3.00$ 
+cmd-8-end

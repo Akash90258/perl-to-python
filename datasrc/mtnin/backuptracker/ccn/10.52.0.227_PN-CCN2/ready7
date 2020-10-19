@@ -1,0 +1,5 @@
+cmd-22-start
+ls -lrth /data/ccn/CcnStorage1/CdrOutput/ready | grep -i ccn | wc -l
+0
+Proc_m1_s7$ 
+cmd-22-end

@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/cfbackup_bzvocc2_`date +%Y%m%d`* | tail
+cat: /var/log/cfbackup_bzvocc2_20201019*: No such file or directory
+[amsro@bzvocc2 ~]$ 
+cmd-6-end

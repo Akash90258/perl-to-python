@@ -1,0 +1,14 @@
+cmd-14-start
+ls -rlt /var/backup/cassandra/main_vs | tail
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:30 securityProfile
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:30 lcs-1f8d5bd0c43511ea9659c3ae5f7ebbe6
+drwxr-xr-x. 4 vs vs 86 Oct 19 02:37 batchIdDefinition
+drwxr-xr-x. 4 vs vs 86 Oct 19 02:37 voucherHistory
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:39 keyCounter
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:39 encryptionKey
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:39 vshash
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:39 vouchers
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:43 batchids
+drwxr-xr-x. 4 vs vs 98 Oct 19 02:44 vouchersByPurgeDate
+[amsro@pnvs2a ~]$ 
+cmd-14-end

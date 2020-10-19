@@ -1,0 +1,14 @@
+cmd-6-start
+cat /var/log/cfbackup_pnrocc2_`date +%Y%m%d`* | tail
+INFO:root:Mounting...
+INFO:root:Creating tar file...
+INFO:root:Creating tar file... Done
+INFO:root:Unmounted
+INFO:root:Removed /dev/VolGroup1/lv_cdr_backup
+INFO:root:Starting backup of /boot
+INFO:root:Backup of /boot done
+INFO:root:Starting backup of /boot/efi
+INFO:root:Backup of /boot/efi done
+INFO:root:Filesystem backup ended at 2020-10-19 02:11:49
+[amsro@pnrocc2 ~]$ 
+cmd-6-end

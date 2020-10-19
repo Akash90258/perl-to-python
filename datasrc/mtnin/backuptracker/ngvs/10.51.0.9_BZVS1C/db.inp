@@ -1,0 +1,8 @@
+cmd-8-start
+ls -rlt /var/backup/cassandra/main_vuc | tail
+total 0
+drwxr-xr-x. 4 vs vs 98 Oct 19 03:36 activationCodes
+drwxr-xr-x. 4 vs vs 98 Oct 19 03:41 serialNums
+drwxr-xr-x. 4 vs vs 98 Oct 19 03:46 serialNumRange
+[amsro@bzvs1c ~]$ 
+cmd-8-end

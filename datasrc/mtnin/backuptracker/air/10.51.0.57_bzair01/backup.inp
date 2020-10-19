@@ -1,6 +1,6 @@
 cmd-6-start
 cat /var/log/cfbackup*`date '+%d'`* | tail
-INFO:root:Calculated maximum snapshot size 106669539328g used for /dev/VolGroup/lv_home
+INFO:root:Calculated maximum snapshot size 106141057024g used for /dev/VolGroup/lv_home
 INFO:root:Mounting...
 INFO:root:Creating tar file...
 INFO:root:Creating tar file... Done
@@ -9,6 +9,6 @@ INFO:root:Removed /dev/VolGroup/lv_home_backup
 INFO:root:Starting backup of /boot
 INFO:root:Backup of /boot done
 INFO:root:Could not identify /boot/efi/ as a mount point, assuming UEFI is not used.
-INFO:root:Filesystem backup ended at 2020-10-19 02:22:43
-[amsro@bzair02 ~]$ 
+INFO:root:Filesystem backup ended at 2020-10-19 02:18:50
+[amsro@bzair01 ~]$ 
 cmd-6-end

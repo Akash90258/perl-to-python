@@ -1,0 +1,5 @@
+cmd-8-start
+ls -lrth /data/ccn/CcnStorage1/CdrOutput/tmp | grep -i ccn | wc -l
+15
+Proc_m1_s5$ 
+cmd-8-end

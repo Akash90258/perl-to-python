@@ -1,0 +1,8 @@
+cmd-15-start
+send: spawn id exp5 not open
+    while executing
+"send "$tcmd\r""
+    (procedure "cmdexec" line 57)
+    invoked from within
+"cmdexec $lgfileh"
+    (file "/home/congo/PM-Automation/bin/prod/smartex.exp" line 65)

@@ -1,0 +1,7 @@
+cmd-16-start
+ls -rlt /var/backup/cassandra/main_vs/batchids | tail
+total 56
+drwxr-xr-x. 2 vs vs 24576 Sep 19 02:31 daily_db_snapshot_20200919023014
+drwxr-xr-x. 2 vs vs 24576 Sep 20 02:32 daily_db_snapshot_20200920023014
+[amsro@pnvs2a ~]$ 
+cmd-16-end

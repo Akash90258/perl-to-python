@@ -1,0 +1,5 @@
+cmd-10-start
+ls -lrth /data/ccn/CcnStorage0/CdrOutput/ready | grep -i ccn | wc -l [AProc_m1_s5$ ls -lrth /data/ccn/CcnStorage0/CdrOutput/ready | grep -i ccn | wc -[Kl
+0
+Proc_m1_s5$ 
+cmd-10-end

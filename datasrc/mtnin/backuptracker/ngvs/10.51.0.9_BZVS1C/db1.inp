@@ -1,0 +1,8 @@
+cmd-10-start
+ls -rlt /var/backup/cassandra/vsuser | tail
+total 0
+drwxr-xr-x. 4 vs vs 98 Oct 19 03:30 global
+drwxr-xr-x. 4 vs vs 98 Oct 19 03:41 users
+drwxr-xr-x. 4 vs vs 98 Oct 19 03:41 groups
+[amsro@bzvs1c ~]$ 
+cmd-10-end

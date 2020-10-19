@@ -1,0 +1,14 @@
+cmd-6-start
+cat /var/log/cfbackup_*_`date +%Y%m%d`* | tail
+INFO:root:Removed /dev/VolGroup/lv_varlog_backup
+INFO:root:Starting backup of /boot
+INFO:root:Backup of /boot done
+INFO:root:Starting backup of /boot/efi
+INFO:root:Backup of /boot/efi done
+WARNING:root:The below File Systems are not handled in backup:
+WARNING:root:/var/lib/cassandra
+WARNING:root:/var/backup
+WARNING:root:During restore these File Systems has to be restored manually.
+INFO:root:Filesystem backup ended at 2020-10-19 02:21:08
+[amsro@pnvs2b ~]$ 
+cmd-6-end

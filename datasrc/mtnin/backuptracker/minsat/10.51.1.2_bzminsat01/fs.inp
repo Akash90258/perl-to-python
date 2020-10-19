@@ -1,0 +1,14 @@
+cmd-6-start
+tail -10 /var/maint/logs/backup/system_backup_exec.log.`date '+%Y.%m. %d'`.*
+  DUMP: Dumping (Pass III) [directories]
+  DUMP: Dumping (Pass IV) [regular files]
+  DUMP: 43082110 blocks (21036.19MB) on 1 volume at 41127 KB/sec
+  DUMP: DUMP IS DONE
+  DUMP: Level 0 dump on Mon Oct 19 02:29:24 2020
+[2020/10/19 02:38:09] Renaming destination directory from /backup1/UFSDUMP_0 to /backup1/UFSDUMP_0_2020.10.19.02.01.42
+
+[2020/10/19 02:38:09] Backup completed
+
+[2020/10/19 02:38:10] Cleaning up the system
+bash-3.00$ 
+cmd-6-end
