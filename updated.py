@@ -1,5 +1,13 @@
 import os
+import re
 # print(os.path.isdir("/home/el"))
+
+
+def read_file(file_name):
+    f = open(file_name,"r")
+    file_data = f.read()
+    f.close()
+    return file_data
 
 def set_users_conf():
     """Read pma_bkp_tracker.conf file and create dict."""
@@ -14,6 +22,8 @@ def set_users_conf():
         users_details[key.strip()] = values.split(',')
     print(users_details)
     return users_details
+
+from datetime import datetime
 
 
 def read_opco_dir():
@@ -53,10 +63,81 @@ def read_inp(inp_dir_path, user, inp_dir):
     else:
         print("Can't open the current directory")
     print(inp_files)
-    print("==================")
+
+    inp_files2 = []
+    for file in inp_files:
+        if '.inp' in file:
+            inp_files2.append(file)
+
+    if user not in parsed_hash:
+        parsed_hash[user] = {}
+    if host not in parsed_hash[user]:
+        parsed_hash[user][host] = {}
+    if ip not in parsed_hash[user][host]:
+        parsed_hash[user][host][ip] = {}
+
+    if len(inp_files2) == 0:
+        for array_ref1 in array_ref:
+            parsed_hash[user][host][ip][array_ref1] = issue1
+    else:
+        nedate = read_file(inp_dir_path+"/nedate.inp")
+        if curr_date2 in nedate:
+            for array_ref1 in array_ref:
+                parsed_hash[user][host][ip][array_ref1] = 'N/A'
+            for inp_name in inp_files:
+                inp_name = inp_name.strip()
+                inp_file = "{}/{}".format(inp_dir_path, inp_name)
+                file_data = read_file(inp_file)
+
+                ##----------------- AIR Backup Check -----------------##
+                if 'air' in user_l:
+                    status = ''
+                    fail_reason = ''
+                    if 'backup.inp' in inp_name:
+                        status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
+                        parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
+                    
+
+        
+                        # print("yes==============")
+        else:
+            for array_ref1 in array_ref:
+                parsed_hash[user][host][ip][array_ref1] = issue1
+
+
+    # print(inp_dir_path, user, inp_dir)
+    print("==================","1")
+
+
+def tape(data, date1, date2, inp_dir_path):
+    status = ""
+    fail_reason = ""
+    regex = '{}.*?voucherHistory'.format(month_date)
+    if 'INFO:root:Filesystem backup ended at '+date1 in data:
+        status = 'Success'
+    elif 'Backup completed at '+date2 in data or 'Backup completed at '+curr_date7 in data:
+        status = 'Success'
+    elif len(re.findall(regex,data))>0:
+        status = 'Success'
+    else:
+        status = 'Fail'
+        fail_reason = 'BURA_BACKUP Failure'
+    return status, fail_reason
 
 
 if __name__ == '__main__':
     global users_details
+    global parsed_hash
+
+    month_date = str(datetime.today().strftime('%b %e'))
+    curr_date = str(datetime.today().strftime('%Y-%m-%d'))
+    curr_date2 = str(datetime.today().strftime('%Y%m%d'))
+    curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
+    curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
+
+    print(curr_date)
+    issue1 = 'Connectivity/Password Issue'
+    parsed_hash = {}
     users_details = set_users_conf()
     read_opco_dir()
+    print(parsed_hash)
