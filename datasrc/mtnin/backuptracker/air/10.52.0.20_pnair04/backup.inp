@@ -9,6 +9,6 @@ INFO:root:Removed /dev/VolGroup/lv_home_backup
 INFO:root:Starting backup of /boot
 INFO:root:Backup of /boot done
 INFO:root:Could not identify /boot/efi/ as a mount point, assuming UEFI is not used.
-INFO:root:Filesystem backup ended at 2020-10-19 02:20:13
+INFO:root:Filesystem backup ended at 2020-10-22 02:20:13
 [amsro@pnair04 ~]$ 
 cmd-6-end

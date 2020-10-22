@@ -98,6 +98,22 @@ def read_inp(inp_dir_path, user, inp_dir):
                     if 'backup.inp' in inp_name:
                         status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
+
+
+                ##----------------- OCC tape Check -----------------##
+                if 'occ' in user_l:
+                    status = ''
+                    fail_reason = ''
+                    if 'fs_occ_backup.inp' in inp_name:
+                        status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
+                        parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
+                    
+                ##----------------- CCN dbn Check -----------------##
+                if 'ccn' in user_l:
+                    status = ''
+                    if 'dbn_backup.inp' in inp_name:
+                        status = dbn(file_data, curr_date3, '')
+                        parsed_hash[user][host][ip][inp_name] = status
                     
 
                 ##----------------- MINSAT fs and db Check -----------------##
@@ -122,11 +138,11 @@ def read_inp(inp_dir_path, user, inp_dir):
                         parsed_hash[user][host][ip][inp_name] = status
 
                     if 'db3.inp' in inp_name:
-                        status = tape(file_data, pre_date1, month_date)
+                        status = tape(file_data, pre_date1, month_date, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status
 
                     if 'fs.inp' in inp_name:
-                        status = $status = zoo(file_data, curr_date, curr_date4)
+                        status = zoo(file_data, curr_date, curr_date4)
                         parsed_hash[user][host][ip][inp_name] = status
 
 
@@ -193,22 +209,64 @@ def dbn(data, date1, date2):
     return status
 
 
-if __name__ == '__main__':
+def zoo(data, date, date2):
+    status = ''
+    regex = "Backup completed at\W+{}".format(date)
+    if 'INFO:root:Filesystem backup ended at '+date in data:
+        status = 'Success'
+    elif len(re.findall(regex, data))>0:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+
+
+def main():
     global users_details
     global parsed_hash
 
-
-    month_date = str(datetime.today().strftime('%b %e'))
-    pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
-    curr_date = str(datetime.today().strftime('%Y-%m-%d'))
-    curr_date2 = str(datetime.today().strftime('%Y%m%d'))
-    curr_date4 = str(datetime.today().strftime('%y%m%d'))
-    curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
-    curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
-    curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
-
-    issue1 = 'Connectivity/Password Issue'
     parsed_hash = {}
     users_details = set_users_conf()
     read_opco_dir()
-    print(parsed_hash)
+    # print(parsed_hash)
+    return parsed_hash
+
+
+
+month_date = str(datetime.today().strftime('%b %e'))
+pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
+curr_date = str(datetime.today().strftime('%Y-%m-%d'))
+curr_date2 = str(datetime.today().strftime('%Y%m%d'))
+curr_date3 = str(datetime.today().strftime('%Y_%m_%d'))
+curr_date4 = str(datetime.today().strftime('%y%m%d'))
+curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
+curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
+curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
+
+issue1 = 'Connectivity/Password Issue'
+
+
+# MTN -Congo_backup_tracker_OUT.xlsx
+
+
+# if __name__ == '__main__':
+#     global users_details
+#     global parsed_hash
+
+
+#     month_date = str(datetime.today().strftime('%b %e'))
+#     pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
+#     curr_date = str(datetime.today().strftime('%Y-%m-%d'))
+#     curr_date2 = str(datetime.today().strftime('%Y%m%d'))
+#     curr_date3 = str(datetime.today().strftime('%Y_%m_%d'))
+#     curr_date4 = str(datetime.today().strftime('%y%m%d'))
+#     curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
+#     curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
+#     curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
+
+#     issue1 = 'Connectivity/Password Issue'
+#     parsed_hash = {}
+#     users_details = set_users_conf()
+#     read_opco_dir()
+#     print(parsed_hash)

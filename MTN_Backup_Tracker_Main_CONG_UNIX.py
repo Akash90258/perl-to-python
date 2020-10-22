@@ -68,7 +68,7 @@ def Is_Input_File_Copied(opco,df_Config):
         print(Input_file_Path_to_Copy[0])
         File_name = Input_File_Prefix+datetime.datetime.today().strftime("%Y-%m-%d")+".xlsx"
         print(File_name)
-        Input_file = shutil.copy2(Input_file_Path_to_Copy[0]+File_name, Input_File_Path[0]) # complete target filename given
+        # Input_file = shutil.copy2(Input_file_Path_to_Copy[0]+File_name, Input_File_Path[0]) # complete target filename given
 
         return "Success"
     except IndexError:
