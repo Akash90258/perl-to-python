@@ -1,0 +1,14 @@
+cmd-6-start
+cat /var/log/cfbackup_sdp3a_`date +%Y%m%d`* | tail
+INFO:root:Creating tar file...
+INFO:root:Creating tar file... Done
+INFO:root:> Backup FdsConfigBackupHandler
+INFO:root: Backup file = /BACKUP/sdp3a//20201021_020001.0/fdsconfig.tar.gz
+INFO:root:< Backup FdsConfigBackupHandler
+INFO:root:Starting backup of /boot
+INFO:root:Backup of /boot done
+INFO:root:Starting backup of /boot/efi
+INFO:root:Backup of /boot/efi done
+INFO:root:Filesystem backup ended at 2020-10-21 04:30:51
+[amsro@sdp3a ~]$ 
+cmd-6-end

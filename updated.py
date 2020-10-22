@@ -1,3 +1,5 @@
+
+from datetime import datetime
 import os
 import re
 # print(os.path.isdir("/home/el"))
@@ -22,8 +24,6 @@ def set_users_conf():
         users_details[key.strip()] = values.split(',')
     print(users_details)
     return users_details
-
-from datetime import datetime
 
 
 def read_opco_dir():
@@ -62,7 +62,7 @@ def read_inp(inp_dir_path, user, inp_dir):
         inp_files = os.listdir(inp_dir_path)
     else:
         print("Can't open the current directory")
-    print(inp_files)
+    # print(inp_files)
 
     # print(inp_files)
 
@@ -108,6 +108,45 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
                     
+                ##----------------- SDP geo-redundancy and tape Check -----------------##
+
+                if 'sdp' in user_l:
+                    status = ''
+                    fail_reason = ''
+                    regex = "{}\s+\d+\:\d+\:\d+\s+Standby\s+database\s+replication\s+OK".format(curr_date)
+                    if 'TTMonitorStandby.inp' in inp_name:
+                        sdp_geo_check += 1
+                        geo_str = file_data.split('\n')
+                        arr_len = len(geo_str)
+                        if arr_len > 4:
+                            parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Fail'
+
+                    if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user][host][ip]['geo-redundancy.inp'] == 'N/A':
+                        if len(re.findall(regex, file_data))>0:
+                            parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Success'
+                        else:
+                            parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Fail'
+
+                    if 'backup.inp' in inp_name:
+                        parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
+
+                ##------------ NGVS geo-redundancy, nfs and cassendra Check -----------##
+
+                if 'ngvs' in user_l:
+                    status = ''
+                    # if 'fs.inp' in inp_name:
+                    #     status = dbn(file_data, curr_date6, curr_date)
+                    #     parsed_hash[user][host][ip][inp_name] = status
+
+                    if 'db3.inp' in inp_name:
+                        status = tape(file_data, pre_date1, month_date, inp_dir_path)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+                    if 'fs.inp' in inp_name:
+                        status = zoo(file_data, curr_date, curr_date4)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+
                 ##----------------- CCN dbn Check -----------------##
                 if 'ccn' in user_l:
                     status = ''
@@ -129,24 +168,63 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = dbn(file_data, pre_date1, '')
                         parsed_hash[user][host][ip][inp_name] = status
 
+                ##-------- VS tape, nfs, ora, ora_archive and geo-redundancy Check ----------##
 
-                ##----------------- NGVS geo-redundancy, nfs and cassendra Check -----------------##
-                if 'ngvs' in user_l:
+                if 'vs' in user_l:
                     status = ''
-                    if 'fs.inp' in inp_name:
-                        status = dbn(file_data, curr_date6, curr_date)
+                    fail_reason = ''
+                    if 'oraBackup.inp' in inp_name and 'oraArchiveBackup.inp' in inp_name:
+                        status = ora(file_data, curr_date2)
                         parsed_hash[user][host][ip][inp_name] = status
 
-                    if 'db3.inp' in inp_name:
-                        status = tape(file_data, pre_date1, month_date, inp_dir_path)
+                    if 'backup.inp' in inp_name:
+                        status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status
 
-                    if 'fs.inp' in inp_name:
-                        status = zoo(file_data, curr_date, curr_date4)
+                    if 'cassendra' in inp_name:
+                        cassandra_flag += 1
+                        date_str = file_data.split('\n')
+                        for row in date_str:
+                            if 'month' in row:
+                                cassendra_arr.append(ow.strip())
+                        
+                        
+                ##----------------- EMA proclog and sogconfig Check -----------------##
+
+                if 'ema' in user_l:
+                    status = ''
+                    fail_reason = ''
+
+                    if 'config_backup.inp' in inp_name:
+                        status = config(file_data, month_date, curr_date2)
                         parsed_hash[user][host][ip][inp_name] = status
 
+                    if 'proclog.inp' in inp_name:
+                        status = proclog(file_data, curr_date4)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+                ##----------------- NGCRS appfs, archived CDR and oracle database Check -----------------##
+
+                # not adding NGCRS . because not present in congo opco
+
+                ##--------- CRS appfs, archived CDR and oracle database Check,fs backup ---------##
+
+                if 'crs' in user_l:
+                    status = ''
+                    fail_reason = ''
+                    if 'db_backup.inp' in inp_name:
+                        status = dbn(file_data, curr_date2, curr_date3)
+                        parsed_hash[user][host][ip][inp_name] = status
+
+                    if 'fs_backup.inp' in inp_name:
+                        status = appfs(file_data, curr_date2, curr_date3)
+                        parsed_hash[user][host][ip][inp_name] = status
 
         
+            ##------------- geo-redundancy check -------------##
+            if sdp_geo_check == 2 and parsed_hash[user][host][ip]['geo-redundancy.inp'] == 'N/A':
+                parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Success'
+
 
             print("yes==============")
         else:
@@ -164,7 +242,7 @@ def tape(data, date1, date2, inp_dir_path):
     """Used for backup.inp and fs_occ_backup.inp"""
     status = ""
     fail_reason = ""
-    regex = '{}.*?voucherHistory'.format(month_date)
+    regex = '{}(.*?)voucherHistory'.format(month_date)
     if 'INFO:root:Filesystem backup ended at '+date1 in data:
         status = 'Success'
     elif 'Backup completed at '+date2 in data or 'Backup completed at '+curr_date7 in data:
@@ -211,7 +289,7 @@ def dbn(data, date1, date2):
 
 def zoo(data, date, date2):
     status = ''
-    regex = "Backup completed at\W+{}".format(date)
+    regex = "Backup completed at(\W+{})".format(date)
     if 'INFO:root:Filesystem backup ended at '+date in data:
         status = 'Success'
     elif len(re.findall(regex, data))>0:
@@ -220,6 +298,14 @@ def zoo(data, date, date2):
         status = 'Fail'
     return status
 
+def ora(data, date):
+    status = ''
+    regex = "(This backup\W+$date.*?session is completed and finished)"
+    if len(re.findall(regex, data)) :
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
 
 
 def main():
@@ -232,8 +318,39 @@ def main():
     # print(parsed_hash)
     return parsed_hash
 
+def proclog(data, mdate, date):
+    status = ''
+    if  curr_date2 in data:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+def config(data, date):
+    status = ''
+    regex = 'sogconfig(.*?){}'.format(curr_date4)
+    if len(re.findall(regex, data)) :
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
 
 
+def appfs(data, date):
+    status = ''
+    regex = 'root_backup(.*?){}'.format(date)
+    if len(re.findall(regex, data)) :
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+
+
+sdp_geo_check = 0
+cassandra_flag = 0
+sdp_geo = ''
+cassendra_arr = []
 month_date = str(datetime.today().strftime('%b %e'))
 pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
 curr_date = str(datetime.today().strftime('%Y-%m-%d'))
@@ -247,26 +364,33 @@ curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
 issue1 = 'Connectivity/Password Issue'
 
 
-# MTN -Congo_backup_tracker_OUT.xlsx
 
 
-# if __name__ == '__main__':
-#     global users_details
-#     global parsed_hash
 
 
-#     month_date = str(datetime.today().strftime('%b %e'))
-#     pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
-#     curr_date = str(datetime.today().strftime('%Y-%m-%d'))
-#     curr_date2 = str(datetime.today().strftime('%Y%m%d'))
-#     curr_date3 = str(datetime.today().strftime('%Y_%m_%d'))
-#     curr_date4 = str(datetime.today().strftime('%y%m%d'))
-#     curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
-#     curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
-#     curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
 
-#     issue1 = 'Connectivity/Password Issue'
-#     parsed_hash = {}
-#     users_details = set_users_conf()
-#     read_opco_dir()
-#     print(parsed_hash)
+
+
+if __name__ == '__main__':
+    global users_details
+    global parsed_hash
+
+    sdp_geo_check = 0
+    sdp_geo = ''
+    cassandra_flag = 0
+    cassendra_arr = []
+    month_date = str(datetime.today().strftime('%b %e'))
+    pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
+    curr_date = str(datetime.today().strftime('%Y-%m-%d'))
+    curr_date2 = str(datetime.today().strftime('%Y%m%d'))
+    curr_date3 = str(datetime.today().strftime('%Y_%m_%d'))
+    curr_date4 = str(datetime.today().strftime('%y%m%d'))
+    curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
+    curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
+    curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
+
+    issue1 = 'Connectivity/Password Issue'
+    parsed_hash = {}
+    users_details = set_users_conf()
+    read_opco_dir()
+    print(parsed_hash)

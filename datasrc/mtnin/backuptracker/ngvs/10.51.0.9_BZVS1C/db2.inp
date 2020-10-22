@@ -1,6 +1,6 @@
 cmd-12-start
 ls -rlt /var/backup/cassandra/mvnoDetails | tail
 total 0
-drwxr-xr-x. 4 vs vs 98 Oct 19 03:30 mvno
+drwxr-xr-x. 4 vs vs 98 Oct 22 03:30 mvno
 [amsro@bzvs1c ~]$ 
 cmd-12-end
