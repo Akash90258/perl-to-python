@@ -1,0 +1,13 @@
+cmd-13-start
+cd /var/sog/backups/config/; ls -ltrh
+total 3.8M
+-rw-r--r-- 1 root root 540K Jan 11 04:45 sogconfig_backup.200111-04:45
+-rw-r--r-- 1 root root 540K Jan 12 04:45 sogconfig_backup.200112-04:45
+-rw-r--r-- 1 root root 540K Jan 13 04:45 sogconfig_backup.200113-04:45
+-rw-r--r-- 1 root root 540K Jan 14 04:45 sogconfig_backup.200114-04:45
+-rw-r--r-- 1 root root 540K Jan 15 04:45 sogconfig_backup.200115-04:45
+-rw-r--r-- 1 root root 540K Jan 16 04:45 sogconfig_backup.200116-04:45
+-rw-r--r-- 1 root root 540K Jan 17 04:45 sogconfig_backup.200117-04:45
+amsro@mtnema02:/var/sog/backups/config> 
+amsro@mtnema02:/var/sog/backups/config> 
+cmd-13-end

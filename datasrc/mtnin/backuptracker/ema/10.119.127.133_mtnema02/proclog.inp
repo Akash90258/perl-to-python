@@ -1,0 +1,20 @@
+cmd-8-start
+cd /var/sog/backups/proclog/; ls -ltrh
+total 316K
+drwxrwxrwx 2 sogadm sog 20K Oct  9 23:55 20201009
+drwxrwxrwx 2 sogadm sog 24K Oct 10 23:58 20201010
+drwxrwxrwx 2 sogadm sog 24K Oct 11 23:53 20201011
+drwxrwxrwx 2 sogadm sog 20K Oct 12 23:49 20201012
+drwxrwxrwx 2 sogadm sog 16K Oct 13 22:13 20201013
+drwxrwxrwx 2 sogadm sog 20K Oct 14 23:55 20201014
+drwxrwxrwx 2 sogadm sog 20K Oct 15 23:48 20201015
+drwxrwxrwx 2 sogadm sog 24K Oct 16 23:56 20201016
+drwxrwxrwx 2 sogadm sog 20K Oct 17 23:41 20201017
+drwxrwxrwx 2 sogadm sog 28K Oct 18 23:45 20201018
+drwxrwxrwx 2 sogadm sog 24K Oct 19 23:34 20201019
+drwxrwxrwx 2 sogadm sog 32K Oct 20 23:34 20201020
+drwxrwxrwx 2 sogadm sog 32K Oct 21 23:42 20201021
+drwxrwxrwx 2 sogadm sog 12K Oct 22 11:29 20201022
+drwxrwxrwx 2 sogadm sog 12K Oct 22 11:29 20201023
+amsro@mtnema02:/var/sog/backups/proclog> 
+cmd-8-end

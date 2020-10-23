@@ -196,11 +196,11 @@ def read_inp(inp_dir_path, user, inp_dir):
                     fail_reason = ''
 
                     if 'config_backup.inp' in inp_name:
-                        status = config(file_data, month_date, curr_date2)
+                        status = config(file_data, month_date)
                         parsed_hash[user][host][ip][inp_name] = status
 
                     if 'proclog.inp' in inp_name:
-                        status = proclog(file_data, curr_date4)
+                        status = proclog(file_data, curr_date4, curr_date2)
                         parsed_hash[user][host][ip][inp_name] = status
 
                 ##----------------- NGCRS appfs, archived CDR and oracle database Check -----------------##
@@ -393,4 +393,5 @@ if __name__ == '__main__':
     parsed_hash = {}
     users_details = set_users_conf()
     read_opco_dir()
-    print(parsed_hash)
+    print("========================================")
+    print(parsed_hash['ema'])

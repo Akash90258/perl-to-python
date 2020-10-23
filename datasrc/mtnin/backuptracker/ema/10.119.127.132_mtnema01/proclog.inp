@@ -1,0 +1,24 @@
+cmd-8-start
+cd /var/sog/backups/proclog/; ls -ltrh
+total 11M
+-rw-r--r-- 1 root   root  27K Oct 17  2019 create_gsm.txt
+-rw-r--r-- 1 root   root 7.3M Oct 21  2019 3005.txt
+-rw-r--r-- 1 root   root 194K Oct 21  2019 msisdn_3005.txt
+-rw-r--r-- 1 root   root 1.3M Oct 21  2019 commands_3005.txt
+-rw-r--r-- 1 root   root    0 Nov 29  2019 pm-PL.log_bkp_18Nov2019
+drwxrwxrwx 2 sogadm sog   92K Oct  9 23:57 20201009
+drwxrwxrwx 2 sogadm sog  100K Oct 10 23:58 20201010
+drwxrwxrwx 2 sogadm sog  100K Oct 11 23:58 20201011
+drwxrwxrwx 2 sogadm sog  104K Oct 12 23:58 20201012
+drwxrwxrwx 2 sogadm sog   96K Oct 13 23:58 20201013
+drwxrwxrwx 2 sogadm sog  108K Oct 14 23:53 20201014
+drwxrwxrwx 2 sogadm sog   92K Oct 15 23:59 20201015
+drwxrwxrwx 2 sogadm sog   96K Oct 16 23:59 20201016
+drwxrwxrwx 2 sogadm sog   96K Oct 17 23:59 20201017
+drwxrwxrwx 2 sogadm sog   92K Oct 18 23:59 20201018
+drwxrwxrwx 2 sogadm sog  104K Oct 19 23:59 20201019
+drwxrwxrwx 2 sogadm sog  104K Oct 20 23:57 20201020
+drwxrwxrwx 2 sogadm sog  100K Oct 21 23:57 20201021
+drwxrwxrwx 2 sogadm sog   36K Oct 22 11:30 20201022
+amsro@mtnema01:/var/sog/backups/proclog> 
+cmd-8-end

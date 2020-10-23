@@ -81,9 +81,10 @@ def nodes_iterator_ngvs(values):
         row_data['Node Name  '] = node_name
         IP = list(value.keys())[0]
         row_data['Node IP'] = IP
-        status = update_status(list(list(value.values())[0].values())[0])
+        # status = update_status(list(list(value.values())[0].values())[0])
+        status = update_status(list(value.values())[0]['fs.inp'])
         row_data['DB dump status '] = status
-        status1 = update_status(list(list(value.values())[0].values())[0])
+        status1 = update_status(list(value.values())[0]['db3.inp'])
         row_data['FS dump status'] = status1
         final_data.append(row_data)
         print(opco, node_name, IP, status)
@@ -91,7 +92,42 @@ def nodes_iterator_ngvs(values):
         
 
 
+def nodes_iterator_minsat(values):
+    final_data = []
+    for key , value in values.items():
+        row_data = {}
+        node_name = key
+        row_data['Hostname'] = node_name
+        IP = list(value.keys())[0]
+        row_data['Node IP'] = IP
+        # status = update_status(list(list(value.values())[0].values()[0])
+        status = update_status(list(value.values())[0]['fs.inp'])
+        row_data['Daily DB dump status'] = status
+        status1 = update_status(list(value.values())[0]['db_backup.inp'])
+        row_data['Daily FS dump status'] = status1
+        final_data.append(row_data)
+        print(opco, node_name, IP, status)
+    return final_data
 
+
+
+def nodes_iterator_ema(values):
+    final_data = []
+    for key , value in values.items():
+        row_data = {}
+        node_name = key
+        row_data['Node Name'] = node_name
+        IP = list(value.keys())[0]
+        row_data['Node IP'] = IP
+        # status = update_status(list(list(value.values())[0].values()[0])
+        status = update_status(list(value.values())[0]['proclog.inp'])
+        row_data['Proclogs_Backup status'] = status
+        status1 = update_status(list(value.values())[0]['config_backup.inp'])
+        row_data['Config_Backup status'] = status1
+        final_data.append(row_data)
+        print(opco, node_name, IP, status)
+    return final_data
+        
 
 
 
@@ -115,51 +151,69 @@ for key, values in parsed_hash.items():
     if opco.upper() ==  'AIR':
         final_data = nodes_iterator_air(values)
         for row in final_data:
-            print(row)
+            # print(row)
             template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
-        print("------------------------")
+        # print("------------------------")
         template_to_df_map['AIR'].to_excel(writer, 'AIR', index=False)
 
     if opco.upper() ==  'CCN':
         final_data = nodes_iterator_ccn(values)
         for row in final_data:
-            print(row)
+            # print(row)
             template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
-        print("------------------------")
+        # print("------------------------")
         template_to_df_map['CCN'].to_excel(writer, 'CCN', index=False)
 
     if opco.upper() ==  'SDP':
         final_data = nodes_iterator_sdp(values)
         for row in final_data:
-            print(row)
+            # print(row)
             template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
-        print("------------------------")
+        # print("------------------------")
         template_to_df_map['SDP'].to_excel(writer, 'SDP', index=False)
 
 
     if opco.upper() ==  'OCC':
         final_data = nodes_iterator_occ(values)
         for row in final_data:
-            print(row)
+            # print(row)
             template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
-        print("------------------------")
+        # print("------------------------")
         template_to_df_map['OCC'].to_excel(writer, 'OCC', index=False)
 
 
     if opco.upper() ==  'NGVS':
         final_data = nodes_iterator_ngvs(values)
         for row in final_data:
-            print(row)
+            # print(row)
             template_to_df_map['NGVS'].dropna(subset=['Node IP'],   inplace=True) # removing the empty row 
             template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
-        print("------------------------")
+        # print("------------------------")
         template_to_df_map['NGVS'].to_excel(writer, 'NGVS', index=False)
 
+
+    if opco.upper() ==  'MINSAT':
+        final_data = nodes_iterator_minsat(values)
+        for row in final_data:
+            # print(row)
+            template_to_df_map['MINSAT'].dropna(subset=['Node IP'],   inplace=True) # removing the empty row 
+            template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
+        # print("------------------------")
+        template_to_df_map['MINSAT'].to_excel(writer, 'MINSAT', index=False)
+
+    if opco.upper() ==  'EMA':
+        final_data = nodes_iterator_ema(values)
+        for row in final_data:
+            # print(row)
+            template_to_df_map['EMA'].dropna(subset=['Node IP'],   inplace=True) # removing the empty row 
+            template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
+        # print("------------------------")
+        template_to_df_map['EMA'].to_excel(writer, 'EMA', index=False)
 
 
 
 print("===================================")
-print(template_to_df_map['NGVS'])
+print(template_to_df_map['EMA'])
 print("===================================")
 writer.save()
 
