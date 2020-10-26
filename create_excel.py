@@ -3,9 +3,20 @@ import pandas as pd
 import openpyxl
 
 
+def password_issue(temp_status, row_data):
+    status = 'Not Done'
+    try:
+        row_data['Failed Reason (If any)'] = temp_status
+    except:
+        row_data['Remarks'] = temp_status
+    return status, row_data
+
+
 def update_status(status):
     if 'Success' in status:
         return "Done"
+    # else:
+    #     return "Not Done"
     elif 'Fail' in status:
         return "Not Done"
     else:
@@ -22,8 +33,7 @@ def nodes_iterator_air(values):
         temp_status = list(list(value.values())[0].values())[0]
         status = update_status(temp_status)
         # if 'Password Issue' in temp_status:
-        #     status = 'Not Done'
-        #     row_data['Failed Reason (If any)'] = temp_status
+        #     status, rowdata = password_issue(temp_status, row_data)
         row_data['Tape Backup Status'] = status
         final_data.append(row_data)
         print(opco, node_name, IP, status)
@@ -148,6 +158,19 @@ template_to_df_map = pd.read_excel(Output_File, sheet_name=None)
 parsed_hash = main()
 for key, values in parsed_hash.items():
     opco = key
+
+
+
+    # final_data = 'nodes_iterator_'+opco.lower()(values)
+    # for row in final_data:
+    #     try:
+    #         template_to_df_map[opco.upper()].dropna(subset=['Node IP'],   inplace=True) # removing the empty row 
+    #     except:
+    #         pass
+    #     template_to_df_map[opco.upper()] =template_to_df_map[opco.upper()].append(row,  ignore_index = True) 
+    # template_to_df_map[opco.upper()].to_excel(writer, opco.upper(), index=False)
+
+
     if opco.upper() ==  'AIR':
         final_data = nodes_iterator_air(values)
         for row in final_data:
@@ -212,8 +235,16 @@ for key, values in parsed_hash.items():
 
 
 
+    template_to_df_map['AIR'].to_excel(writer, 'Summary', index=False, startrow=1,startcol=1, header=False)
+    template_to_df_map['SDP'].to_excel(writer, 'Summary', index=False, startrow=6,startcol=1, header=False)
+    template_to_df_map['CCN'].to_excel(writer, 'Summary', index=False, startrow=11,startcol=1, header=False)
+    template_to_df_map['NGVS'].to_excel(writer, 'Summary', index=False, startrow=14,startcol=1, header=False)
+    template_to_df_map['MINSAT'].to_excel(writer, 'Summary', index=False, startrow=21,startcol=1, header=False)
+    template_to_df_map['EMA'].to_excel(writer, 'Summary', index=False, startrow=24,startcol=1, header=False)
+    template_to_df_map['OCC'].to_excel(writer, 'Summary', index=False, startrow=27,startcol=1, header=False)
+
 print("===================================")
-print(template_to_df_map['EMA'])
+# print(template_to_df_map['EMA'])
 print("===================================")
 writer.save()
 

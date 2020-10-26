@@ -394,4 +394,4 @@ if __name__ == '__main__':
     users_details = set_users_conf()
     read_opco_dir()
     print("========================================")
-    print(parsed_hash['ema'])
+    print(parsed_hash)
