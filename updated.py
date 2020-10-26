@@ -1,4 +1,3 @@
-
 from datetime import datetime
 import os
 import re
@@ -224,18 +223,13 @@ def read_inp(inp_dir_path, user, inp_dir):
             ##------------- geo-redundancy check -------------##
             if sdp_geo_check == 2 and parsed_hash[user][host][ip]['geo-redundancy.inp'] == 'N/A':
                 parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Success'
-
-
-            print("yes==============")
         else:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = issue1
-            print("No==============")
 
 
 
     # print(inp_dir_path, user, inp_dir)
-    print("==================","1")
 
 
 def tape(data, date1, date2, inp_dir_path):
@@ -308,15 +302,6 @@ def ora(data, date):
     return status
 
 
-def main():
-    global users_details
-    global parsed_hash
-
-    parsed_hash = {}
-    users_details = set_users_conf()
-    read_opco_dir()
-    # print(parsed_hash)
-    return parsed_hash
 
 def proclog(data, mdate, date):
     status = ''
@@ -344,6 +329,18 @@ def appfs(data, date):
     else:
         status = 'Fail'
     return status
+
+
+
+def main():
+    global users_details
+    global parsed_hash
+
+    parsed_hash = {}
+    users_details = set_users_conf()
+    read_opco_dir()
+    # print(parsed_hash)
+    return parsed_hash
 
 
 
