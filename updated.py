@@ -1,19 +1,32 @@
 from datetime import datetime
 import os
 import re
-# print(os.path.isdir("/home/el"))
+
+try:
+    from configparser import ConfigParser
+except ImportError:
+    from ConfigParser import ConfigParser  # ver. < 3.0
+
+
+def load_config_ini():
+    config = ConfigParser()
+    config.read('final_config.ini')
+    config_data = dict(config.items('section1'))
+    return config_data
 
 
 def read_file(file_name):
-    f = open(file_name,"r")
+    f = open(file_name, "r")
     file_data = f.read()
     f.close()
     return file_data
 
+
 def set_users_conf():
     """Read pma_bkp_tracker.conf file and create dict."""
     users_details = {}
-    conf_file = "conf/pma_bkp_tracker.conf"
+    # conf_file = "conf/pma_bkp_tracker.conf"
+    conf_file = config_data['pma_bkup_tracker']
     fh = open(conf_file, "r")
     data = fh.readlines()
     fh.close()
@@ -26,7 +39,7 @@ def set_users_conf():
 
 
 def read_opco_dir():
-    basedir = "/home/ubuntu/perl-to-python/datasrc/mtnin/backuptracker/"
+    basedir = config_data['base_dir_inp_files']
     child_dir = os.listdir(basedir)
     for inner_dir in child_dir:
         user_dir = basedir + inner_dir
@@ -42,7 +55,7 @@ def read_users_dir(user_dir, user):
     for inp_dir in hosts:
         # $inp_dir_hash->{$user}->{$inp_dir} = 1; TODO : not getting this line
         inp_dir_path = user_dir + "/" + inp_dir
-        read_inp(inp_dir_path, user, inp_dir) 
+        read_inp(inp_dir_path, user, inp_dir)
 
 
 def read_inp(inp_dir_path, user, inp_dir):
@@ -61,9 +74,6 @@ def read_inp(inp_dir_path, user, inp_dir):
         inp_files = os.listdir(inp_dir_path)
     else:
         print("Can't open the current directory")
-    # print(inp_files)
-
-    # print(inp_files)
 
     inp_files2 = []
     for file in inp_files:
@@ -81,7 +91,7 @@ def read_inp(inp_dir_path, user, inp_dir):
         for array_ref1 in array_ref:
             parsed_hash[user][host][ip][array_ref1] = issue1
     else:
-        nedate = read_file(inp_dir_path+"/nedate.inp")
+        nedate = read_file(inp_dir_path + "/nedate.inp")
         if curr_date2 in nedate:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = 'N/A'
@@ -98,7 +108,6 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
 
-
                 ##----------------- OCC tape Check -----------------##
                 if 'occ' in user_l:
                     status = ''
@@ -106,7 +115,7 @@ def read_inp(inp_dir_path, user, inp_dir):
                     if 'fs_occ_backup.inp' in inp_name:
                         status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
-                    
+
                 ##----------------- SDP geo-redundancy and tape Check -----------------##
 
                 if 'sdp' in user_l:
@@ -120,8 +129,9 @@ def read_inp(inp_dir_path, user, inp_dir):
                         if arr_len > 4:
                             parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Fail'
 
-                    if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user][host][ip]['geo-redundancy.inp'] == 'N/A':
-                        if len(re.findall(regex, file_data))>0:
+                    if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user][host][ip][
+                        'geo-redundancy.inp'] == 'N/A':
+                        if len(re.findall(regex, file_data)) > 0:
                             parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Success'
                         else:
                             parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Fail'
@@ -145,14 +155,12 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = zoo(file_data, curr_date, curr_date4)
                         parsed_hash[user][host][ip][inp_name] = status
 
-
                 ##----------------- CCN dbn Check -----------------##
                 if 'ccn' in user_l:
                     status = ''
                     if 'dbn_backup.inp' in inp_name:
                         status = dbn(file_data, curr_date3, '')
                         parsed_hash[user][host][ip][inp_name] = status
-                    
 
                 ##----------------- MINSAT fs and db Check -----------------##
                 if 'minsat' in user_l:
@@ -186,8 +194,7 @@ def read_inp(inp_dir_path, user, inp_dir):
                         for row in date_str:
                             if 'month' in row:
                                 cassendra_arr.append(ow.strip())
-                        
-                        
+
                 ##----------------- EMA proclog and sogconfig Check -----------------##
 
                 if 'ema' in user_l:
@@ -219,15 +226,12 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = appfs(file_data, curr_date2, curr_date3)
                         parsed_hash[user][host][ip][inp_name] = status
 
-        
             ##------------- geo-redundancy check -------------##
             if sdp_geo_check == 2 and parsed_hash[user][host][ip]['geo-redundancy.inp'] == 'N/A':
                 parsed_hash[user][host][ip]['geo-redundancy.inp'] = 'Success'
         else:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = issue1
-
-
 
     # print(inp_dir_path, user, inp_dir)
 
@@ -237,23 +241,23 @@ def tape(data, date1, date2, inp_dir_path):
     status = ""
     fail_reason = ""
     regex = '{}(.*?)voucherHistory'.format(month_date)
-    if 'INFO:root:Filesystem backup ended at '+date1 in data:
+    if 'INFO:root:Filesystem backup ended at ' + date1 in data:
         status = 'Success'
-    elif 'Backup completed at '+date2 in data or 'Backup completed at '+curr_date7 in data:
+    elif 'Backup completed at ' + date2 in data or 'Backup completed at ' + curr_date7 in data:
         status = 'Success'
-    elif len(re.findall(regex,data))>0:
+    elif len(re.findall(regex, data)) > 0:
         status = 'Success'
     else:
         status = 'Fail'
         fail_reason = 'BURA_BACKUP Failure'
     return status, fail_reason
-    
+
 
 def filesystem(data, date):
     """Used for fs.inp"""
     status = ""
-    regex  = '{}.*?Backup completed'.format(curr_date6)
-    if len(re.findall(regex, data))>0:
+    regex = '{}.*?Backup completed'.format(curr_date6)
+    if len(re.findall(regex, data)) > 0:
         status = 'Success'
     else:
         status = 'Fail'
@@ -264,15 +268,15 @@ def dbn(data, date1, date2):
     """Used for db_backup.inp"""
     regex = "cfbackup.*?{}.*?log".format(curr_date2)
     status = ''
-    if 'ScheduledBackup'+date1 in data:
+    if 'ScheduledBackup' + date1 in data:
         status = 'Success'
-    elif 'INFO:root:Filesystem backup ended at '+date2 in data:
+    elif 'INFO:root:Filesystem backup ended at ' + date2 in data:
         status = 'Success'
     elif 'Recovery Manager complete' in data:
-        status = 'Success'  
+        status = 'Success'
     elif 'HISTDG' in data or 'rman' in data:
         status = Success
-    elif len(re.findall(regex, data))>0:
+    elif len(re.findall(regex, data)) > 0:
         status = 'Success'
     elif 'DUMP is complete' in data:
         status = 'Success'
@@ -284,37 +288,38 @@ def dbn(data, date1, date2):
 def zoo(data, date, date2):
     status = ''
     regex = "Backup completed at(\W+{})".format(date)
-    if 'INFO:root:Filesystem backup ended at '+date in data:
+    if 'INFO:root:Filesystem backup ended at ' + date in data:
         status = 'Success'
-    elif len(re.findall(regex, data))>0:
+    elif len(re.findall(regex, data)) > 0:
         status = 'Success'
     else:
         status = 'Fail'
     return status
+
 
 def ora(data, date):
     status = ''
     regex = "(This backup\W+$date.*?session is completed and finished)"
-    if len(re.findall(regex, data)) :
+    if len(re.findall(regex, data)):
         status = 'Success'
     else:
         status = 'Fail'
     return status
-
 
 
 def proclog(data, mdate, date):
     status = ''
-    if  curr_date2 in data:
+    if curr_date2 in data:
         status = 'Success'
     else:
         status = 'Fail'
     return status
 
+
 def config(data, date):
     status = ''
     regex = 'sogconfig(.*?){}'.format(curr_date4)
-    if len(re.findall(regex, data)) :
+    if len(re.findall(regex, data)):
         status = 'Success'
     else:
         status = 'Fail'
@@ -324,24 +329,22 @@ def config(data, date):
 def appfs(data, date):
     status = ''
     regex = 'root_backup(.*?){}'.format(date)
-    if len(re.findall(regex, data)) :
+    if len(re.findall(regex, data)):
         status = 'Success'
     else:
         status = 'Fail'
     return status
 
 
-
 def main():
     global users_details
     global parsed_hash
-
+    global config_data
     parsed_hash = {}
+    config_data = load_config_ini()
     users_details = set_users_conf()
     read_opco_dir()
-    # print(parsed_hash)
     return parsed_hash
-
 
 
 sdp_geo_check = 0
@@ -357,13 +360,7 @@ curr_date4 = str(datetime.today().strftime('%y%m%d'))
 curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
 curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
 curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
-
 issue1 = 'Connectivity/Password Issue'
-
-
-
-
-
 
 
 
@@ -371,7 +368,8 @@ issue1 = 'Connectivity/Password Issue'
 if __name__ == '__main__':
     global users_details
     global parsed_hash
-
+    global config_data
+    config_data = load_config_ini()
     sdp_geo_check = 0
     sdp_geo = ''
     cassandra_flag = 0
@@ -390,5 +388,5 @@ if __name__ == '__main__':
     parsed_hash = {}
     users_details = set_users_conf()
     read_opco_dir()
-    print("========================================")
-    print(parsed_hash)
+    # print("========================================")
+    # print(parsed_hash)

@@ -50,6 +50,7 @@ def nodes_iterator_air(values,pma_ips):
         status = update_status(temp_status)
         # if 'Password Issue' in temp_status:
         #     status, rowdata = password_issue(temp_status, row_data)
+
         row_data['Tape Backup Status'] = status
         final_data.append(row_data)
         print(opco, node_name, IP, status)
@@ -104,7 +105,7 @@ def nodes_iterator_occ(values, pma_ips):
         status = update_status(list(list(value.values())[0].values())[0])
         row_data['FS Backup Status'] = status
         final_data.append(row_data)
-        print(opco, node_name, IP, status)
+        print(opco, node_name, IP,status)
     return final_data
         
 
@@ -171,10 +172,16 @@ def nodes_iterator_ema(values, pma_ips):
         
 
 
+'''Loading config.ini file into a dictionary'''
+global config_data
+global logs_dict
+logs_dict = {}
+config_data =  load_config_ini()
 
 
 config = ConfigParser()
-config.read('pma_nw_final.conf')
+pma_nw_file_path  = config_data['pma_nw_file_path']
+config.read(pma_nw_file_path)
 pma_dict = dict(config.items('3_nodeip'))
 updated_pma_dict = {}
 for key, value in pma_dict.items():
@@ -182,21 +189,26 @@ for key, value in pma_dict.items():
     new_value = value.split(',')
     updated_pma_dict[new_key]= new_value
 
+# Output_File = '/home/ubuntu/perl-to-python/TEMP/MTN -Congo_backup_tracker_OUT.xlsx' 
+# Output_File1 = '/home/ubuntu/perl-to-python/TEMP/MTN -Congo_backup_tracker_OUT1.xlsx' 
 
-Output_File = '/home/ubuntu/perl-to-python/TEMP/MTN -Congo_backup_tracker_OUT.xlsx' 
-Output_File1 = '/home/ubuntu/perl-to-python/TEMP/MTN -Congo_backup_tracker_OUT1.xlsx' 
 
-writer = pd.ExcelWriter(Output_File1, engine='openpyxl')
-book = openpyxl.load_workbook(Output_File)
+Template_file = config_data['template_file']
+Output_File = config_data['output_file_path'] + config_data['output_file_prefix']
+
+writer = pd.ExcelWriter(Output_File, engine='openpyxl')
+book = openpyxl.load_workbook(Template_file)
 writer.book = book
 writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
-template_to_df_map = pd.read_excel(Output_File, sheet_name=None)
+template_to_df_map = pd.read_excel(Template_file, sheet_name=None)
 
 
 
 
 parsed_hash = main()
-print(pma_dict.keys())
+
+# print(pma_dict.keys())
+
 for key, values in parsed_hash.items():
     opco = key
 
@@ -272,9 +284,44 @@ for key, values in parsed_hash.items():
     template_to_df_map['MINSAT'].to_excel(writer, 'Summary', index=False, startrow=21,startcol=1, header=False)
     template_to_df_map['EMA'].to_excel(writer, 'Summary', index=False, startrow=24,startcol=1, header=False)
     template_to_df_map['OCC'].to_excel(writer, 'Summary', index=False, startrow=27,startcol=1, header=False)
+    
 
+# print("===================================")
+# print(template_to_df_map['AIR'])
 print("===================================")
-print(template_to_df_map['AIR'])
+
+
+# '''Flattening Json to update Logs sheet in excel'''
+log_rows = []
+for key, values in parsed_hash.items():
+    for key1, values1 in values.items():
+        for key2, values2 in values1.items():
+            for key3, values3 in values2.items():
+                if 'Success' not in values3:
+                    # print(key,key1,key2,key3,values3)
+                    final_data = nodes_iterator_air(values,updated_pma_dict[opco.lower()])                    
+                    flag = Is_IP_Exists(key2, updated_pma_dict[key.lower()])
+                    if not flag:
+                        continue
+                    basepath = '/home/ubuntu/perl-to-python/datasrc/mtnin/backuptracker/'
+                    try:
+                        dynamic_path = '{}/{}_{}/{}'.format(key,key2,key1,key3)
+                        full_path = basepath+dynamic_path
+                        file_data = read_file(full_path)
+                    except:
+                        file_data = ''
+                        print("Generating Exception ==================")
+                    log_row = [key,key1,key2,key3,file_data]
+                    log_rows.append(log_row)
+                    
+                    # /home/ubuntu/perl-to-python/datasrc/mtnin/backuptracker/sdp/10.52.0.48_pnrsdp4a
+                    # occ pnrocc2 10.52.160.39 fs_occ_backup.inp Connectivity/Password Issue
+
+
+
+template_to_df_map['Logs'] =template_to_df_map['Logs'].append(log_rows,  ignore_index = True) 
+template_to_df_map['Logs'].to_excel(writer, 'Logs', index=False,startrow=1,startcol=0,header=False)
+print(template_to_df_map['Logs'])
 print("===================================")
 writer.save()
 
