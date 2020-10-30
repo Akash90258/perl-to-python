@@ -1,0 +1,252 @@
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Sending mail
+INFO:root:Automation Ended
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Sending mail
+INFO:root:Automation Ended
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Sending mail
+INFO:root:Automation Ended
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Sending mail
+INFO:root:Automation Ended
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Sending mail
+INFO:root:Automation Ended
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
+INFO:root:Sending mail
+INFO:root:Automation Ended
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Calling custom function for OPCO : sdp
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Calling custom function for OPCO : minsat
+INFO:root:Writting data for OPCO : minsat
+INFO:root:Calling custom function for OPCO : occ
+INFO:root:Writting data for OPCO : occ
+INFO:root:Calling custom function for OPCO : air
+INFO:root:Writting data for OPCO : air
+INFO:root:Calling custom function for OPCO : ccn
+INFO:root:Writting data for OPCO : ccn
+INFO:root:Calling custom function for OPCO : ngvs
+INFO:root:Writting data for OPCO : ngvs
+INFO:root:Calling custom function for OPCO : ema
+INFO:root:Writting data for OPCO : ema
+INFO:root:Flatting Dataframe
+INFO:root:Writting Data to Logs sheet in output excel file
