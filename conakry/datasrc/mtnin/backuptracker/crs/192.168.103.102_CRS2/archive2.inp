@@ -1,0 +1,5 @@
+cmd-10-start
+ls -ld /var/DWS/archive/CS40/AIR |tail
+drwxrwxrwx   2 dwsftp   dws      1848320 Nov  3 10:29 /var/DWS/archive/CS40/AIR
+bash-3.2$ 
+cmd-10-end

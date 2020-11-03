@@ -1,0 +1,5 @@
+cmd-102-start
+ls -ltr /var/DWS/loading/msc | wc -l
+       3
+bash-3.2$ 
+cmd-102-end

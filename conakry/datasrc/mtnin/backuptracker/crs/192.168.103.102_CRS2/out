@@ -1,0 +1,177 @@
+/home/conakry/PM-Automation/datasrc/mtnin/backuptracker/crs/
+### 192.168.103.102_CRS2 ###
+Inside else: ==       2==
+for::
+cmd-106-start
+ls -ltr /var/DWS/incoming/CME20MSCSCP |wc -l
+       2
+bash-3.2$ 
+cmd-106-end
+Inside CME: Feb 28 08:08 ,08:08
+Inside else: ==       1==
+for::
+cmd-98-start
+ls -ltr /var/DWS/working/CME20MSC |wc -l
+       1
+bash-3.2$ 
+cmd-98-end
+Inside else: ==       1==
+for::
+cmd-114-start
+ls -ltr /var/DWS/loading_queue/msc | wc -l
+       1
+bash-3.2$ 
+cmd-114-end
+Inside else: ==       1==
+for::
+cmd-116-start
+ls -ltr /var/DWS/loading/msc | wc -l
+       1
+bash-3.2$ 
+cmd-116-end
+Inside else: ==       1==
+for::
+cmd-110-start
+ls -ltr /var/DWS/erroneous/CME20SCP | wc -l
+       1
+bash-3.2$ 
+cmd-110-end
+Inside else: ==       1==
+for::
+cmd-102-start
+ls -ltr /var/DWS/loading/msc | wc -l
+       1
+bash-3.2$ 
+cmd-102-end
+Inside else: ==       1==
+for::
+cmd-100-start
+ls -ltr /var/DWS/loading_queue/msc | wc -l
+       1
+bash-3.2$ 
+cmd-100-end
+Inside else: ==       1==
+for::
+cmd-92-start
+ls -ltr /var/DWS/incoming/CME20MSC |wc -l
+       1
+bash-3.2$ 
+cmd-92-end
+Inside else: ==     847==
+for::
+cmd-96-start
+ls -ltr /var/DWS/erroneous/CME20MSC |wc -l
+     847
+bash-3.2$ 
+cmd-96-end
+Inside else: ==      22==
+for::
+cmd-94-start
+ls -ltr /var/DWS/processing/CME20MSC |wc -l
+      22
+bash-3.2$ 
+cmd-94-end
+Inside else: ==       1==
+for::
+cmd-108-start
+ls -ltr /var/DWS/processing/CME20MSCSCP |wc -l
+       1
+bash-3.2$ 
+cmd-108-end
+Inside CME: Feb 28 08:08 ,08:08
+Inside else: ==       1==
+for::
+cmd-112-start
+ls -ltr /var/DWS/working/CME20MSCSCP |wc -l
+       1
+bash-3.2$ 
+cmd-112-end
+### 10.13.3.22_CRS3 ###
+Inside else: ==       1==
+for::
+cmd-106-start
+ls -ltr /var/DWS/incoming/CME20MSCSCP |wc -l
+       1
+bash-3.2$ 
+cmd-106-end
+Inside CME: Feb 28 08:08 ,08:08
+Inside else: ==       1==
+for::
+cmd-98-start
+ls -ltr /var/DWS/working/CME20MSC |wc -l
+       1
+bash-3.2$ 
+cmd-98-end
+Inside else: ==       1==
+for::
+cmd-114-start
+ls -ltr /var/DWS/loading_queue/msc | wc -l
+       1
+bash-3.2$ 
+cmd-114-end
+Inside else: ==     783==
+for::
+cmd-116-start
+ls -ltr /var/DWS/loading/msc | wc -l
+     783
+bash-3.2$ 
+cmd-116-end
+Inside else: ==       1==
+for::
+cmd-110-start
+ls -ltr /var/DWS/erroneous/CME20SCP | wc -l
+       1
+bash-3.2$ 
+cmd-110-end
+Inside else: ==     783==
+for::
+cmd-102-start
+ls -ltr /var/DWS/loading/msc | wc -l
+     783
+bash-3.2$ 
+cmd-102-end
+Inside else: ==       1==
+for::
+cmd-100-start
+ls -ltr /var/DWS/loading_queue/msc | wc -l
+       1
+bash-3.2$ 
+cmd-100-end
+Inside else: ==       1==
+for::
+cmd-92-start
+ls -ltr /var/DWS/incoming/CME20MSC |wc -l
+       1
+bash-3.2$ 
+cmd-92-end
+Inside else: ==       1==
+for::
+cmd-96-start
+ls -ltr /var/DWS/erroneous/CME20MSC |wc -l
+       1
+bash-3.2$ 
+cmd-96-end
+Inside else: ==     674==
+for::
+cmd-94-start
+ls -ltr /var/DWS/processing/CME20MSC |wc -l
+     674
+bash-3.2$ 
+cmd-94-end
+Inside else: ==       1==
+for::
+cmd-108-start
+ls -ltr /var/DWS/processing/CME20MSCSCP |wc -l
+       1
+bash-3.2$ 
+cmd-108-end
+Inside CME: Feb 28 08:08 ,08:08
+Inside else: ==/var/DWS/working/CME20MSCSCP: No such file or directory==
+for::
+cmd-112-start
+ls -ltr /var/DWS/working/CME20MSCSCP |wc -l
+/var/DWS/working/CME20MSCSCP: No such file or directory
+       0
+bash-3.2$ 
+cmd-112-end
+Email Sent Successfully

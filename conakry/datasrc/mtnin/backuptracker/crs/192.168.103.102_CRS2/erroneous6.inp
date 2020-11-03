@@ -1,0 +1,5 @@
+cmd-74-start
+ls -ltr /var/DWS/erroneous/CS40/CCN_BONUS|wc -l
+     301
+bash-3.2$ 
+cmd-74-end

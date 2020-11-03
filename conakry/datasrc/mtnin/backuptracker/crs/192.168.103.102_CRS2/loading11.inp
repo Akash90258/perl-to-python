@@ -1,0 +1,5 @@
+cmd-36-start
+ls -ltr /var/DWS/loading/CS40/account|wc -l
+       1
+bash-3.2$ 
+cmd-36-end

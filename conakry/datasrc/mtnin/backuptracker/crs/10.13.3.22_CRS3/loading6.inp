@@ -1,0 +1,5 @@
+cmd-26-start
+ls -ltr /var/DWS/loading_queue/CS40/adjustment|wc -l
+       1
+bash-3.2$ 
+cmd-26-end

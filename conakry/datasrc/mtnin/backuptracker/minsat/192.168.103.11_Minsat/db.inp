@@ -1,0 +1,5 @@
+cmd-8-start
+tail -20 /backup1/dbdumps/PPLE_SYB.`date +%Y.%m.%d`*/dump.log|grep -i  "DUMP is complete"
+tail: cannot open input
+bash-3.00$ 
+cmd-8-end

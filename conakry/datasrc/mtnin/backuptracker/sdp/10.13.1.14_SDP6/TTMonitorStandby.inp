@@ -1,0 +1,32 @@
+cmd-8-start
+tail -500 /var/opt/fds/logs/TTMonitorStandby.log | grep -i "Standby da tabase replication OK"
+2020-11-02 07:02:57 Standby database replication OK
+2020-11-02 08:04:17 Standby database replication OK
+2020-11-02 09:04:35 Standby database replication OK
+2020-11-02 10:04:40 Standby database replication OK
+2020-11-02 11:04:33 Standby database replication OK
+2020-11-02 12:04:31 Standby database replication OK
+2020-11-02 13:04:32 Standby database replication OK
+2020-11-02 14:04:22 Standby database replication OK
+2020-11-02 15:04:31 Standby database replication OK
+2020-11-02 16:04:26 Standby database replication OK
+2020-11-02 17:04:25 Standby database replication OK
+2020-11-02 18:04:33 Standby database replication OK
+2020-11-02 19:04:32 Standby database replication OK
+2020-11-02 20:05:22 Standby database replication OK
+2020-11-02 21:05:08 Standby database replication OK
+2020-11-02 22:05:04 Standby database replication OK
+2020-11-02 23:04:19 Standby database replication OK
+2020-11-03 00:05:53 Standby database replication OK
+2020-11-03 01:02:47 Standby database replication OK
+2020-11-03 02:02:04 Standby database replication OK
+2020-11-03 03:01:52 Standby database replication OK
+2020-11-03 04:02:06 Standby database replication OK
+2020-11-03 05:01:55 Standby database replication OK
+2020-11-03 06:01:24 Standby database replication OK
+2020-11-03 07:02:58 Standby database replication OK
+2020-11-03 08:04:03 Standby database replication OK
+2020-11-03 09:04:12 Standby database replication OK
+2020-11-03 10:04:13 Standby database replication OK
+bash-3.2$ 
+cmd-8-end

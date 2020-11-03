@@ -1,0 +1,5 @@
+cmd-16-start
+cat /tmp/cfbackup.log|grep -i "CRITICAL"|grep -i "status"|awk -F" " '{ print $(NF-1), $NF}'
+cat: cannot open /tmp/cfbackup.log
+bash-3.2$ 
+cmd-16-end

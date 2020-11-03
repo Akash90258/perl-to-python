@@ -1,0 +1,5 @@
+cmd-64-start
+ls -ltr /var/DWS/erroneous/CS40/SDP|wc -l
+      73
+bash-3.2$ 
+cmd-64-end

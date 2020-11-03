@@ -1,0 +1,5 @@
+cmd-112-start
+ls -ltr /var/DWS/working/CME20MSCSCP |wc -l
+       1
+bash-3.2$ 
+cmd-112-end

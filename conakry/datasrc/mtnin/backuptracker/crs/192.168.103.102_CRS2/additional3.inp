@@ -1,0 +1,5 @@
+cmd-96-start
+ls -ltr /var/DWS/erroneous/CME20MSC |wc -l
+  249214
+bash-3.2$ 
+cmd-96-end

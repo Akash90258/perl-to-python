@@ -1,0 +1,5 @@
+cmd-8-start
+ls -ld /var/DWS/archive/CS40/SDP|tail
+drwxrwxrwx   2 dwsftp   dws      1865216 Nov  3 10:30 /var/DWS/archive/CS40/SDP
+bash-3.2$ 
+cmd-8-end

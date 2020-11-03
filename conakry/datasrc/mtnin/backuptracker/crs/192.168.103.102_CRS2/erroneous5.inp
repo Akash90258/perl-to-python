@@ -1,0 +1,5 @@
+cmd-72-start
+ls -ltr /var/DWS/erroneous/CS40/CCN_USAGE| wc -l
+    1093
+bash-3.2$ 
+cmd-72-end

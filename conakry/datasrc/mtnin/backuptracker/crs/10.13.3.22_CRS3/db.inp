@@ -1,0 +1,5 @@
+cmd-6-start
+grep -i "Recovery Manager complete" /var/DWS/logs/backup_log/rman* | t ail -1
+/var/DWS/logs/backup_log/rman_20201102_220000.log:Recovery Manager complete.
+bash-3.2$ 
+cmd-6-end

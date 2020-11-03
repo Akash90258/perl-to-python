@@ -1,0 +1,5 @@
+cmd-52-start
+ls -ltr /var/DWS/processing/CS40/CCN_BONUS|wc -l
+       7
+bash-3.2$ 
+cmd-52-end

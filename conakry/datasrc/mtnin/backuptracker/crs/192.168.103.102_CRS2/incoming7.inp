@@ -1,0 +1,5 @@
+cmd-88-start
+ls -ltr /var/DWS/incoming/CS40/CCN_BONUS | wc -l
+       1
+bash-3.2$ 
+cmd-88-end

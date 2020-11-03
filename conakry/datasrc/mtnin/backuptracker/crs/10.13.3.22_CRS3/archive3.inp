@@ -1,0 +1,5 @@
+cmd-12-start
+ls -ld /var/DWS/archive/CS40/CCN_USAGE
+drwxrwxr-x   2 dwsftp   dws      10643456 Nov  3 10:30 /var/DWS/archive/CS40/CCN_USAGE
+bash-3.2$ 
+cmd-12-end

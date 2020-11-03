@@ -1,0 +1,5 @@
+cmd-14-start
+ls -ld /var/DWS/archive/CS40/SDPNotification |tail
+drwxrwxr-x   2 dwsftp   dws        52736 Oct 26 22:50 /var/DWS/archive/CS40/SDPNotification
+bash-3.2$ 
+cmd-14-end

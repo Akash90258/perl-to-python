@@ -1,0 +1,5 @@
+cmd-24-start
+ls -ltr /var/DWS/loading_queue/CS40/account|wc -l
+       1
+bash-3.2$ 
+cmd-24-end

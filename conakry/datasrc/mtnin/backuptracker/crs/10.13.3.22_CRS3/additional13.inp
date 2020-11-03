@@ -1,0 +1,5 @@
+cmd-116-start
+ls -ltr /var/DWS/loading/msc | wc -l
+       6
+bash-3.2$ 
+cmd-116-end

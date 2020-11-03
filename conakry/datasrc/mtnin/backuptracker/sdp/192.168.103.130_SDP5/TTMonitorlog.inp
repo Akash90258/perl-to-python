@@ -1,0 +1,4 @@
+cmd-12-start
+tail -500 /var/opt/fds/logs/TTMonitor.log | egrep `date +%Y-%m-%d` | e grep -i "Replication" | grep -iv OK
+bash-3.2$ 
+cmd-12-end

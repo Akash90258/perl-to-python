@@ -1,0 +1,4 @@
+cmd-10-start
+tail -5000 /var/opt/fds/logs/TTMonitor.log |grep -i info
+bash-3.2$ 
+cmd-10-end

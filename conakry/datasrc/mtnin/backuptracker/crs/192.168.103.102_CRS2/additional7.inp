@@ -1,0 +1,5 @@
+cmd-104-start
+ls -ltr -ld /var/DWS/archive/CME20MSC | tail
+drwxrwxrwx   2 dwsftp   dws      4151808 Nov  3 10:31 /var/DWS/archive/CME20MSC
+bash-3.2$ 
+cmd-104-end

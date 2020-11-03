@@ -1,0 +1,5 @@
+cmd-110-start
+ls -ltr /var/DWS/erroneous/CME20SCP | wc -l
+       1
+bash-3.2$ 
+cmd-110-end

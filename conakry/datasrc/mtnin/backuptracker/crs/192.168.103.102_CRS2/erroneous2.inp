@@ -1,0 +1,5 @@
+cmd-66-start
+ls -ltr /var/DWS/erroneous/CS40/AIR|wc -l
+      30
+bash-3.2$ 
+cmd-66-end

@@ -1,0 +1,5 @@
+cmd-44-start
+ls -ltr /var/DWS/processing/CS40/SDP |wc -l
+      10
+bash-3.2$ 
+cmd-44-end

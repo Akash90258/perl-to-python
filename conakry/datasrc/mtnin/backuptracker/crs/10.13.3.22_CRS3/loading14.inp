@@ -1,0 +1,5 @@
+cmd-42-start
+ls -ltr /var/DWS/loading/CS40/ccn_gcdr_usage|wc -l
+      26
+bash-3.2$ 
+cmd-42-end

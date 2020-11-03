@@ -1,0 +1,5 @@
+cmd-8-start
+ls -ltr /var/sog/backups/config/*sogconfig*|tail -1
+-rw-r--r-- 1 root root 163840 Nov  3 04:45 /var/sog/backups/config/sogconfig_backup.201103-04:45
+AMSRO@HOEMA2:~> 
+cmd-8-end

@@ -1,0 +1,5 @@
+cmd-80-start
+ls -ltr /var/DWS/incoming/CS40/SDPNotification|wc -l
+       2
+bash-3.2$ 
+cmd-80-end

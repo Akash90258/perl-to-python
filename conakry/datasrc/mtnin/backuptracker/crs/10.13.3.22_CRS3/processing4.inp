@@ -1,0 +1,5 @@
+cmd-50-start
+ls -ltr /var/DWS/processing/CS40/CCN_USAGE|wc -l
+       8
+bash-3.2$ 
+cmd-50-end

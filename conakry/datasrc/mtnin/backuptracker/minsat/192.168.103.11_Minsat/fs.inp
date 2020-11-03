@@ -1,0 +1,5 @@
+cmd-6-start
+tail -30 /var/maint/logs/backup/system_backup_exec.log.`date '+%Y.%m. %d'`.*|grep -i "Backup completed"
+[2020/11/03 05:42:44] Backup completed
+bash-3.00$ 
+cmd-6-end

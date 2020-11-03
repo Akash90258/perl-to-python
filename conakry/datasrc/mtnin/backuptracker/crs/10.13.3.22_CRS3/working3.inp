@@ -1,0 +1,5 @@
+cmd-58-start
+ls -ltr /var/DWS/working/CS40/CCN_BONUS_BER|wc -l
+       1
+bash-3.2$ 
+cmd-58-end

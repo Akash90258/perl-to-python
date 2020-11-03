@@ -1,0 +1,5 @@
+cmd-94-start
+ls -ltr /var/DWS/processing/CME20MSC |wc -l
+      20
+bash-3.2$ 
+cmd-94-end

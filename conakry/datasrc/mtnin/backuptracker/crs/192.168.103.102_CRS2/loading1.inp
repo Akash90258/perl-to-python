@@ -1,0 +1,5 @@
+cmd-16-start
+ls -ltr /var/DWS/loading_queue/CS40/SDPNotification |wc -l
+       1
+bash-3.2$ 
+cmd-16-end
