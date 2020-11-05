@@ -158,14 +158,14 @@ def read_inp(inp_dir_path, user, inp_dir):
                     status = ''
                     fail_reason = ''
                     # regex = "{}\s+\d+\:\d+\:\d+\s+Standby\s+database\s+replication\s+OK".format(curr_date)
-                    regex = "({}\s+\d+\:\d+\:\d+\s+Standby\s+database\s+replication\s+OK)".format(curr_date)
                     if 'TTMonitor.inp' in inp_name or 'TTMonitorlog.inp' in inp_name:
                         sdp_geo_check += 1
-                        geo_str = file_data.split('\n')
+                        geo_str = file_data.strip().split('\n')
                         arr_len = len(geo_str)
                         if arr_len > 4:
                             parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
 
+                    regex = "({} .*?Standby database replication OK)".format(curr_date)
                     if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] == 'N/A':
                         if len(re.findall(regex, file_data)) > 0:
                             parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
@@ -311,7 +311,8 @@ def filesystem(data, date):
 
 def dbn(data, date1, date2):
     """Used for db_backup.inp"""
-    regex = "(rman\_{}.*?Recovery\s+Manager\s+complete)".format(curr_date2)
+    regex = "(rman_{}.*?Recovery Manager complete)".format(date2)
+    print(regex,"==============")
     status = ''
     if 'ScheduledBackup_' + date1 in data:
         status = 'Success'
@@ -406,19 +407,27 @@ sdp_geo_check = 0
 cassandra_flag = 0
 sdp_geo = ''
 cassendra_arr = []
-month_date = str(datetime.today().strftime('%b %e'))
-pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
-curr_date = str(datetime.today().strftime('%Y-%m-%d'))
-curr_date2 = str(datetime.today().strftime('%Y%m%d'))
-curr_date3 = str(datetime.today().strftime('%Y_%m_%d'))
-curr_date4 = str(datetime.today().strftime('%y%m%d'))
-curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
-curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
-curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
-pre_date1 = str(datetime.today().strftime('%Y_%m_%d'))
-pre_date2 = str(datetime.today().strftime('%Y/%m/%d'))
-pre_date3 = str(datetime.today().strftime('%Y%m%d'))
-pre_date4 = str(datetime.today().strftime('%Y-%m-%d'))
+import datetime
+todays_datetime = datetime.datetime.today()-datetime.timedelta(2)
+from datetime import datetime
+day1 = str(datetime.today().strftime('%d'))
+day2 = str(datetime.today().strftime('%e'))
+month = str(datetime.today().strftime('%b'))
+month_date = str(todays_datetime.strftime('%b %e'))
+pre_date1 =  str(todays_datetime.strftime('%Y_%m_%d -d -1 day'))
+curr_date =  str(todays_datetime.strftime('%Y-%m-%d'))
+curr_date2 = str(todays_datetime.strftime('%Y%m%d'))
+curr_date3 = str(todays_datetime.strftime('%Y_%m_%d'))
+curr_date4 = str(todays_datetime.strftime('%y%m%d'))
+curr_date5 = str(todays_datetime.strftime('%A, %B %d, %Y'))
+curr_date6 = str(todays_datetime.strftime('%Y/%m/%d'))
+curr_date7 = str(todays_datetime.strftime('%A, %B %e, %Y'))
+
+
+pre_date1 = str(todays_datetime.strftime('%Y_%m_%d'))
+pre_date2 = str(todays_datetime.strftime('%Y/%m/%d'))
+pre_date3 = str(todays_datetime.strftime('%Y%m%d'))
+pre_date4 = str(todays_datetime.strftime('%Y-%m-%d'))
 
 issue1 = 'Connectivity/Password Issue'
 
@@ -432,24 +441,29 @@ if __name__ == '__main__':
     cassandra_flag = 0
     cassendra_arr = []
     inp_dir_hash = {}
+
+
+    import datetime
+    todays_datetime = datetime.datetime.today()-datetime.timedelta(2)
+    from datetime import datetime
     day1 = str(datetime.today().strftime('%d'))
     day2 = str(datetime.today().strftime('%e'))
     month = str(datetime.today().strftime('%b'))
-    month_date = str(datetime.today().strftime('%b %e'))
-    pre_date1 = str(datetime.today().strftime('%Y_%m_%d -d -1 day'))
-    curr_date = str(datetime.today().strftime('%Y-%m-%d'))
-    curr_date2 = str(datetime.today().strftime('%Y%m%d'))
-    curr_date3 = str(datetime.today().strftime('%Y_%m_%d'))
-    curr_date4 = str(datetime.today().strftime('%y%m%d'))
-    curr_date5 = str(datetime.today().strftime('%A, %B %d, %Y'))
-    curr_date6 = str(datetime.today().strftime('%Y/%m/%d'))
-    curr_date7 = str(datetime.today().strftime('%A, %B %e, %Y'))
+    month_date = str(todays_datetime.strftime('%b %e'))
+    pre_date1 =  str(todays_datetime.strftime('%Y_%m_%d -d -1 day'))
+    curr_date =  str(todays_datetime.strftime('%Y-%m-%d'))
+    curr_date2 = str(todays_datetime.strftime('%Y%m%d'))
+    curr_date3 = str(todays_datetime.strftime('%Y_%m_%d'))
+    curr_date4 = str(todays_datetime.strftime('%y%m%d'))
+    curr_date5 = str(todays_datetime.strftime('%A, %B %d, %Y'))
+    curr_date6 = str(todays_datetime.strftime('%Y/%m/%d'))
+    curr_date7 = str(todays_datetime.strftime('%A, %B %e, %Y'))
 
 
-    pre_date1 = str(datetime.today().strftime('%Y_%m_%d'))
-    pre_date2 = str(datetime.today().strftime('%Y/%m/%d'))
-    pre_date3 = str(datetime.today().strftime('%Y%m%d'))
-    pre_date4 = str(datetime.today().strftime('%Y-%m-%d'))
+    pre_date1 = str(todays_datetime.strftime('%Y_%m_%d'))
+    pre_date2 = str(todays_datetime.strftime('%Y/%m/%d'))
+    pre_date3 = str(todays_datetime.strftime('%Y%m%d'))
+    pre_date4 = str(todays_datetime.strftime('%Y-%m-%d'))
 
 
     issue1 = 'Connectivity/Password Issue'
@@ -457,4 +471,4 @@ if __name__ == '__main__':
     users_details = set_users_conf()
     read_opco_dir()
     print("========================================")
-    print(parsed_hash)
+    print(parsed_hash['ema'])

@@ -14,3 +14,63 @@ INFO:root:Loading Configations from pma_nw_file_path.conf
 INFO:root:Creating Object for outptu Excel 
 ERROR:root:Error Occured: [Errno 2] No such file or directory: '/home/ubuntu/perl-to-python/TEMP/MTN -Congo_backup_tracker_TEMP.xlsx'
 INFO:root:Sending Failier mail
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Writting data for OPCO : sdp
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Writting data for OPCO : sdp

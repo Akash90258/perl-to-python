@@ -87,7 +87,7 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
         for key1, values1 in values.items():
             for key2, values2 in values1.items():
                 for key3, values3 in values2.items():
-                    if 'Success' not in values3:
+                    if 'Success' not in values3 and 'Password Issue' not in values3:
                         if key.lower() not in updated_pma_dict:
                             continue
                         flag = Is_IP_Exists(key2, updated_pma_dict[key.lower()])

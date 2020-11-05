@@ -11,7 +11,7 @@ print("Process Started")
 log_file_path = "./logs/logs_{}.log".format(str(date.today()))
 logging.basicConfig(
     level=logging.INFO,
-    filename=log_file_path
+    # filename=log_file_path
 )
 logging.info("Starting Automation...")
 
@@ -101,10 +101,10 @@ try:
     # print("===================================")
     writer.save()
     logging.info("Sending mail")
-    Send_Email_SMTP(Output_File)
+    # Send_Email_SMTP(Output_File)
 except Exception as error:
     logging.error("Error Occured: {}".format(error))
     logging.info("Sending Failier mail")
-    Send_Email_SMTP(log_file_path)
+    # Send_Email_SMTP(log_file_path)
 logging.info("Automation Ended")
 print("Process Ended")
