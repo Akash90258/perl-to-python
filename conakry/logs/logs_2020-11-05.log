@@ -477,3 +477,11 @@ INFO:root:Loading Configations from pma_nw_file_path.conf
 INFO:root:Creating Object for outptu Excel 
 INFO:root:Reading Input Template file
 INFO:root:Creating dictinary of all node types after parsing ini files
+INFO:root:Starting Automation...
+INFO:root:Loading Config.ini
+INFO:root:Loading Dynamic Function mapping
+INFO:root:Loading Variables from config.ini 
+INFO:root:Loading Configations from pma_nw_file_path.conf
+INFO:root:Creating Object for outptu Excel 
+INFO:root:Reading Input Template file
+INFO:root:Creating dictinary of all node types after parsing ini files

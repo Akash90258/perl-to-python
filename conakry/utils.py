@@ -10,9 +10,6 @@ import pandas as pd
 from updated import *
 
 
-
-
-
 def pma_nw_node_dict(pma_nw_file_path):
     """
         Function will read pma_nw_final.conf anc return a dict with opco as
@@ -74,7 +71,7 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
         for key1, values1 in values.items():
             for key2, values2 in values1.items():
                 for key3, values3 in values2.items():
-                    if 'Success' not in values3:
+                    if 'Success' not in values3 and 'Password Issue' not in values3:
                         if key.lower() not in updated_pma_dict:
                             continue
                         flag = Is_IP_Exists(key2, updated_pma_dict[key.lower()])
@@ -172,28 +169,29 @@ def nodes_iterator_vs(values, pma_ips):
         final_data.append(row_data)
     return final_data
 
+
 def nodes_iterator_crs(values, pma_ips):
-        """
-            Iterate over each node name of air and check if the ip exist in
-            pma_nw_final.conf file and create a list of node to insert in
-            final output excel sheet with their corresponding headers
-        """
-        final_data = []
-        for key, value in values.items():
-            IP = list(value.keys())[0]
-            flag = Is_IP_Exists(IP, pma_ips)
-            if not flag:
-                continue
-            row_data = {}
-            node_name = key
-            row_data['Node Name'] = node_name
-            row_data['Node IP'] = IP
-            status = update_status(list(value.values())[0]['db.inp'])
-            row_data['CRS DB Backup _ Daily'] = status
-            # if 'Password Issue' in temp_status:
-            #     status, rowdata = password_issue(temp_status, row_data)
-            final_data.append(row_data)
-        return final_data
+    """
+        Iterate over each node name of air and check if the ip exist in
+        pma_nw_final.conf file and create a list of node to insert in
+        final output excel sheet with their corresponding headers
+    """
+    final_data = []
+    for key, value in values.items():
+        IP = list(value.keys())[0]
+        flag = Is_IP_Exists(IP, pma_ips)
+        if not flag:
+            continue
+        row_data = {}
+        node_name = key
+        row_data['Node Name'] = node_name
+        row_data['Node IP'] = IP
+        status = update_status(list(value.values())[0]['db.inp'])
+        row_data['CRS DB Backup _ Daily'] = status
+        # if 'Password Issue' in temp_status:
+        #     status, rowdata = password_issue(temp_status, row_data)
+        final_data.append(row_data)
+    return final_data
 
 
 def nodes_iterator_ccn(values, pma_ips):
@@ -236,16 +234,19 @@ def nodes_iterator_sdp(values, pma_ips):
         if int(IP1.split('.')[-1]) > int(IP2.split('.')[-1]):
             row_data['Node B-IP'] = IP1
             row_data['Node A-IP'] = IP2
+            status1 = update_status(list(value[IP1].values())[0])
+            status = update_status(list(value[IP2].values())[0])
         else:
             row_data['Node A-IP'] = IP1
             row_data['Node B-IP'] = IP2
-        status1 = update_status(list(list(value.values())[0].values())[0])
-        row_data['Node - A'] = status1
-        status2 = update_status(list(list(value.values())[1].values())[0])
-        row_data['Node - B'] = status2
+            status1 = update_status(list(value[IP2].values())[0])
+            status = update_status(list(value[IP1].values())[0])
+        # status1 = update_status(list(list(value.values())[0].values())[0])
+        row_data['Node - A'] = status
+        # status2 = update_status(list(list(value.values())[1].values())[0])
+        row_data['Node - B'] = status1
         final_data.append(row_data)
     return final_data
-
 
 
 def nodes_iterator_sdp_geo(values, pma_ips):
@@ -267,12 +268,11 @@ def nodes_iterator_sdp_geo(values, pma_ips):
         for index in range(len(sorted_list)):
             row_data = {}
             node_name = key
-            row_data['Hostname'] = node_name+str(index+1)
+            row_data['Hostname'] = node_name + str(index + 1)
             status = update_status(list(value[sorted_list[index]].values())[0])
             row_data['Todays_date'] = status
             final_data.append(row_data)
     return final_data
-
 
 
 def nodes_iterator_occ(values, pma_ips):
@@ -370,6 +370,16 @@ def nodes_iterator_ema(values, pma_ips):
     return final_data
 
 
+def append_row_to_excel(writer, template_df_map, final_data, sheet_name):
+    """
+        This function append row to excel sheet and save the resultant to 
+        output excel sheet . 
+    """
+    for row in final_data:
+        template_df_map[sheet_name] = template_df_map[sheet_name].append(row, ignore_index=True)
+    template_df_map[sheet_name].to_excel(writer, sheet_name, index=False)
+    return template_df_map
+
 
 def get_dynamic_function_dict():
     """
@@ -388,35 +398,29 @@ def get_dynamic_function_dict():
     return mapping
 
 
-def Send_Email_SMTP(Attachment_Full_Path):
-    subject = 'New MTN Backup Tracker for Congo'  # + GetOpco_Name(opco)
-    text = 'New MTN Backup Tracker for Congo'  # + GetOpco_Name(opco)
+def Send_Email_SMTP(Attachment_Full_Path, flag):
+    subject = 'New MTN Backup Tracker for Conakry'
+    text = 'New MTN Backup Tracker for Conakry'
     fromaddr = 'no-reply@AutoBOT'
-    # toaddr = ['gnoc.1st.la.mtn.rsaa@ericsson.com','PDLMTNFMIN@pdl.internal.ericsson.com','PDLFOINMTN@pdl.internal.ericsson.com','PDLHIFTMAN@pdl.internal.ericsson.com']
-    toaddr = ['akash.a.agrawal@ericsson.com', 'akshath.sharma@ericsson.com', 'aditya.k.kumar@ericsson.com']
+    if flag == False:
+        toaddr = ['akash.a.agrawal@ericsson.com', 'akshath.sharma@ericsson.com', 'aditya.k.kumar@ericsson.com']
+    else:
+        toaddr = ['akash.a.agrawal@ericsson.com', 'akshath.sharma@ericsson.com']
     COMMASPACE = ', '
 
     msg = MIMEMultipart()
-
     msg['From'] = fromaddr
     msg['To'] = COMMASPACE.join(toaddr)
     msg['Subject'] = subject
-
     body = text
-
     msg.attach(MIMEText(body, 'plain'))
-
     part = MIMEBase('application', 'octet-stream')
-
     part.set_payload(open(Attachment_Full_Path, "rb").read())
-
     encoders.encode_base64(part)
     filename = Attachment_Full_Path.split('/')[-1]
     part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-
     msg.attach(part)
     text = msg.as_string()
-
     try:
         smtpObj = smtplib.SMTP('172.23.168.13', 25)
         smtpObj.sendmail(fromaddr, toaddr, text)

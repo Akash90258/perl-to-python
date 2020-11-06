@@ -55,17 +55,8 @@ def read_users_dir(user_dir, user):
     else:
         print("Can't open the current directory")
     for inp_dir in hosts:
-        # $inp_dir_hash->{$user}->{$inp_dir} = 1; TODO : not getting this line
         inp_dir_path = user_dir + "/" + inp_dir
-        # if user not in inp_dir_hash:
-        #     inp_dir_hash[user] = {}
-        #     inp_dir_hash[user][inp_dir] = 1;
-        # else:
-        #     inp_dir_hash[user][inp_dir] = 1;
         read_inp(inp_dir_path, user, inp_dir)
-    # print(inp_dir_hash)
-    # print(inp_dir_path)
-    # print("============================")
 
 
 def read_inp(inp_dir_path, user, inp_dir):
@@ -81,15 +72,14 @@ def read_inp(inp_dir_path, user, inp_dir):
 
     # see in pma_bkup_tracker file for geo-redundancy
     array_ref_geo = []
-    if ('sdp' in user_l or  'vs' in user_l) :
-        array_ref_geo = users_details[user+"-geo-red"];
-        if user+"-geo-red" not in parsed_hash:
-            parsed_hash[user+"-geo-red"] = {}
-        if host not in parsed_hash[user+"-geo-red"]:
-            parsed_hash[user+"-geo-red"][host] = {}
-        if ip not in parsed_hash[user+"-geo-red"][host]:
-            parsed_hash[user+"-geo-red"][host][ip] = {}
-
+    if ('sdp' in user_l or 'vs' in user_l):
+        array_ref_geo = users_details[user + "-geo-red"];
+        if user + "-geo-red" not in parsed_hash:
+            parsed_hash[user + "-geo-red"] = {}
+        if host not in parsed_hash[user + "-geo-red"]:
+            parsed_hash[user + "-geo-red"][host] = {}
+        if ip not in parsed_hash[user + "-geo-red"][host]:
+            parsed_hash[user + "-geo-red"][host][ip] = {}
 
     inp_files = []
     if os.path.isdir(inp_dir_path):
@@ -104,31 +94,28 @@ def read_inp(inp_dir_path, user, inp_dir):
 
     if user not in parsed_hash:
         parsed_hash[user] = {}
-        # parsed_hash[user+"-geo-red"] = {}
     if host not in parsed_hash[user]:
         parsed_hash[user][host] = {}
-        # parsed_hash[user+"-geo-red"][host] = {}
     if ip not in parsed_hash[user][host]:
         parsed_hash[user][host][ip] = {}
-        # parsed_hash[user+"-geo-red"][host][ip] = {}
 
     if len(inp_files2) == 0:
         for array_ref1 in array_ref:
             parsed_hash[user][host][ip][array_ref1] = issue1
 
         for array_ref_geo1 in array_ref_geo:
-            parsed_hash[user+"-geo-red"][host][ip][array_ref_geo1] = issue1
+            parsed_hash[user + "-geo-red"][host][ip][array_ref_geo1] = issue1
 
 
     else:
         nedate = read_file(inp_dir_path + "/nedate.inp")
         if curr_date2 in nedate:
-        # if '20201102' in nedate:
+            # if '20201102' in nedate:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = 'N/A'
 
             for array_ref_geo1 in array_ref_geo:
-                parsed_hash[user+"-geo-red"][host][ip][array_ref_geo1] = 'N/A'
+                parsed_hash[user + "-geo-red"][host][ip][array_ref_geo1] = 'N/A'
 
             for inp_name in inp_files:
                 inp_name = inp_name.strip()
@@ -145,12 +132,14 @@ def read_inp(inp_dir_path, user, inp_dir):
                         )
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
 
-                #-- OCC tape Check --##
+                # -- OCC tape Check --##
                 if 'occ' in user_l:
                     status = ''
                     fail_reason = ''
                     if 'tape.inp' in inp_name or 'nfs.inp' in inp_name:
-                        status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
+                        status, fail_reason = tape(
+                            file_data, curr_date, curr_date5, inp_dir_path
+                        )
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
 
                 ##-- SDP geo-redundancy and tape Check --##
@@ -163,16 +152,16 @@ def read_inp(inp_dir_path, user, inp_dir):
                         geo_str = file_data.strip().split('\n')
                         arr_len = len(geo_str)
                         if arr_len > 4:
-                            parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
 
                     regex = "({} .*?Standby database replication OK)".format(curr_date)
-                    if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] == 'N/A':
+                    if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user + "-geo-red"][host][ip][
+                        'geo-redundancy.inp'] == 'N/A':
                         if len(re.findall(regex, file_data)) > 0:
-                            parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
                         else:
-                            parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
 
-                
                     if 'tape.inp' in inp_name or 'nfs.inp' in inp_name or 'tape_nfs.inp' in inp_name:
                         status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status + "^^" + fail_reason
@@ -182,17 +171,14 @@ def read_inp(inp_dir_path, user, inp_dir):
                     status = ''
                     if 'appfs.inp' in inp_name:
                         status = appfs(file_data, pre_date3)
-                        # status = dbn(file_data, curr_date6, curr_date)
                         parsed_hash[user][host][ip][inp_name] = status
 
                     if 'appfs1.inp' in inp_name:
                         status = cdr(file_data, pre_date3);
-                        # status = tape(file_data, pre_date1, month_date, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status
 
                     if 'maintenance.inp' in inp_name:
                         status = oradb(file_data, pre_date4);
-                        # status = zoo(file_data, curr_date, curr_date4)
                         parsed_hash[user][host][ip][inp_name] = status
 
                 # ##-- CCN dbn Check --##
@@ -215,16 +201,18 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = dbn(file_data, pre_date1, '')
                         parsed_hash[user][host][ip][inp_name] = status
 
-                ##-- VS tape, nfs, ora, ora_archive and geo-redundancy Check --##
+                ##-- VS tape, nfs, ora, ora_archive  --##
                 if 'vs' in user_l:
                     status = ''
                     fail_reason = ''
-                    if 'ora.inp' in inp_name and 'ora_archive.inp' in inp_name:
+                    if 'ora.inp' in inp_name or 'ora_archive.inp' in inp_name:
                         status = ora(file_data, curr_date2)
                         parsed_hash[user][host][ip][inp_name] = status
 
-                    if 'tape.inp' in inp_name and 'nfs.inp' in inp_name:
-                        status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
+                    if 'tape.inp' in inp_name or 'nfs.inp' in inp_name:
+                        status, fail_reason = tape(
+                            file_data, curr_date, curr_date5, inp_dir_path
+                        )
                         parsed_hash[user][host][ip][inp_name] = status
 
                     if 'cassendra' in inp_name:
@@ -247,7 +235,6 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = sogconfig(file_data, curr_date4)
                         parsed_hash[user][host][ip][inp_name] = status
 
-
                 ##-- CRS appfs, archived CDR and oracle database Check,fs backup --##
                 if 'crs' in user_l:
                     status = ''
@@ -256,18 +243,14 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = dbn(file_data, pre_date1, pre_date3)
                         parsed_hash[user][host][ip][inp_name] = status
 
-
-            #-- geo-redundancy check --##
-            if sdp_geo_check == 2 and parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] == 'N/A':
-                parsed_hash[user+"-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
+            # -- geo-redundancy check --##
+            if sdp_geo_check == 2 and parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] == 'N/A':
+                parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
         else:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = issue1
             for array_ref_geo1 in array_ref_geo:
-                parsed_hash[user+"-geo-red"][host][ip][array_ref_geo1] = issue1
-    
-    # print(parsed_hash)                
-    # print(inp_dir_path, user, inp_dir)
+                parsed_hash[user + "-geo-red"][host][ip][array_ref_geo1] = issue1
 
 
 def tape(data, date1, date2, inp_dir_path):
@@ -284,10 +267,10 @@ def tape(data, date1, date2, inp_dir_path):
         status = 'Fail'
         tape_data1 = ''
         tape_data2 = ''
-        if os.path.exists(inp_dir_path+"/tape2.inp"):
-            tape_data1  = read_file(inp_dir_path+"/tape2.inp")
-        if os.path.exists(inp_dir_path+"/tape1.inp"):
-            tape_data2  = read_file(inp_dir_path+"/tape1.inp")
+        if os.path.exists(inp_dir_path + "/tape2.inp"):
+            tape_data1 = read_file(inp_dir_path + "/tape2.inp")
+        if os.path.exists(inp_dir_path + "/tape1.inp"):
+            tape_data2 = read_file(inp_dir_path + "/tape1.inp")
 
         tape_data1 = tape_data1.split('\n')
         if ("there is no tape in drive"):
@@ -312,7 +295,6 @@ def filesystem(data, date):
 def dbn(data, date1, date2):
     """Used for db_backup.inp"""
     regex = "(rman_{}.*?Recovery Manager complete)".format(date2)
-    print(regex,"==============")
     status = ''
     if 'ScheduledBackup_' + date1 in data:
         status = 'Success'
@@ -346,8 +328,8 @@ def ora(data, date):
 
 def proclog(data, mdate, date):
     status = ''
-    regex = '(sogadm\s+sog.*?{}\s+{}.*?{})'.format(month, day1, date)
-    regex1 = "(sogadm\s+sog.*?{}\s+{}.*?{})".format(month, day2, date)
+    regex = '(sogadm sog.*?{}.*?{}.*?{})'.format(month, day1, date)
+    regex1 = '(sogadm sog.*?{}.*?{}.*?{})'.format(month, day2, date)
     if len(re.findall(regex, data)) > 0 or len(re.findall(regex1, data)) > 0:
         status = 'Success'
     else:
@@ -374,6 +356,7 @@ def appfs(data, date):
         status = 'Fail'
     return status
 
+
 def cdr(data, date):
     status = ''
     if 'swezdesma_{}'.format(date) in data:
@@ -390,7 +373,7 @@ def oradb(data, date):
     else:
         status = 'Fail'
     return status
-    
+
 
 def main():
     global users_details
@@ -408,21 +391,22 @@ cassandra_flag = 0
 sdp_geo = ''
 cassendra_arr = []
 import datetime
-todays_datetime = datetime.datetime.today()-datetime.timedelta(2)
+
+todays_datetime = datetime.datetime.today() - datetime.timedelta(3)
 from datetime import datetime
+
 day1 = str(datetime.today().strftime('%d'))
 day2 = str(datetime.today().strftime('%e'))
 month = str(datetime.today().strftime('%b'))
 month_date = str(todays_datetime.strftime('%b %e'))
-pre_date1 =  str(todays_datetime.strftime('%Y_%m_%d -d -1 day'))
-curr_date =  str(todays_datetime.strftime('%Y-%m-%d'))
+pre_date1 = str(todays_datetime.strftime('%Y_%m_%d -d -1 day'))
+curr_date = str(todays_datetime.strftime('%Y-%m-%d'))
 curr_date2 = str(todays_datetime.strftime('%Y%m%d'))
 curr_date3 = str(todays_datetime.strftime('%Y_%m_%d'))
 curr_date4 = str(todays_datetime.strftime('%y%m%d'))
 curr_date5 = str(todays_datetime.strftime('%A, %B %d, %Y'))
 curr_date6 = str(todays_datetime.strftime('%Y/%m/%d'))
 curr_date7 = str(todays_datetime.strftime('%A, %B %e, %Y'))
-
 
 pre_date1 = str(todays_datetime.strftime('%Y_%m_%d'))
 pre_date2 = str(todays_datetime.strftime('%Y/%m/%d'))
@@ -442,16 +426,17 @@ if __name__ == '__main__':
     cassendra_arr = []
     inp_dir_hash = {}
 
-
     import datetime
-    todays_datetime = datetime.datetime.today()-datetime.timedelta(2)
+
+    todays_datetime = datetime.datetime.today() - datetime.timedelta(3)
     from datetime import datetime
+
     day1 = str(datetime.today().strftime('%d'))
     day2 = str(datetime.today().strftime('%e'))
     month = str(datetime.today().strftime('%b'))
     month_date = str(todays_datetime.strftime('%b %e'))
-    pre_date1 =  str(todays_datetime.strftime('%Y_%m_%d -d -1 day'))
-    curr_date =  str(todays_datetime.strftime('%Y-%m-%d'))
+    pre_date1 = str(todays_datetime.strftime('%Y_%m_%d -d -1 day'))
+    curr_date = str(todays_datetime.strftime('%Y-%m-%d'))
     curr_date2 = str(todays_datetime.strftime('%Y%m%d'))
     curr_date3 = str(todays_datetime.strftime('%Y_%m_%d'))
     curr_date4 = str(todays_datetime.strftime('%y%m%d'))
@@ -459,16 +444,14 @@ if __name__ == '__main__':
     curr_date6 = str(todays_datetime.strftime('%Y/%m/%d'))
     curr_date7 = str(todays_datetime.strftime('%A, %B %e, %Y'))
 
-
     pre_date1 = str(todays_datetime.strftime('%Y_%m_%d'))
     pre_date2 = str(todays_datetime.strftime('%Y/%m/%d'))
     pre_date3 = str(todays_datetime.strftime('%Y%m%d'))
     pre_date4 = str(todays_datetime.strftime('%Y-%m-%d'))
-
 
     issue1 = 'Connectivity/Password Issue'
     parsed_hash = {}
     users_details = set_users_conf()
     read_opco_dir()
     print("========================================")
-    print(parsed_hash['ema'])
+    print(parsed_hash['ngcrs'])
