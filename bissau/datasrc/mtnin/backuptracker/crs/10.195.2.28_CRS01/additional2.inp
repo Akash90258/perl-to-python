@@ -1,0 +1,5 @@
+cmd-138-start
+ ls -ltr /var/DWS/processing/CME20MSC | wc -l 
+       3
+bash-3.2$ 
+cmd-138-end

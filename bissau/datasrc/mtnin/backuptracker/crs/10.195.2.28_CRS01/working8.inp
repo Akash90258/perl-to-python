@@ -1,0 +1,5 @@
+cmd-86-start
+ ls -ltr /var/DWS/working/CS40/CCN_USAGE_16K | wc -l 
+       1
+bash-3.2$ 
+cmd-86-end

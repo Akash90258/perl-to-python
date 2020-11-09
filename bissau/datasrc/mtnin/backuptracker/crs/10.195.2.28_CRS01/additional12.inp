@@ -1,0 +1,5 @@
+cmd-158-start
+ ls -ltr /var/DWS/loading_queue/msc | wc -l 
+       1
+bash-3.2$ 
+cmd-158-end

@@ -1,0 +1,5 @@
+cmd-68-start
+ ls -ltr /var/DWS/processing/CS40/CCN_BONUS_32K | wc -l 
+       1
+bash-3.2$ 
+cmd-68-end

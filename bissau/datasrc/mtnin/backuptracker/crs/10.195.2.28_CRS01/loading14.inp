@@ -1,0 +1,5 @@
+cmd-46-start
+ ls -ltr /var/DWS/loading/CS40/adjustment | wc -l 
+       2
+bash-3.2$ 
+cmd-46-end

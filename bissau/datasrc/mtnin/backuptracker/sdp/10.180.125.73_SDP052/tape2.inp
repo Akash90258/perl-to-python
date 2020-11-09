@@ -1,0 +1,4 @@
+cmd-10-start
+cat /tmp/cfbackup.log|grep -i "CRITICAL"|grep -i "status"|awk  -F" " '{print $(NF-1), $NF}'
+[amsro@Sdp052 ~]$ 
+cmd-10-end

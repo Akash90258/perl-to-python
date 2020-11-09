@@ -1,0 +1,5 @@
+cmd-6-start
+grep -i "Recovery Manager complete" /var/DWS/logs/backup_log/rman*`TZ= $TZ+24 date +'%Y%m%d'`*
+Recovery Manager complete.
+bash-3.2$ 
+cmd-6-end

@@ -1,0 +1,5 @@
+cmd-12-start
+ ls -ld /var/DWS/archive/CS40/SDPNotification | tail 
+drwxrwxr-x   2 dwsadm   dws        14336 Nov  5 21:51 /var/DWS/archive/CS40/SDPNotification
+bash-3.2$ 
+cmd-12-end

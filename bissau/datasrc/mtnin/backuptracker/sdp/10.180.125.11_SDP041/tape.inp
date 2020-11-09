@@ -1,0 +1,100 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%d"`*.log|grep -i --color=never "Filesystem backup ended"
+INFO:root:Filesystem backup ended at 2019-12-17 13:11:36
+INFO:root:Filesystem backup ended at 2019-12-18 02:15:57
+INFO:root:Filesystem backup ended at 2019-12-20 02:03:43
+INFO:root:Filesystem backup ended at 2019-12-21 02:05:03
+INFO:root:Filesystem backup ended at 2019-12-22 02:07:22
+INFO:root:Filesystem backup ended at 2019-12-23 02:11:56
+INFO:root:Filesystem backup ended at 2019-12-24 02:21:07
+INFO:root:Filesystem backup ended at 2019-12-25 02:39:16
+cat: /var/log/cfbackup_Sdp041_20200106_180610.logINFO:root:Filesystem backup ended at 2020-01-04 03:04:41
+: Permission denied
+INFO:root:Filesystem backup ended at 2020-01-08 03:02:59
+cat: /var/log/cfbackup_Sdp041_20200109_085354.log: Permission denied
+cat: /var/log/cfbackup_Sdp041_20200109_085527.log: Permission denied
+cat: /var/log/cfbackup_Sdp041_20200109_090052.log: Permission denied
+cat: /var/log/cfbackup_Sdp041_20200109_092757.log: Permission denied
+cat: /var/log/cfbackup_Sdp041_20200113_160455.log: Permission denied
+INFO:root:Filesystem backup ended at 2020-01-10 02:05:54
+INFO:root:Filesystem backup ended at 2020-01-14 02:08:37
+INFO:root:Filesystem backup ended at 2020-01-14 02:46:59
+INFO:root:Filesystem backup ended at 2020-01-16 02:09:12
+INFO:root:Filesystem backup ended at 2020-01-16 02:47:25
+INFO:root:Filesystem backup ended at 2020-01-17 02:55:32
+INFO:root:Filesystem backup ended at 2020-01-18 02:57:30
+INFO:root:Filesystem backup ended at 2020-01-19 02:51:55
+INFO:root:Filesystem backup ended at 2020-01-20 02:52:45
+INFO:root:Filesystem backup ended at 2020-01-21 02:55:44
+INFO:root:Filesystem backup ended at 2020-01-22 02:54:09
+INFO:root:Filesystem backup ended at 2020-01-23 02:56:30
+INFO:root:Filesystem backup ended at 2020-01-24 02:56:06
+INFO:root:Filesystem backup ended at 2020-01-25 02:57:59
+INFO:root:Filesystem backup ended at 2020-01-26 02:53:21
+INFO:root:Filesystem backup ended at 2020-01-27 02:55:23
+INFO:root:Filesystem backup ended at 2020-01-28 02:53:53
+INFO:root:Filesystem backup ended at 2020-01-29 02:54:36
+INFO:root:Filesystem backup ended at 2020-01-30 02:52:44
+INFO:root:Filesystem backup ended at 2020-01-31 02:57:19
+INFO:root:Filesystem backup ended at 2020-02-01 02:59:02
+INFO:root:Filesystem backup ended at 2020-02-02 02:59:11
+INFO:root:Filesystem backup ended at 2020-02-03 02:57:48
+INFO:root:Filesystem backup ended at 2020-02-04 03:01:46
+cat: /var/log/cfbackup_Sdp041_20200714_165834.log: Permission denied
+INFO:root:Filesystem backup ended at 2020-02-05 02:59:37
+cat: /var/log/cfbackup_Sdp041_20200714_170008.log: Permission denied
+cat: /var/log/cfbackup_Sdp041_20200714_211231.log: Permission denied
+INFO:root:Filesystem backup ended at 2020-07-15 03:54:55
+INFO:root:Filesystem backup ended at 2020-07-16 04:12:19
+INFO:root:Filesystem backup ended at 2020-07-17 04:07:08
+INFO:root:Filesystem backup ended at 2020-07-18 04:09:21
+INFO:root:Filesystem backup ended at 2020-07-19 04:08:59
+INFO:root:Filesystem backup ended at 2020-07-20 04:07:08
+INFO:root:Filesystem backup ended at 2020-07-21 03:57:24
+INFO:root:Filesystem backup ended at 2020-07-22 05:00:42
+INFO:root:Filesystem backup ended at 2020-07-23 04:17:19
+INFO:root:Filesystem backup ended at 2020-07-24 04:02:44
+INFO:root:Filesystem backup ended at 2020-07-25 04:13:21
+INFO:root:Filesystem backup ended at 2020-07-26 04:17:16
+INFO:root:Filesystem backup ended at 2020-07-27 04:14:25
+INFO:root:Filesystem backup ended at 2020-07-28 03:57:05
+INFO:root:Filesystem backup ended at 2020-07-29 04:15:28
+INFO:root:Filesystem backup ended at 2020-07-30 04:06:43
+INFO:root:Filesystem backup ended at 2020-07-31 04:26:53
+INFO:root:Filesystem backup ended at 2020-08-01 04:46:10
+INFO:root:Filesystem backup ended at 2020-08-02 04:19:19
+INFO:root:Filesystem backup ended at 2020-08-03 04:05:50
+INFO:root:Filesystem backup ended at 2020-08-04 04:29:37
+INFO:root:Filesystem backup ended at 2020-08-05 04:24:46
+INFO:root:Filesystem backup ended at 2020-08-06 04:19:03
+INFO:root:Filesystem backup ended at 2020-08-07 04:05:49
+INFO:root:Filesystem backup ended at 2020-08-08 04:14:20
+INFO:root:Filesystem backup ended at 2020-08-09 04:27:06
+INFO:root:Filesystem backup ended at 2020-08-10 04:20:25
+INFO:root:Filesystem backup ended at 2020-08-11 04:27:59
+INFO:root:Filesystem backup ended at 2020-08-12 04:25:17
+INFO:root:Filesystem backup ended at 2020-08-13 04:35:21
+INFO:root:Filesystem backup ended at 2020-08-14 04:31:43
+INFO:root:Filesystem backup ended at 2020-08-15 04:40:11
+INFO:root:Filesystem backup ended at 2020-08-16 04:40:24
+INFO:root:Filesystem backup ended at 2020-08-17 04:28:58
+INFO:root:Filesystem backup ended at 2020-08-18 04:42:09
+INFO:root:Filesystem backup ended at 2020-08-19 04:20:09
+INFO:root:Filesystem backup ended at 2020-08-20 04:22:02
+INFO:root:Filesystem backup ended at 2020-08-21 04:17:36
+INFO:root:Filesystem backup ended at 2020-08-22 04:31:04
+INFO:root:Filesystem backup ended at 2020-08-23 04:32:09
+INFO:root:Filesystem backup ended at 2020-08-24 04:32:52
+INFO:root:Filesystem backup ended at 2020-08-25 04:30:53
+INFO:root:Filesystem backup ended at 2020-08-26 04:34:23
+INFO:root:Filesystem backup ended at 2020-08-27 04:41:52
+INFO:root:Filesystem backup ended at 2020-08-28 04:25:32
+INFO:root:Filesystem backup ended at 2020-08-29 04:24:21
+INFO:root:Filesystem backup ended at 2020-08-30 04:28:59
+INFO:root:Filesystem backup ended at 2020-08-31 04:31:40
+INFO:root:Filesystem backup ended at 2020-09-01 04:37:43
+INFO:root:Filesystem backup ended at 2020-09-02 04:39:55
+INFO:root:Filesystem backup ended at 2020-09-03 04:24:53
+INFO:root:Filesystem backup ended at 2020-09-04 04:18:38
+]0;amsro@Sdp041:~[amsro@Sdp041 ~]$ 
+cmd-6-end

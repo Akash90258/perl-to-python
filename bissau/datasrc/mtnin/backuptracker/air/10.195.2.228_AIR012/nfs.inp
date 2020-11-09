@@ -1,0 +1,14 @@
+cmd-6-start
+cd /var/log; tail backuplog`date +'%d'`
+
+Filesystem backup started @ Friday, November  6, 2020 02:00:01 AM GMT
+Creating list of excluded files/directories
+Backing up the root (/) file system
+Filesystem backup ended @ Friday, November  6, 2020 02:12:46 AM GMT
+
+
+All sessions written (except the log) at: Friday, November  6, 2020 02:12:51 AM GMT
+
+Backup completed at: Friday, November  6, 2020 02:12:56 AM GMT
+bash-3.2$ 
+cmd-6-end

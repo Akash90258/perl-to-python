@@ -1,0 +1,15 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%d"`*.log|grep -i --color=never  "Filesystem backup ended"
+cat: /var/log/cfbackup_Sdp041_20200106_180610.log: Permission denied
+INFO:root:Filesystem backup ended at 2020-01-24 02:56:06
+INFO:root:Filesystem backup ended at 2020-07-30 04:06:43
+INFO:root:Filesystem backup ended at 2020-08-06 04:19:03
+INFO:root:Filesystem backup ended at 2020-08-09 04:27:06
+INFO:root:Filesystem backup ended at 2020-09-06 04:24:30
+INFO:root:Filesystem backup ended at 2020-09-27 04:36:06
+INFO:root:Filesystem backup ended at 2020-10-06 04:32:38
+INFO:root:Filesystem backup ended at 2020-10-17 04:41:06
+INFO:root:Filesystem backup ended at 2020-11-05 05:06:01
+INFO:root:Filesystem backup ended at 2020-11-06 05:00:04
+[amsro@Sdp041 ~]$ 
+cmd-6-end

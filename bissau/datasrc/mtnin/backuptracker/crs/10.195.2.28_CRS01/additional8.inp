@@ -1,0 +1,5 @@
+cmd-150-start
+ ls -ltr /var/DWS/incoming/CME20MSCSCP | wc -l 
+       1
+bash-3.2$ 
+cmd-150-end

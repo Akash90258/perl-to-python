@@ -1,0 +1,5 @@
+cmd-162-start
+ ls -ltr -ld /var/DWS/archive/CME20MSCSCP | tail 
+drwxrwxr-x   2 dwsftp   dws      8813568 Nov  6 09:31 /var/DWS/archive/CME20MSCSCP
+bash-3.2$ 
+cmd-162-end

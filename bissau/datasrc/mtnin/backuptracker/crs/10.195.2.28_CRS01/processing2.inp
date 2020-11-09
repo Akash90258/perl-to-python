@@ -1,0 +1,5 @@
+cmd-56-start
+ ls -ltr /var/DWS/processing/CS40/AIR | wc -l 
+       1
+bash-3.2$ 
+cmd-56-end

@@ -1,0 +1,5 @@
+cmd-6-start
+cd /var/log/; tail backuplog-`date '+%m-%d-%y'`*
+tail: cannot open input
+bash-3.2$ 
+cmd-6-end

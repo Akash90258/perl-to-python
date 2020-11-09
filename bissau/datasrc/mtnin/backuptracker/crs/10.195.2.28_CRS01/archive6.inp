@@ -1,0 +1,5 @@
+cmd-18-start
+ ls -ld /var/DWS/archive/CS40/CCN_USAGE_32K | tail 
+drwxrwxrwx   2 dwsadm   dws      12005888 Nov  6 09:30 /var/DWS/archive/CS40/CCN_USAGE_32K
+bash-3.2$ 
+cmd-18-end

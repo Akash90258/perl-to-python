@@ -1,0 +1,5 @@
+cmd-94-start
+ ls -ltr /var/DWS/erroneous/CS40/SDPNotification | wc -l 
+     385
+bash-3.2$ 
+cmd-94-end

@@ -1,0 +1,5 @@
+cmd-104-start
+ ls -ltr /var/DWS/erroneous/CS40/CCN_BONUS_16K | wc -l 
+       1
+bash-3.2$ 
+cmd-104-end

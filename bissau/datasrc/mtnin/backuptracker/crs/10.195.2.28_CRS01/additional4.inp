@@ -1,0 +1,5 @@
+cmd-142-start
+ ls -ltr /var/DWS/working/CME20MSC | wc -l 
+       1
+bash-3.2$ 
+cmd-142-end

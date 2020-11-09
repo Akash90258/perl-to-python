@@ -1,0 +1,5 @@
+cmd-10-start
+tail -10 /opt/oracle/admin/VSDB_S*/backuplogs/oraArchiveBackup`date "+ %Y%m%d"`*| grep -i "session is completed"
+This backup (20201106_0500) session is completed and finished without errors.
+bash-3.2$ 
+cmd-10-end

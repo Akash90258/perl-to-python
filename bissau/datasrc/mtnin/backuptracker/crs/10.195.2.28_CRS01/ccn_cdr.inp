@@ -1,0 +1,5 @@
+cmd-134-start
+ ls -ltr /var/DWS/working/CS40/CCN_USAGE_BER | tail 
+total 0
+bash-3.2$ 
+cmd-134-end

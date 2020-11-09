@@ -1,0 +1,5 @@
+cmd-6-start
+ls -lrth /var/sog/backups/proclog/|tail -1
+drwxrwxrwx 2 sogadm sog  88K Nov  6 09:29 20201106
+fouser@emacs:~> 
+cmd-6-end

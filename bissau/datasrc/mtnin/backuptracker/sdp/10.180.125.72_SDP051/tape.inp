@@ -1,0 +1,70 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%d"`*.log|grep -i --color=never "Filesystem backup ended"
+cat: /var/log/cfbackup_Sdp051_20200102_103304.logINFO:root:Filesystem backup ended at 2019-09-04 02:23:03
+INFO:root:Filesystem backup ended at 2019-09-28 02:28:04
+: Permission deniedINFO:root:Filesystem backup ended at 2019-10-04 02:27:28
+
+INFO:root:Filesystem backup ended at 2019-11-04 02:35:32
+INFO:root:Filesystem backup ended at 2019-12-04 03:16:50
+INFO:root:Filesystem backup ended at 2020-01-29 02:55:04
+INFO:root:Filesystem backup ended at 2020-02-04 02:55:01
+INFO:root:Filesystem backup ended at 2020-02-21 03:03:04
+INFO:root:Filesystem backup ended at 2020-03-04 03:03:45
+INFO:root:Filesystem backup ended at 2020-03-06 03:04:12
+INFO:root:Filesystem backup ended at 2020-03-07 03:04:26
+INFO:root:Filesystem backup ended at 2020-03-08 03:04:27
+INFO:root:Filesystem backup ended at 2020-03-09 03:04:33
+INFO:root:Filesystem backup ended at 2020-03-10 03:04:41
+INFO:root:Filesystem backup ended at 2020-03-11 03:04:55
+INFO:root:Filesystem backup ended at 2020-04-01 03:03:48
+INFO:root:Filesystem backup ended at 2020-04-02 03:03:55
+INFO:root:Filesystem backup ended at 2020-04-03 03:04:04
+INFO:root:Filesystem backup ended at 2020-04-04 03:04:32
+INFO:root:Filesystem backup ended at 2020-04-05 03:04:29
+INFO:root:Filesystem backup ended at 2020-04-06 03:04:41
+INFO:root:Filesystem backup ended at 2020-04-07 03:04:50
+INFO:root:Filesystem backup ended at 2020-04-08 03:04:57
+INFO:root:Filesystem backup ended at 2020-04-09 03:05:07
+INFO:root:Filesystem backup ended at 2020-04-10 03:05:14
+INFO:root:Filesystem backup ended at 2020-04-11 03:05:29
+INFO:root:Filesystem backup ended at 2020-04-12 03:05:42
+INFO:root:Filesystem backup ended at 2020-04-13 03:05:57
+INFO:root:Filesystem backup ended at 2020-04-14 03:05:55
+INFO:root:Filesystem backup ended at 2020-04-15 03:06:05
+INFO:root:Filesystem backup ended at 2020-04-16 03:06:28
+INFO:root:Filesystem backup ended at 2020-04-17 03:06:27
+INFO:root:Filesystem backup ended at 2020-04-18 03:06:40
+INFO:root:Filesystem backup ended at 2020-04-19 03:06:56
+INFO:root:Filesystem backup ended at 2020-04-20 03:07:00
+INFO:root:Filesystem backup ended at 2020-04-21 03:07:02
+INFO:root:Filesystem backup ended at 2020-04-22 03:07:25
+INFO:root:Filesystem backup ended at 2020-04-23 03:07:35
+INFO:root:Filesystem backup ended at 2020-04-24 03:07:51
+INFO:root:Filesystem backup ended at 2020-04-25 03:07:51
+INFO:root:Filesystem backup ended at 2020-04-26 03:03:45
+INFO:root:Filesystem backup ended at 2020-04-27 03:03:39
+INFO:root:Filesystem backup ended at 2020-04-28 03:03:59
+INFO:root:Filesystem backup ended at 2020-04-29 03:04:13
+INFO:root:Filesystem backup ended at 2020-04-30 03:04:13
+INFO:root:Filesystem backup ended at 2020-05-01 03:04:23
+INFO:root:Filesystem backup ended at 2020-05-02 03:04:25
+INFO:root:Filesystem backup ended at 2020-05-03 03:04:49
+INFO:root:Filesystem backup ended at 2020-05-04 03:04:41
+INFO:root:Filesystem backup ended at 2020-05-05 03:04:57
+INFO:root:Filesystem backup ended at 2020-06-04 03:07:42
+INFO:root:Filesystem backup ended at 2020-06-17 03:04:02
+INFO:root:Filesystem backup ended at 2020-06-18 03:04:18
+INFO:root:Filesystem backup ended at 2020-06-20 03:04:24
+INFO:root:Filesystem backup ended at 2020-06-21 03:04:34
+INFO:root:Filesystem backup ended at 2020-06-22 03:04:41
+INFO:root:Filesystem backup ended at 2020-06-23 03:04:58
+INFO:root:Filesystem backup ended at 2020-07-04 03:07:19
+INFO:root:Filesystem backup ended at 2020-07-06 03:07:04
+INFO:root:Filesystem backup ended at 2020-07-14 03:04:30
+INFO:root:Filesystem backup ended at 2020-07-15 03:04:28
+INFO:root:Filesystem backup ended at 2020-07-16 03:04:28
+INFO:root:Filesystem backup ended at 2020-08-04 03:08:05
+INFO:root:Filesystem backup ended at 2020-08-21 18:23:04
+INFO:root:Filesystem backup ended at 2020-09-04 02:42:07
+]0;amsro@Sdp051:~[amsro@Sdp051 ~]$ 
+cmd-6-end

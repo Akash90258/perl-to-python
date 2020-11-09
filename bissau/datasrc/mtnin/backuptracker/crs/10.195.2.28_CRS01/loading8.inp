@@ -1,0 +1,5 @@
+cmd-34-start
+ ls -ltr /var/DWS/loading_queue/CS40/ccn_gcdr_usage | wc -l 
+       1
+bash-3.2$ 
+cmd-34-end

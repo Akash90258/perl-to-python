@@ -1,0 +1,14 @@
+cmd-6-start
+cd /var/log/; tail backuplog-`date '+%m-%d-%y'`_*
+-r-xr-xr-x   1 root     root       97336 Nov  6 06:00 gzip
+SESSIONONE=/tmp/SessionOne26618
+TAPEDEV=/tmp/.datapipe26618
+
+
+
+
+Filesystem backup started @ Friday, November  6, 2020 06:00:04 AM GMT
+Creating list of excluded files/directories
+Backing up the root (/) file system
+bash-3.2$ 
+cmd-6-end

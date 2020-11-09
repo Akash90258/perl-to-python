@@ -1,0 +1,5 @@
+cmd-108-start
+ ls -ltr /var/DWS/erroneous/CS40/CCN_USAGE_32K | wc -l 
+       1
+bash-3.2$ 
+cmd-108-end

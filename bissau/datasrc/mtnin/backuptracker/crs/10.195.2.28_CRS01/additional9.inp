@@ -1,0 +1,6 @@
+cmd-152-start
+ ls -ltr /var/DWS/processing/CME20MSCSCP | wc -l 
+/var/DWS/processing/CME20MSCSCP: No such file or directory
+       0
+bash-3.2$ 
+cmd-152-end

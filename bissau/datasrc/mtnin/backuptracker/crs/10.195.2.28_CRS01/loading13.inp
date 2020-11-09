@@ -1,0 +1,5 @@
+cmd-44-start
+ ls -ltr /var/DWS/loading/CS40/account | wc -l 
+       7
+bash-3.2$ 
+cmd-44-end

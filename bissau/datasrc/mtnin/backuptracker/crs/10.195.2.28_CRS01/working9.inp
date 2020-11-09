@@ -1,0 +1,5 @@
+cmd-88-start
+ ls -ltr /var/DWS/working/CS40/CCN_BONUS_16K | wc -l 
+     101
+bash-3.2$ 
+cmd-88-end

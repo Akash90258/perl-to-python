@@ -1,0 +1,5 @@
+cmd-10-start
+ ls -ld /var/DWS/archive/CS40/AIR | tail 
+drwxrwxrwx   2 dwsadm   dws      1572864 Nov  6 09:30 /var/DWS/archive/CS40/AIR
+bash-3.2$ 
+cmd-10-end

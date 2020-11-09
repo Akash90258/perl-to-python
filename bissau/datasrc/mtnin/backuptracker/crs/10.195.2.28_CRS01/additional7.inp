@@ -1,0 +1,5 @@
+cmd-148-start
+ ls -ltr -ld /var/DWS/archive/CME20MSC | tail 
+drwxrwxr-x   2 dwsftp   dws      4380160 Nov  6 09:32 /var/DWS/archive/CME20MSC
+bash-3.2$ 
+cmd-148-end

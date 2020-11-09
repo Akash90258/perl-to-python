@@ -1,0 +1,5 @@
+cmd-124-start
+ ls -ltr /var/DWS/incoming/CS40/CCN | wc -l 
+      27
+bash-3.2$ 
+cmd-124-end

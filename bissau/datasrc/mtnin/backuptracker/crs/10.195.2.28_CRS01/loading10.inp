@@ -1,0 +1,5 @@
+cmd-38-start
+ ls -ltr /var/DWS/loading/CS40/valuevoucher | wc -l 
+       1
+bash-3.2$ 
+cmd-38-end
