@@ -1,10 +1,3 @@
-
-import sys
-
-reload(sys)
-
-sys.setdefaultencoding('utf8')
-
 import logging
 from datetime import date
 from datetime import datetime
@@ -73,6 +66,7 @@ try:
             final_data = nodes_iterator_sdp(values, updated_pma_dict[opco.lower()])
             temp_pd = template_df_map[sheet_name].columns
             template_df_map[sheet_name].columns = template_df_map[sheet_name].iloc[0]
+            template_df_map[sheet_name] = template_df_map[sheet_name].reset_index(drop=True)
             for row in final_data:
                 template_df_map[sheet_name].dropna(subset=['Node Name'], inplace=True)
                 template_df_map[sheet_name] = template_df_map[sheet_name].append(row, ignore_index=True)

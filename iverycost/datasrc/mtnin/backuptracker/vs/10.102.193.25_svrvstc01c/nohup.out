@@ -1,0 +1,25 @@
+sh: /usr/local/bin/mailsend: No such file or directory
+sh: /usr/local/bin/mailsend: No such file or directory
+sh: /usr/local/bin/mailsend: No such file or directory
+hanging ip :
+sh: /usr/local/bin/mailsend: No such file or directory
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ivorycoast/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ivorycoast/PM-Automation/bin/prod/smartex.exp" line 56)
+hanging ip :
+sh: /usr/local/bin/mailsend: No such file or directory

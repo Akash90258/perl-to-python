@@ -1,0 +1,13 @@
+cmd-8-start
+ls -lrt /backup/CDRcompressed/ |tail
+total 9689988
+-rw-r--r--. 1 root root 1120932882 Nov  2 01:12 swezdessl1_20201102011144_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1321233285 Nov  3 01:23 swezdessl1_20201103012003_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1290864352 Nov  4 01:14 swezdessl1_20201104011146_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1268278288 Nov  5 01:14 swezdessl1_20201105011159_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1241616859 Nov  6 01:14 swezdessl1_20201106011143_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1323559766 Nov  7 01:15 swezdessl1_20201107011229_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1273870882 Nov  8 01:14 swezdessl1_20201108011116_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1082141246 Nov  9 01:12 swezdessl1_20201109010958_varCRSarchive.tar.gz
+[AMSRO@swezdessl1-des_slave ~]$ 
+cmd-8-end

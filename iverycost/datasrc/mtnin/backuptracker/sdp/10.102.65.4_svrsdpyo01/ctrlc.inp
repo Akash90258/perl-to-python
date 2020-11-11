@@ -1,0 +1,5 @@
+cmd-11-start
+cat /var/log/cfbackup*`date "+%Y%m%d"`*.log | grep -i "Fi lesystem backup ended"
+INFO:root:Filesystem backup ended at 2019-03-22 05:52:46
+[amsro@svrsdpyo01a ~]$ 
+cmd-11-end

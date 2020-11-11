@@ -1,0 +1,7 @@
+cmd-14-start
+ls -lrt /var/backup/cassandra/mvnoDetails/ | awk '{print $ 6,$7,$8,$9}'
+   
+Jul 25 2017 mvno-2e6c51606f1011e780ec9b06f4c11e6f
+Jul 18 03:03 mvno-be3ff1e06f0911e7bf81f35add18842e
+[amsro@svrvsyo01c ~]$ 
+cmd-14-end

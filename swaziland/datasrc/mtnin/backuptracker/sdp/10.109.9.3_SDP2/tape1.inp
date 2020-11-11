@@ -1,0 +1,5 @@
+cmd-8-start
+cat /tmp/cfbackup.log|grep -i "CRITICAL"
+cat: cannot open /tmp/cfbackup.log
+bash-3.2$ 
+cmd-8-end

@@ -1,0 +1,14 @@
+cmd-8-start
+ls -lrt /var/backup/cassandra/main_vs/ | awk '{print $6,$7 ,$8,$9}'
+   
+Jul 18 02:44 batchIdDefinition-afedb7306f0911e78904cf505dff10e0
+Jul 18 02:44 vouchers-aced6f806f0911e78904cf505dff10e0
+Jul 18 02:44 vouchersByPurgeDate-bf5273506f0911e78904cf505dff10e0
+Jul 18 02:44 encryptionKey-adf8ec106f0911e7bf81f35add18842e
+Jul 18 02:44 batchids-b0fae1706f0911e7bf81f35add18842e
+Jul 18 02:44 securityProfile-b36d8f206f0911e78904cf505dff10e0
+Jul 18 02:44 keyCounter-b247d3d06f0911e780d50de9c96b97f7
+Jul 18 02:44 vshash-af0775e06f0911e780d50de9c96b97f7
+Jul 18 02:44 voucherHistory-c7cae0806f0911e7bf81f35add18842e
+[amsro@svrvstc01c ~]$ 
+cmd-8-end

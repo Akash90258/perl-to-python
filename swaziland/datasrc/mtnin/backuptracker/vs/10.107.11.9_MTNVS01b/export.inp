@@ -1,0 +1,4 @@
+cmd-2-start
+export TERM=xterm
+bash-3.2$ 
+cmd-2-end

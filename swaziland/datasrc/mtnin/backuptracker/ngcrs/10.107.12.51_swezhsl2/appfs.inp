@@ -1,0 +1,5 @@
+cmd-6-start
+ls -lrt /backup/postgres |tail
+ls: cannot access /backup/postgres: No such file or directory
+[AMSRO@swezhsl2-hslave ~]$ 
+cmd-6-end

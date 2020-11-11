@@ -1,0 +1,5 @@
+cmd-12-start
+exit
+logout
+bash: /user_homes/amsro/.bash_logout: Permission denied
+Connection to 10.102.99.20 closed.

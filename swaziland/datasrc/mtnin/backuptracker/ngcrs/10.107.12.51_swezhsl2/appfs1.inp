@@ -1,0 +1,8 @@
+cmd-8-start
+sudo ls -lrt /backup/CDRcompressed/ |tail
+sudo: PERM_SUDOERS: setresuid(-1, 1, -1): Operation not permitted
+sudo: no valid sudoers sources found, quitting
+sudo: setresuid() [0, 0, 0] -> [1501, -1, -1]: Operation not permitted
+sudo: unable to initialize policy plugin
+[AMSRO@swezhsl2-hslave ~]$ 
+cmd-8-end

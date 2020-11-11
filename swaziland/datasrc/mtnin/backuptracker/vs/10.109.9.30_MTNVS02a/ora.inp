@@ -1,0 +1,5 @@
+cmd-8-start
+tail -10 /opt/oracle/admin/VSDB_S*/backuplogs/oraBackup`date "+%Y%m%d" `*| grep -i "session is completed"
+This backup (20200606_0300) session is completed and finished with 4284 warning(s).
+bash-3.2$ 
+cmd-8-end

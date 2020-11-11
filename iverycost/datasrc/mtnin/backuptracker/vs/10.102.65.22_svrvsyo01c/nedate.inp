@@ -1,0 +1,5 @@
+cmd-20-start
+date +%Y%m%d-%H%M%S
+20190925-085008
+[amsro@svrvsyo01c ~]$ 
+cmd-20-end

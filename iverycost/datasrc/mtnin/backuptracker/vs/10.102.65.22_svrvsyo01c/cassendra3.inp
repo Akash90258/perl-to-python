@@ -1,0 +1,11 @@
+cmd-12-start
+ls -lrt /var/backup/cassandra/vsuser/ | awk '{print $6,$7, $8,$9}'
+   
+Jul 25 2017 users-242a6ed06f1011e78af0099a3cf9ed0a
+Jul 25 2017 groups-256f23d06f1011e780ec9b06f4c11e6f
+Jul 25 2017 global-26ca6e106f1011e79ff587bddc9df446
+Jul 18 03:03 groups-b65853006f0911e7bf81f35add18842e
+Jul 18 03:03 users-b54c13206f0911e78904cf505dff10e0
+Jul 18 03:03 global-b76508106f0911e780d50de9c96b97f7
+[amsro@svrvsyo01c ~]$ 
+cmd-12-end

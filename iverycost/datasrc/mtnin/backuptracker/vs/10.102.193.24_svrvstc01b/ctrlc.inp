@@ -1,0 +1,7 @@
+cmd-15-start
+ls -lrt /var/backup/cassandra/mvnoDetails/ | awk '{print $ 6,$7,$8,$9}'
+   
+Mar 22 03:00 mvno-be3ff1e06f0911e7bf81f35add18842e
+[amsro@svrvstc01b ~]$ ^C
+[amsro@svrvstc01b ~]$ 
+cmd-15-end

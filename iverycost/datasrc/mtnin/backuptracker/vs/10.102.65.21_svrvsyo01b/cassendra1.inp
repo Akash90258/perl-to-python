@@ -1,0 +1,23 @@
+cmd-8-start
+ls -lrt /var/backup/cassandra/main_vs/ | awk '{print $6,$7 ,$8,$9}'
+   
+Jul 25 2017 encryptionKey-1bdba9b06f1011e780ec9b06f4c11e6f
+Jul 25 2017 keyCounter-209931c06f1011e79ff587bddc9df446
+Jul 25 2017 batchids-1f78f4b06f1011e780ec9b06f4c11e6f
+Jul 25 2017 vouchersByPurgeDate-2f81e0106f1011e78af0099a3cf9ed0a
+Jul 25 2017 batchIdDefinition-1e31ceb06f1011e78af0099a3cf9ed0a
+Jul 25 2017 vouchers-1ab4dcf06f1011e78af0099a3cf9ed0a
+Jul 25 2017 voucherHistory-39e41be06f1011e780ec9b06f4c11e6f
+Jul 25 2017 vshash-1d1a92506f1011e79ff587bddc9df446
+Jul 25 2017 securityProfile-21d02b206f1011e78af0099a3cf9ed0a
+Jul 18 03:03 voucherHistory-c7cae0806f0911e7bf81f35add18842e
+Jul 18 03:03 vouchers-aced6f806f0911e78904cf505dff10e0
+Jul 18 03:03 batchids-b0fae1706f0911e7bf81f35add18842e
+Jul 18 03:03 encryptionKey-adf8ec106f0911e7bf81f35add18842e
+Jul 18 03:03 vshash-af0775e06f0911e780d50de9c96b97f7
+Jul 18 03:03 vouchersByPurgeDate-bf5273506f0911e78904cf505dff10e0
+Jul 18 03:03 batchIdDefinition-afedb7306f0911e78904cf505dff10e0
+Jul 18 03:03 keyCounter-b247d3d06f0911e780d50de9c96b97f7
+Jul 18 03:03 securityProfile-b36d8f206f0911e78904cf505dff10e0
+[amsro@svrvsyo01b ~]$ 
+cmd-8-end

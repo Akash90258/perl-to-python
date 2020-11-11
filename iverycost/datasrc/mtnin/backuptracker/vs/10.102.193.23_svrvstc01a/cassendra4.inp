@@ -1,0 +1,5 @@
+cmd-14-start
+ls -lrt /var/backup/cassandra/mvnoDetails/ | awk '{print $ 6,$7,$8,$9}'
+ls: cannot access /var/backup/cassandra/mvnoDetails/: Permission denied
+[amsro@svrvstc01a ~]$ 
+cmd-14-end

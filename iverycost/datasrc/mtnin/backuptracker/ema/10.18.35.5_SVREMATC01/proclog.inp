@@ -1,0 +1,5 @@
+cmd-6-start
+ls -lrth /var/sog/backups/proclog/|tail -1
+drwxrwxrwx 2 sogadm sog 268K Nov  8 16:49 20201108
+amsro@SVREMATC01:~> 
+cmd-6-end

@@ -1,0 +1,14 @@
+cmd-6-start
+ls -lrt /backup/postgres |tail
+-rw-r--r--. 1 root root 5896877 Oct 11 04:01 swezdessl1.20201011040030.postgresmgrdb.dmp
+-rw-r--r--. 1 root root   73735 Oct 11 04:01 swezdessl1.20201011040030.postgresfm_db_Server1.dmp
+-rw-r--r--. 1 root root 6193243 Oct 18 04:00 swezdessl1.20201018040015.postgresmgrdb.dmp
+-rw-r--r--. 1 root root   75244 Oct 18 04:01 swezdessl1.20201018040015.postgresfm_db_Server1.dmp
+-rw-r--r--. 1 root root 6474465 Oct 25 04:01 swezdessl1.20201025040037.postgresmgrdb.dmp
+-rw-r--r--. 1 root root   77507 Oct 25 04:01 swezdessl1.20201025040037.postgresfm_db_Server1.dmp
+-rw-r--r--. 1 root root 7002798 Nov  1 04:01 swezdessl1.20201101040027.postgresmgrdb.dmp
+-rw-r--r--. 1 root root   82139 Nov  1 04:01 swezdessl1.20201101040027.postgresfm_db_Server1.dmp
+-rw-r--r--. 1 root root 7361465 Nov  8 04:00 swezdessl1.20201108040018.postgresmgrdb.dmp
+-rw-r--r--. 1 root root   86391 Nov  8 04:01 swezdessl1.20201108040018.postgresfm_db_Server1.dmp
+[AMSRO@swezdessl1-des_slave ~]$ 
+cmd-6-end

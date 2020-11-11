@@ -1,0 +1,4 @@
+cmd-18-start
+ls -lrt /var/backup/zookeeper/snapshots/ | grep -i YoZooke eperbackup_`date "+%Y%m%d" -d "-1 day"`*
+[amsro@svrvsyo01b ~]$ 
+cmd-18-end

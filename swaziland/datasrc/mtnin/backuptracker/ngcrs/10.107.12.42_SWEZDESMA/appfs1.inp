@@ -1,0 +1,13 @@
+cmd-8-start
+ls -lrt /backup/CDRcompressed/ |tail
+total 9755748
+-rw-r--r--. 1 root root 1127734541 Nov  2 01:17 swezdesma_20201102011530_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1319183259 Nov  3 01:24 swezdesma_20201103012245_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1303410978 Nov  4 01:17 swezdesma_20201104011555_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1313847285 Nov  5 01:18 swezdesma_20201105011642_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1237609108 Nov  6 01:21 swezdesma_20201106011920_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1329775859 Nov  7 01:19 swezdesma_20201107011724_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1290914277 Nov  8 01:17 swezdesma_20201108011534_varCRSarchive.tar.gz
+-rw-r--r--. 1 root root 1067363670 Nov  9 01:16 swezdesma_20201109011430_varCRSarchive.tar.gz
+[AMSRO@swezdesma-des_master ~]$ 
+cmd-8-end

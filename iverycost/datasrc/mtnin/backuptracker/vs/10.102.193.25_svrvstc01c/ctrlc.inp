@@ -1,0 +1,9 @@
+cmd-11-start
+print $6,$ 7,$8,$9}'
+   
+Mar 22 03:00 activationCodes-b97ee7606f0911e780d50de9c96b97f7
+Mar 22 03:00 serialNumRange-bbcb6f706f0911e7bf81f35add18842e
+Mar 22 03:00 serialNums-baa1e3906f0911e78904cf505dff10e0
+[amsro@svrvstc01c ~]$ ^C
+[amsro@svrvstc01c ~]$ 
+cmd-11-end

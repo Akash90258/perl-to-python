@@ -1,0 +1,4 @@
+cmd-20-start
+cat /tmp/cfbackup.log|grep -i "CRITICAL"
+[amsro@svrvstc01a ~]$ 
+cmd-20-end

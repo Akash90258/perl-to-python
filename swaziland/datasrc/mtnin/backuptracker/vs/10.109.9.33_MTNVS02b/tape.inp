@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/backuplog`date "+%d"`*|grep -i "Backup completed"
+Backup completed at: Saturday, June  6, 2020 07:19:09 AM SAST
+bash-3.2$ 
+cmd-6-end

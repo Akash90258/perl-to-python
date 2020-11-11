@@ -1,0 +1,11 @@
+cmd-10-start
+ls -lrt /var/backup/cassandra/main_vuc/ | awk '{print $6,$ 7,$8,$9}'
+   
+Jul 25 2017 activationCodes-299d3d206f1011e79ff587bddc9df446
+Jul 25 2017 serialNumRange-2bf648506f1011e780ec9b06f4c11e6f
+Jul 25 2017 serialNums-2ab27db06f1011e78af0099a3cf9ed0a
+Jul 18 03:03 serialNumRange-bbcb6f706f0911e7bf81f35add18842e
+Jul 18 03:03 serialNums-baa1e3906f0911e78904cf505dff10e0
+Jul 18 03:03 activationCodes-b97ee7606f0911e780d50de9c96b97f7
+[amsro@svrvsyo01a ~]$ 
+cmd-10-end

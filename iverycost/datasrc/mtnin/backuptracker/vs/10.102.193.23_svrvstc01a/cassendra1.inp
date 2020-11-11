@@ -1,0 +1,5 @@
+cmd-8-start
+ls -lrt /var/backup/cassandra/main_vs/ | awk '{print $6,$7 ,$8,$9}'
+ls: cannot access /var/backup/cassandra/main_vs/: Permission denied
+[amsro@svrvstc01a ~]$ 
+cmd-8-end

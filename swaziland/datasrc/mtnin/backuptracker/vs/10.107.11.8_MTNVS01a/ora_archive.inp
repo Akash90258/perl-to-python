@@ -1,0 +1,5 @@
+cmd-10-start
+tail -10 /opt/oracle/admin/VSDB_S*/backuplogs/oraArchiveBackup`date "" +%Y%m%d""`*| grep -i "session is completed"
+tail: cannot open input
+bash-3.2$ 
+cmd-10-end
