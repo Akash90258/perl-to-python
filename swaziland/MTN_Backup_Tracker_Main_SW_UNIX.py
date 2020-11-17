@@ -51,7 +51,7 @@ from email import encoders
 
 
 #Config_File = glob.glob("C:\\Users\erairoy\\Desktop\\Automation\\MTN\\CONFIG\\CONFIG_PYTHON.xlsx")
-Config_File = glob.glob("/home/guineabisau/PM-Automation/MTN/CONFIG/CONFIG_PYTHON_UNIX.xlsx")
+Config_File = glob.glob("/home/swaziland/PM-Automation/MTN/CONFIG/CONFIG_PYTHON_UNIX.xlsx")
 Configsheet_to_df_map = pd.read_excel(Config_File[0], sheet_name=None)
 print('Configuration Loaded..')
 
@@ -143,8 +143,8 @@ def Find_Stat(df_stat,entity):
 # In[8]:
 
 
-def Enrich_Information(opco,entity,default_value,inputsheet_to_df_map):
-    print(inputsheet_to_df_map)
+def Enrich_Information(opco,entity,source_field,default_value,inputsheet_to_df_map):
+    #print(inputsheet_to_df_map)
     if opco == 'BIS':
         if entity == 'EMA':
             if inputsheet_to_df_map['PROCLOG'] and inputsheet_to_df_map['SOGCONFIG'] =='Done':
@@ -153,11 +153,16 @@ def Enrich_Information(opco,entity,default_value,inputsheet_to_df_map):
                 return 'Not Done'
     if opco == 'SW':
         if entity == 'NGCRS':
-            if inputsheet_to_df_map['APPFS'] =='Not Done':
+            if inputsheet_to_df_map['APPFS'] =='Not Done' and source_field=='DUMMY':
                 return default_value
+            elif source_field != 'DUMMY' :
+                if inputsheet_to_df_map[source_field] is None:
+                    return default_value
+                else:
+                    return inputsheet_to_df_map[source_field]
             else:
                 return 'N/A'
-        elif entity == 'VS':
+        elif entity == 'VS' and source_field=='DUMMY':
             if inputsheet_to_df_map['ORA_ARCHIVE'] =='Not Done':
                 return default_value
             else:
@@ -204,12 +209,16 @@ def Load_Format_Write(opco,Configsheet_to_df_map):
                         #print(row_source_dest['CODEVALUE2'])
                         #print(row_source_dest['CODEVALUE3'])
                         if row_source_dest['CODEVALUE2']== 'DIRECT':
+
                             template_to_df_map[entity].loc[template_to_df_map[entity]['Node IP']==row['Node IP'],[row_source_dest['CODEVALUE1']]]=inputsheet_to_df_map[entity][inputsheet_to_df_map[entity]['Node-IP']==row['Node IP']].iloc[0][row_source_dest['CODEVALUE']]
+                            if inputsheet_to_df_map[entity][inputsheet_to_df_map[entity]['Node-IP']==row['Node IP']].iloc[0][row_source_dest['CODEVALUE']] is None:
+                                print(row_source_dest['CODEVALUE1'])
+                                template_to_df_map[entity].loc[template_to_df_map[entity]['Node IP'] == row['Node IP'], [row_source_dest['CODEVALUE1']]]=row_source_dest['CODEVALUE3']
                             #print(inputsheet_to_df_map[entity][inputsheet_to_df_map[entity]['Node-IP']==row['Node IP']].iloc[0][row_source_dest['CODEVALUE']])
                         elif row_source_dest['CODEVALUE2']== 'INDIRECT':
                             #print('INDIRECT:'+opco + " "+entity+" "+row_source_dest['CODEVALUE3'])
                             #print(inputsheet_to_df_map[entity][inputsheet_to_df_map[entity]['Node-IP']==row['Node IP']].iloc[0])
-                            template_to_df_map[entity].loc[template_to_df_map[entity]['Node IP']==row['Node IP'],[row_source_dest['CODEVALUE1']]]=Enrich_Information(opco,entity,row_source_dest['CODEVALUE3'],inputsheet_to_df_map[entity][inputsheet_to_df_map[entity]['Node-IP']==row['Node IP']].iloc[0])
+                            template_to_df_map[entity].loc[template_to_df_map[entity]['Node IP']==row['Node IP'],[row_source_dest['CODEVALUE1']]]=Enrich_Information(opco,entity,row_source_dest['CODEVALUE'],row_source_dest['CODEVALUE3'],inputsheet_to_df_map[entity][inputsheet_to_df_map[entity]['Node-IP']==row['Node IP']].iloc[0])
                             
                 except IndexError:
                     continue
@@ -575,8 +584,8 @@ def Archive_File(df_Config,Input_file):
 
 
 def Send_Email_SMTP(Attachment_Path,Attachment_Name,opco,df_Config):
-	subject = 'MTN Backup Tracker for '+ GetOpco_Name(opco)
-	text = 'MTN Backup Tracker for '+ GetOpco_Name(opco)
+	subject = 'New MTN Backup Tracker for '+ GetOpco_Name(opco)
+	text = 'New MTN Backup Tracker for '+ GetOpco_Name(opco)
 	fromaddr = 'no-reply@AutoBOT' #df_Config[df_Config['CODENAME']=='EMAIL_TO_SEND']['CODEVALUE'].iloc[0]
 	toaddr = ['gnoc.1st.la.mtn.rsaa@ericsson.com','PDLMTNFMIN@pdl.internal.ericsson.com','PDLFOINMTN@pdl.internal.ericsson.com','PDLHIFTMAN@pdl.internal.ericsson.com']#df_Config[df_Config['CODENAME']=='EMAIL_TO_SEND']['CODEVALUE'].iloc[0]
 	COMMASPACE = ', '

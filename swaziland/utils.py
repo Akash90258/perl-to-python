@@ -125,24 +125,29 @@ def nodes_iterator_sdp(values, pma_ips):
         final output excel sheet
     """
     final_data = []
-    pair_list = []
-    for key in values:
-        if key[0:-1] not in pair_list:
-            pair_list.append(key[0:-1])
-    for row in pair_list:
-        row_data = {}
-        if row + "1" not in values:
+    for key, value in values.items():
+        IP1, IP2 = list(value.keys())
+        flag = Is_IP_Exists(IP1, pma_ips)
+        if not flag:
             continue
-        node_name = row
+        row_data = {}
+        node_name = key
         row_data['Node Name'] = node_name
-        row_data['Node A-IP'] = list(values[row + "1"].keys())[0]
-        row_data['Node B-IP'] = list(values[row + "2"].keys())[0]
-        status = update_status(list(values[row + "1"].values())[0]['nfs.inp'])
-        row_data['Node - A'] = status
-        status = update_status(list(values[row + "2"].values())[0]['nfs.inp'])
-        row_data['Node - B'] = status
+        if int(IP1.split('.')[-1]) > int(IP2.split('.')[-1]):
+            row_data['Node B-IP'] = IP1
+            row_data['Node A-IP'] = IP2
+            status1 = update_status(list(value[IP1].values())[0])
+            status = update_status(list(value[IP2].values())[0])
+        else:
+            row_data['Node A-IP'] = IP1
+            row_data['Node B-IP'] = IP2
+            status1 = update_status(list(value[IP2].values())[0])
+            status = update_status(list(value[IP1].values())[0])
+        row_data['Node-A'] = status
+        row_data['Node-B'] = status1
         final_data.append(row_data)
     return final_data
+
 
 
 def nodes_iterator_air(values, pma_ips):
@@ -166,7 +171,7 @@ def nodes_iterator_air(values, pma_ips):
         status = update_status(temp_status)
         # if 'Password Issue' in temp_status:
         #     status, rowdata = password_issue(temp_status, row_data)
-        row_data['NFS Backup Status'] = status
+        row_data['Tape Backup Status'] = status
         final_data.append(row_data)
     return final_data
 
@@ -192,6 +197,39 @@ def nodes_iterator_ccn(values, pma_ips):
         final_data.append(row_data)
     return final_data
 
+def nodes_iterator_ngcrs(values, pma_ips):
+    """
+        Iterate over each node name of ccn and check if the ip exist in
+        pma_nw_final.conf file and create a list of node to insert in
+        final output excel sheet with their corresponding headers
+    """
+    final_data = []
+    for key, value in values.items():
+        IP = list(value.keys())[0]
+        flag = Is_IP_Exists(IP, pma_ips)
+        if not flag:
+            continue
+        row_data = {}
+        if '10.107.12.42' in IP:
+            row_data['Node Name'] = "DES Master"
+        elif '10.107.12.43' in IP:
+            row_data['Node Name'] = "DES Slave"
+        elif '10.107.12.51' in IP:
+            row_data['Node Name'] = "Reporting Node-BI"
+        else:
+            row_data['Node Name'] = ""
+        row_data['Node IP'] = IP
+        node_name = key
+        row_data['Host Name'] = node_name
+        status = update_status(list(value.values())[0]['oradb.inp'])
+        row_data['Oracle Database(Daily)'] = status
+        status = update_status(list(value.values())[0]['appfs.inp'])
+        row_data['Application filesystem(Weekly)'] = status
+        status = update_status(list(value.values())[0]['cdr.inp'])
+        row_data['Archived CDR (Daily)'] = status
+        final_data.append(row_data)
+    return final_data
+
 
 def nodes_iterator_vs(values, pma_ips):
     """
@@ -209,12 +247,12 @@ def nodes_iterator_vs(values, pma_ips):
         node_name = key
         row_data['Node Name'] = node_name
         row_data['Hostname'] = IP
-        status = update_status(list(value.values())[0]['nfs.inp'])
-        row_data['NFS Backup status'] = status
-        status = update_status(list(value.values())[0]['ora.inp'])
-        row_data['OraBackup'] = status
-        status = update_status(list(value.values())[0]['ora_archive.inp'])
-        row_data['OraArchiveBackup'] = status
+        status = update_status(list(value.values())[0]['tape.inp'])
+        row_data['Tape Backup  status'] = status
+        status = update_status(list(value.values())[0]['cassendra.inp'])
+        row_data['Cassandra status'] = status
+        status = update_status(list(value.values())[0]['zoo.inp'])
+        row_data['Zookeper  status'] = status
         final_data.append(row_data)
     return final_data
 
@@ -282,9 +320,9 @@ def nodes_iterator_ema(values, pma_ips):
         row_data['Node Name'] = node_name
         row_data['Node IP'] = IP
         status = update_status(list(value.values())[0]['proclog.inp'])
-        row_data['Backup status'] = status
-        # status1 = update_status(list(value.values())[0]['sogconfig.inp'])
-        # row_data['SOG Config'] = status1
+        row_data['PROCLOG status'] = status
+        status1 = update_status(list(value.values())[0]['sogconfig.inp'])
+        row_data['SOGCONFIG Status'] = status1
         final_data.append(row_data)
     return final_data
 
@@ -306,7 +344,7 @@ def nodes_iterator_occ(values, pma_ips):
         row_data['Node Name'] = node_name
         row_data['Node IP'] = IP
         status = update_status(list(list(value.values())[0].values())[0])
-        row_data['TAPE'] = status
+        row_data['Tape Backup status'] = status
         final_data.append(row_data)
     return final_data
 
@@ -340,8 +378,8 @@ def get_dynamic_function_dict():
 
 
 def Send_Email_SMTP(Attachment_Full_Path, flag):
-    subject = 'New MTN Backup Tracker for Conakry'
-    text = 'New MTN Backup Tracker for Conakry'
+    subject = 'New MTN Backup Tracker for Swaziland'
+    text = 'New MTN Backup Tracker for Swaziland'
     fromaddr = 'no-reply@AutoBOT'
     if flag == False:
         toaddr = ['akash.a.agrawal@ericsson.com', 'akshath.sharma@ericsson.com', 'aditya.k.kumar@ericsson.com']

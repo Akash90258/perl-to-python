@@ -6,12 +6,12 @@ from ConfigParser import ConfigParser
 
 sdp_geo = ''
 sdp_geo_check = 0
-cassandra_flag = 0
+cassendra_flag = 0
 cassendra_arr = []
 issue1 = 'Connectivity/Password Issue'
 
 one_day_delta = datetime.timedelta(1)
-todays_datetime = datetime.datetime.today() - datetime.timedelta(3)
+todays_datetime = datetime.datetime.today() - datetime.timedelta(8)
 
 day1 = str(todays_datetime.strftime('%d'))
 day2 = str(todays_datetime.strftime('%e'))
@@ -29,7 +29,7 @@ pre_date1 = ((datetime.datetime.today() - one_day_delta).strftime('%Y_%m_%d'))
 pre_date2 = ((datetime.datetime.today() - one_day_delta).strftime('%Y/%m/%d'))
 pre_date3 = ((datetime.datetime.today() - one_day_delta).strftime('%Y%m%d'))
 pre_date4 = ((datetime.datetime.today() - one_day_delta).strftime('%Y-%m-%d'))
-
+# pre_day_hash = pre_day_hash()
 
 def load_config_ini():
     # Loading config.ini file into a dictionary
@@ -86,7 +86,15 @@ def read_inp(inp_dir_path, user, inp_dir):
     sdp_geo_check = 0
     sdp_geo = ''
     cassendra_arr = []
-    cassandra_flag = 0
+    cassendra_flag = 0
+    if 'sdp' in user.lower().strip():
+        if inp_dir[-1] == 'B' :
+            inp_dir = inp_dir[0:-1]+'A'
+            print(inp_dir)
+
+    # if inp_dir[-1] == 'a' or inp_dir[-1] == 'b':
+    #     print(inp_dir)
+    # return
 
     ip, host = inp_dir.split("_")
     array_ref = users_details[user]
@@ -117,7 +125,7 @@ def read_inp(inp_dir_path, user, inp_dir):
         nedate = read_file(inp_dir_path + "/nedate.inp")
         if curr_date2 in nedate:
             for array_ref1 in array_ref:
-                parsed_hash[user][host][ip][array_ref1] = 'N/A'
+                parsed_hash[user][host][ip][array_ref1] = ''
 
             for inp_name in inp_files:
                 inp_name = inp_name.strip()
@@ -148,9 +156,7 @@ def read_inp(inp_dir_path, user, inp_dir):
                 if 'sdp' in user_l:
                     status = ''
                     fail_reason = ''
-                    if ('tape.inp' in inp_name or
-                            'nfs.inp' in inp_name or
-                            'tape_nfs.inp' in inp_name):
+                    if ('tape.inp' in inp_name):
                         status, fail_reason = tape(
                             file_data, curr_date, curr_date5, inp_dir_path
                         )
@@ -160,34 +166,34 @@ def read_inp(inp_dir_path, user, inp_dir):
                 if 'ccn' in user_l:
                     status = ''
                     if 'dbn.inp' in inp_name:
-                        status = dbn(file_data, curr_date3, '')
+                        if 'EZCCN' in host:
+                            status = dbn(file_data, pre_date1, '')
+                        else:
+                            status = dbn(file_data, curr_date3, '')
                         parsed_hash[user][host][ip][inp_name] = status
 
-                ##-- MINSAT fs and db Check --##
-                if 'minsat' in user_l:
-                    status = ''
-                    fail_reason = ''
-
-                    if 'fs.inp' in inp_name:
-                        status = filesystem(file_data, curr_date6)
-                        parsed_hash[user][host][ip][inp_name] = status
-
-                    if 'db.inp' in inp_name:
-                        status = dbn(file_data, pre_date1, '')
-                        parsed_hash[user][host][ip][inp_name] = status
 
                 ##-- VS tape, nfs, ora, ora_archive  --##
                 if 'vs' in user_l:
                     status = ''
                     fail_reason = ''
-                    if 'ora.inp' in inp_name or 'ora_archive.inp' in inp_name:
-                        status = ora(file_data, curr_date2)
+                    if 'cassendra.inp' in inp_name:
+                        cassendra_flag += 1
+                        for line in file_data.strip().split('\n'):
+                            if month in line:
+                                cassendra_arr.append(line.strip())
+                        
+                    if 'tape.inp' in inp_name:
+                        try:
+                            temp_flag = pre_day_hash[user_l][host][ip][inp_name]
+                            status, fail_reason = tape(file_data, pre_date4, pre_date3, inp_dir_path)
+                        except:
+                            temp_flag = pre_day_hash[user_l][host][ip][inp_name]
+                            status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
                         parsed_hash[user][host][ip][inp_name] = status
-
-                    if 'tape.inp' in inp_name or 'nfs.inp' in inp_name:
-                        status, fail_reason = tape(
-                            file_data, curr_date, curr_date5, inp_dir_path
-                        )
+                        
+                    if 'zoo.inp' in inp_name:
+                        status = zoo(file_data, pre_date3)
                         parsed_hash[user][host][ip][inp_name] = status
 
                 ##--EMA proclog and sogconfig Check --##
@@ -203,14 +209,45 @@ def read_inp(inp_dir_path, user, inp_dir):
                         status = sogconfig(file_data, curr_date4)
                         parsed_hash[user][host][ip][inp_name] = status
 
-                ##-- CRS  Check,fs backup --##
-                if 'crs' in user_l:
+
+                ##--EMA proclog and sogconfig Check --##
+                if 'ngcrs' in user_l:
                     status = ''
                     fail_reason = ''
-                    if 'db.inp' in inp_name:
-                        status = dbn(file_data, pre_date1, pre_date3)
+
+                    if 'appfs.inp' in inp_name:
+                        status = appfs(file_data, pre_date3)
                         parsed_hash[user][host][ip][inp_name] = status
 
+                    if 'appfs1.inp' in inp_name:
+                        status = cdr(file_data, pre_date3)
+                        parsed_hash[user][host][ip]['cdr.inp'] = status
+
+                    if 'maintenance.inp' in inp_name:
+                        status = oradb(file_data, pre_date4)
+                        parsed_hash[user][host][ip]['oradb.inp'] = status
+
+            ##------------- cassendra check -------------##
+            flag = 0
+            for date_val in cassendra_arr:
+                try:
+                    temp_flag = pre_day_hash[user_l][host][ip][inp_name]
+                except:
+                    temp_flag = 0
+                if temp_flag:
+                    if month+" "+pre_day1 in date_val or month+" "+pre_day2 in date_val:
+                        flag = 1
+                else:
+                    if month+" "+day1 in date_val or month+" "+day2 in date_val:
+                        flag = 1
+
+            if cassendra_flag > 0 :
+                if flag:
+                    parsed_hash[user][host][ip]['cassendra.inp'] = 'Success'
+                else:
+                    parsed_hash[user][host][ip]['cassendra.inp'] = 'Fail'
+            if 'cassendra.inp' in array_ref and cassendra_flag == 0:
+                parsed_hash[user][host][ip]['cassendra.inp'] = 'Fail'
         else:
             for array_ref1 in array_ref:
                 parsed_hash[user][host][ip][array_ref1] = issue1
@@ -259,13 +296,8 @@ def filesystem(data, date):
 
 def dbn(data, date1, date2):
     """Used for db_backup.inp"""
-    regex = "(rman_{}.*?Recovery Manager complete)".format(date2)
     status = ''
-    if 'ScheduledBackup_' + date1 in data:
-        status = 'Success'
-    elif len(re.findall(regex, data)) > 0 or "Recovery Manager complete" in data:
-        status = 'Success'
-    elif 'DUMP is complete' in data:
+    if 'ScheduledBackup_' + date1 in data or "DUMP is complete" in data:
         status = 'Success'
     else:
         status = 'Fail'
@@ -302,12 +334,63 @@ def sogconfig(data, date):
         status = 'Fail'
     return status
 
+def zoo(data, date):
+    status = ''
+    if "backup_zk_"+date in data or "TCZookeeperbackup_"+date in data or "YoZookeeperbackup_" + date in data:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+def appfs(data, date):
+    status = ''
+    if "swezdesma." + curr_date2 in data:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+
+def cdr(data, date):
+    status = ''
+    if "swezdesma_" + date in data:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+def oradb(data, date):
+    status = ''
+    if "rman_bkup_" + date in data:
+        status = 'Success'
+    else:
+        status = 'Fail'
+    return status
+
+
+
+def pre_day_hash():
+    hash = {
+        'vs' : {
+            'svrvstc01b' : {
+                '10.102.193.24' : {'tape.inp' : 1},
+                '10.102.193.25' : {'tape.inp' : 1},
+                '10.102.193.23' : {'tape.inp' : 1},
+                '10.102.65.21' : {'cassendra.inp' : 1},
+                '10.102.65.20' : {'cassendra.inp' : 1},
+                '10.102.65.22' : {'cassendra.inp' : 1}
+            }
+        }
+    }
+    return hash
 
 def main():
     global users_details
     global parsed_hash
     global config_data
+    global pre_day_hash
     parsed_hash = {}
+    pre_day_hash = pre_day_hash()
     config_data = load_config_ini()
     users_details = set_users_conf()
     read_opco_dir()
@@ -317,4 +400,4 @@ def main():
 if __name__ == '__main__':
     parsed_hash = main()
     print("========================================")
-    print(parsed_hash)
+    print(parsed_hash['ngcrs'])

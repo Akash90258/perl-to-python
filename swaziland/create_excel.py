@@ -61,6 +61,7 @@ try:
     # Iterating each node type for Update individual output sheet
     for key, values in parsed_hash.items():
         opco = key
+        print(opco)
 
         # Continue if opco is commented in pma_nw-final.cong
         if opco.lower() not in updated_pma_dict.keys():
@@ -96,51 +97,61 @@ try:
         if 'CCN' == opco.upper():
             sheet_name = "CCN"
             final_data = nodes_iterator_ccn(values, updated_pma_dict[opco.lower()])
+
+            template_df_map = append_row_to_excel(
+                writer, template_df_map, final_data, sheet_name
+            )
+        
+        # ------------------
+        if 'NGCRS' == opco.strip().upper():
+            sheet_name = "NGCRS Backup"
+            final_data = nodes_iterator_ngcrs(values, updated_pma_dict[opco.lower()])
+            print(final_data)
             template_df_map = append_row_to_excel(
                 writer, template_df_map, final_data, sheet_name
             )
 
         # ------------------
-        if 'VS' == opco.upper():
-            sheet_name = "VS Daily"
-            final_data = nodes_iterator_vs(values, updated_pma_dict[opco.lower()])
-            template_df_map = append_row_to_excel(
-                writer, template_df_map, final_data, sheet_name
-            )
+        # if 'VS' == opco.upper():
+        #     sheet_name = "NGCRS Backup"
+        #     final_data = nodes_iterator_vs(values, updated_pma_dict[opco.lower()])
+        #     template_df_map = append_row_to_excel(
+        #         writer, template_df_map, final_data, sheet_name
+        #     )
 
-        # ------------------
-        if 'CRS' == opco.upper():
-            sheet_name = "CRS DB backup"
-            final_data = nodes_iterator_crs(values, updated_pma_dict[opco.lower()])
-            template_df_map = append_row_to_excel(
-                writer, template_df_map, final_data, sheet_name
-            )
-
-
-        # ------------------
-        if 'MINSAT' == opco.upper():
-            sheet_name = "Minsat_Daily"
-            final_data = nodes_iterator_minsat(values, updated_pma_dict[opco.lower()])
-            template_df_map = append_row_to_excel(
-                writer, template_df_map, final_data, sheet_name
-            )
+        # # ------------------
+        # if 'CRS' == opco.upper():
+        #     sheet_name = "CRS DB backup"
+        #     final_data = nodes_iterator_crs(values, updated_pma_dict[opco.lower()])
+        #     template_df_map = append_row_to_excel(
+        #         writer, template_df_map, final_data, sheet_name
+        #     )
 
 
-        # ------------------
-        if 'EMA' == opco.upper():
-            sheet_name = "EMA proclogs_Backup"
-            final_data = nodes_iterator_ema(values, updated_pma_dict[opco.lower()])
-            template_df_map = append_row_to_excel(
-                writer, template_df_map, final_data, sheet_name
-            )
+        # # ------------------
+        # if 'MINSAT' == opco.upper():
+        #     sheet_name = "Minsat_Daily"
+        #     final_data = nodes_iterator_minsat(values, updated_pma_dict[opco.lower()])
+        #     template_df_map = append_row_to_excel(
+        #         writer, template_df_map, final_data, sheet_name
+        #     )
 
-                # ------------------
-        if 'OCC' == opco.upper():
-            sheet_name = "OCC"
-            final_data = nodes_iterator_occ(values, updated_pma_dict[opco.lower()])
-            template_df_map = append_row_to_excel(
-                writer, template_df_map, final_data, sheet_name
-            )
+
+        # # ------------------
+        # if 'EMA' == opco.upper():
+        #     sheet_name = "EMA"
+        #     final_data = nodes_iterator_ema(values, updated_pma_dict[opco.lower()])
+        #     template_df_map = append_row_to_excel(
+        #         writer, template_df_map, final_data, sheet_name
+        #     )
+
+        # # ------------------
+        # if 'OCC' == opco.upper():
+        #     sheet_name = "OCC"
+        #     final_data = nodes_iterator_occ(values, updated_pma_dict[opco.lower()])
+        #     template_df_map = append_row_to_excel(
+        #         writer, template_df_map, final_data, sheet_name
+        #     )
 
     # Flattening Json and return a list of nodes of NotDone cases for Logs sheet.
     logging.info("Flatting Dataframe")
@@ -156,7 +167,7 @@ try:
         )
 
     print("===================================")
-    print(template_df_map["OCC"])
+    print(template_df_map["SDP"])
     print("===================================")
     writer.save()
     logging.info("Sending mail")

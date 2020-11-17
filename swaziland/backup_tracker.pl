@@ -10,7 +10,7 @@ use Data::Dumper;
 use Excel::Writer::XLSX;
 use MIME::Lite;
 
-my $opco_name = 'bissau'; chomp($opco_name);
+my $opco_name = 'swaziland'; chomp($opco_name);
 #my $opco_name = $ARGV[1]; chomp($opco_name);
 my $path = $FindBin::Bin;
 $path =~ s/\/bin//ig;
@@ -28,8 +28,7 @@ my $curr_date2 = `date '+%Y%m%d'`; chomp($curr_date2);
 my $curr_date3 = `date '+%Y_%m_%d'`; chomp($curr_date3);
 my $curr_date4 = `date '+%y%m%d'`; chomp($curr_date4);
 my $curr_date5 = `date '+%A, %B %d, %Y'`; chomp($curr_date5);
-my $curr_date6 = `date '+%Y/%m/%d'`; chomp($curr_date6);
-my $curr_date7 = `date '+%A, %B %e, %Y'`; chomp($curr_date7);
+my $curr_date6 = `date '+%A, %B %e, %Y'`; chomp($curr_date6);
 my $pre_date1 = `date '+%Y_%m_%d' -d '-1 day'`; chomp($pre_date1);
 my $pre_date2 = `date '+%Y/%m/%d' -d '-1 day'`; chomp($pre_date2);
 my $pre_date3 = `date '+%Y%m%d' -d '-1 day'`; chomp($pre_date3);
@@ -38,11 +37,10 @@ my $issue1 = 'Connectivity/Password Issue';
 my $excel_file = 'MTN-'.ucfirst($opco_name)."-Backup-Tracker_".$curr_date.".xlsx";
 my $file_name = "$path/files/$excel_file";
 
-my $to = 'gnoc.1st.la.mtn.rsaa@ericsson.com,PDLFOINMTN@pdl.internal.ericsson.com,tarun.j.kumar@ericsson.com,PDLHIFTMAN@pdl.internal.ericsson.com';
-my $cc = 'mohd.ezaz@ericsson.com,aditya.k.kumar@ericsson.com,shubhankar.thakur@ericsson.com';
-#my $to = 'aditya.k.kumar@ericsson.com';
+my $to = 'akshath.sharma@ericsson.com';
+my $cc = 'aditya.k.kumar@ericsson.com';
+#my $cc = 'mohd.ezaz@ericsson.com,shivani.saxena@ericsson.com,shubhankar.thakur@ericsson.com';
 #my $cc = '';
-
 my $users_details = set_users_conf();
 #print Dumper \$users_details; die;
 read_opco_dir();
@@ -97,8 +95,6 @@ sub read_inp{
 	my ($ip, $host) = (split("_", $inp_dir))[0, 1];
 	my $sdp_geo_check = 0;
 	my $sdp_geo = '';
-	my @cassendra_arr;
-	my $cassandra_flag = 0;
 	my $array_ref = $users_details->{$user};
 
 	my $user_l = trim(lc($user));
@@ -109,6 +105,7 @@ sub read_inp{
 		@inp_files = readdir(DIR) or die "Unable to read inp_dir_path:$!\n";
 		closedir(DIR);
 	}
+
 	my @inp_files2;
 	foreach (@inp_files) { next if ($_ eq '.' || $_ eq '..'); push(@inp_files2, $_) if ($_ =~ /\.inp$/); }
 	my $inp_size += map {$_} @inp_files2;
@@ -122,7 +119,7 @@ sub read_inp{
 	{
 		my $nedate = readFile("$inp_dir_path/nedate.inp");
 		if ($nedate =~ /$curr_date2/ig)
-		{	
+		{
 			foreach (@$array_ref) {
 				$parsed_hash->{$user}->{$host}->{$ip}->{$_} = 'N/A';
 			}
@@ -136,21 +133,22 @@ sub read_inp{
 
 				if ($user_l eq 'air') {
 					my $status; my $fail_reason;
-					if ($inp_name =~ /tape.inp/ig || $inp_name =~ /nfs.inp/ig) {
-						($status, $fail_reason) = tape($file_data, $curr_date, $curr_date5, $inp_dir_path);
-						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = "$status^^$fail_reason";
-					}
-				}
-
-				##----------------- OCC tape Check -----------------##
-
-				if ($user_l eq 'occ') {
-					my $status; my $fail_reason;
-					if ($inp_name =~ /tape.inp/ig || $inp_name =~ /nfs.inp/ig) {
+					if ($inp_name =~ /tape.inp/ig) {
 						($status, $fail_reason) = tape($file_data, $curr_date, $curr_date5, $inp_dir_path);
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = "$status^^$fail_reason";
 					}
 				}	
+	
+				##---------------- OCC Tape Check ------------------##
+
+				if ($user_l eq 'occ') {
+                                        my $status;my $fail_reason;
+                                        if ($inp_name =~ /tape.inp/ig || $inp_name =~ /nfs.inp/ig) {
+                                                ($status, $fail_reason) = tape($file_data, $curr_date, $curr_date5, $inp_dir_path);
+                                                $parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = "$status^^$fail_reason";
+                                        }
+                                }
+
 				
 				##----------------- SDP geo-redundancy and tape Check -----------------##
 
@@ -164,7 +162,7 @@ sub read_inp{
 							$parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'} = 'Fail';
 						}
 					}			
-					if ($inp_name =~ /TTMonitorStandby.inp/ig && $parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'} eq 'N/A')
+					if ($inp_name =~ /TTMonitorStandby.inp/ig && !defined($parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'}))
 					{
 						#foreach my $geo_str ((split("\n", $file_data))) {
 							if ($file_data =~ /$curr_date\s+\d+\:\d+\:\d+\s+Standby\s+database\s+replication\s+OK/ig) {
@@ -175,18 +173,32 @@ sub read_inp{
 							}
 						#}
 					}
-					if ($inp_name =~ /tape.inp/ig || $inp_name =~ /nfs.inp/ig || $inp_name =~ /tape_nfs.inp/ig) {
+					if ($inp_name =~ /tape.inp/ig) {
 						($status, $fail_reason) = tape($file_data, $curr_date, $curr_date5, $inp_dir_path);
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = "$status^^$fail_reason";
 					}
 				}		
+
+				##----------------- NGVS geo-redundancy Check -----------------##
+
+				if ($user_l eq 'ngvs') {
+					my $status;
+					if ($inp_name =~ /geo.inp/ig) {
+						$status = ngvs_geo($file_data);
+						$parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'} = $status;
+					}
+				}
 
 				##----------------- CCN dbn Check -----------------##
 
 				if ($user_l eq 'ccn') {
 					my $status;
 					if ($inp_name =~ /dbn.inp/ig) {
-						$status = dbn($file_data, $curr_date3, '');
+						if ($host =~ /EZCCN/ig) {
+							$status = dbn($file_data, $pre_date1);
+						} else {
+							$status = dbn($file_data, $curr_date3);
+						}
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = $status;
 					}
 				}
@@ -196,16 +208,16 @@ sub read_inp{
 				if ($user_l eq 'minsat') {
 					my $status;
 					if ($inp_name =~ /fs.inp/ig) {
-						$status = filesystem($file_data, $curr_date6);
+						$status = filesystem($file_data, $pre_date2);
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = $status;
 					}
 					if ($inp_name =~ /db.inp/ig) {
-						$status = dbn($file_data, $pre_date1, '');
+						$status = dbn($file_data, $pre_date1);
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = $status;
 					}
 				}
 
-				##----------------- VS tape, nfs, ora, ora_archive and geo-redundancy Check -----------------##
+				##----------------- VS ora and ora_archive Check -----------------##
 
 				if ($user_l eq 'vs') {
 					my $status; my $fail_reason;
@@ -213,17 +225,9 @@ sub read_inp{
 						$status = ora($file_data, $curr_date2);
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = $status;
 					}
-					if ($inp_name =~ /tape.inp/ig || $inp_name =~ /nfs.inp/ig) {
+					if ($inp_name =~ /tape.inp/ig) {
 						($status, $fail_reason) = tape($file_data, $curr_date, $curr_date5, $inp_dir_path);
 						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = "$status^^$fail_reason";
-					}
-					if ($inp_name =~ /cassendra/ig) {
-						$cassandra_flag++;
-						foreach my $date_str ((split("\n", $file_data))) {
-							if ($date_str =~ /^$month/ig) {
-								push(@cassendra_arr, trim($date_str));
-							}
-						}
 					}
 				}
 
@@ -258,46 +262,14 @@ sub read_inp{
 						$parsed_hash->{$user}->{$host}->{$ip}->{'oradb.inp'} = $status;
 					}
 				}
-
-				##----------------- CRS appfs, archived CDR and oracle database Check -----------------##
-
-				if ($user_l eq 'crs') {
-					my $status;
-					if ($inp_name =~ /db.inp/ig) {
-						$status = dbn($file_data, $pre_date1, $pre_date3);
-						$parsed_hash->{$user}->{$host}->{$ip}->{$inp_name} = $status;
-					}
-				}
-			}
-
-			##------------- cassendra check -------------##
-			
-			my $flag = 0;
-			foreach my $date_val (@cassendra_arr) {
-				if ($date_val =~ /^$month\s+$day1/ig || $date_val =~ /^$month\s+$day2/ig) {
-					$flag = 1;
-				}
-			}
-			if ($cassandra_flag > 0) {	
-				if ($flag == 1) {
-					$parsed_hash->{$user}->{$host}->{$ip}->{'cassendra.inp'} = 'Success';
-				} else {
-					$parsed_hash->{$user}->{$host}->{$ip}->{'cassendra.inp'} = 'Fail';
-				}
-			}
-			
-			my $match = map { /cassendra\.inp/ig } @$array_ref;
-			if ($match == 1 && $cassandra_flag == 0) {
-				$parsed_hash->{$user}->{$host}->{$ip}->{'cassendra.inp'} = 'N/A';		
 			}
 
 			##------------- geo-redundancy check -------------##
 
-			if ($sdp_geo_check == 2 && $parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'} eq 'N/A') {
+			if ($sdp_geo_check == 2 && !defined($parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'})) {
 				$parsed_hash->{$user}->{$host}->{$ip}->{'geo-redundancy.inp'} = 'Success';
-			}			
-		}
-		else {
+			}
+		}else {
 			foreach (@$array_ref) {
 				$parsed_hash->{$user}->{$host}->{$ip}->{$_} = $issue1;
 			}
@@ -310,11 +282,11 @@ sub tape{
 	my $date1 = shift;
 	my $date2 = shift;
 	my $inp_dir_path = shift;
-	my $status = '';  my $fail_reason = '';
-	if ($data =~ /INFO\:root\:Filesystem\s+backup\s+ended\s+at\s+$date1/ig || $data =~ /at\s+$date1/ig) {
+	my $status = ''; my $fail_reason = '';
+	if ($data =~ /INFO\:root\:Filesystem\s+backup\s+ended\s+at\s+$date1/ig) {
 		$status = 'Success';
 	}
-	elsif ($data =~ /Backup\s+completed\s+at\W+$date2/ig || $data =~ /Backup\s+completed\s+at\W+$curr_date7/ig) {
+	elsif ($data =~ /Backup\s+completed\s+at\W+$date2/ig || $data =~ /Backup\s+completed\s+at\W+$curr_date6/ig) {
 		$status = 'Success';
 	}
 	else {
@@ -326,7 +298,7 @@ sub tape{
                 if ($tape_data2 =~ /there\s+is\s+no\s+tape\s+in\s+drive/ig)
                 {
                         $fail_reason = "No Tape in Drive";
-		}
+                }
                 else
                 {
                      if ($tape_data1[2] =~ /status/ig)
@@ -334,7 +306,6 @@ sub tape{
                         $fail_reason = $tape_data1[2];
                      }
                 }
-
 	}
 	return ($status, $fail_reason);
 }
@@ -369,16 +340,9 @@ sub ngvs_geo{
 
 sub dbn{
 	my $data = shift;
-	my $date1 = shift;
-	my $date2 = shift;
+	my $date = shift;
 	my $status = '';
-	if ($data =~ /ScheduledBackup\_$date1/ig) {
-		$status = 'Success';
-	} 
-	elsif ($data =~ /rman\_$date2.*?Recovery\s+Manager\s+complete/ig || $data =~ /Recovery\s+Manager\s+complete/ig) {
-		$status = 'Success';
-	} 
-	elsif ($data =~ /DUMP\s+is\s+complete/ig) {
+	if ($data =~ /ScheduledBackup\_$date/ig || $data =~ /DUMP\s+is\s+complete/ig) {
 		$status = 'Success';
 	} else {
 		$status = 'Fail';
@@ -439,7 +403,7 @@ sub appfs{
 	my $data = shift;
 	my $date = shift;
 	my $status = '';
-	if ($data =~ /swezdesma.$date/ig) {
+	if ($data =~ /swezdesma.$curr_date2/ig) {
 		$status = 'Success';
 	} else {
 		$status = 'Fail';
@@ -471,19 +435,50 @@ sub oradb{
 	return $status;
 }
 
-sub zoo{
-	my $data = shift;
-	my $date = shift;
-	my $status = '';
-	if ($data =~ /backup\_zk\_$date/ig) {
-		$status = 'Success';
-	} else {
-		$status = 'Fail';
-	}
-	return $status;
-}
+#sub initialize_sheet{	
+	#my $heading = $workbook->add_format(
+		#align		=> 'center',
+		#bold		=> 1,
+		#text_wrap	=> 1,
+		#top			=> 1,
+        #left		=> 1,
+        #right		=> 1,
+        #bottom		=> 1
+	#);
+	#$heading->set_text_wrap();
 
-##==========================================================================##
+	#my $format = $workbook->add_format(
+		#center_across   => 1,
+		#bold            => 1,
+		#size            => 15,
+		#pattern         => 1,
+		#border          => 6,
+		#color           => 'white',
+		#fg_color        => 'blue',
+		#border_color    => 'blue',
+		#align           => 'vcenter',
+		#top				=> 1,
+		#left			=> 1,
+		#right			=> 1,
+		#bottom			=> 1,
+		#text_wrap		=> 1
+	#);
+
+	#my $cell_format = $workbook->add_format(
+		#center_across	=> 1,
+        #bold			=> 1,
+		#pattern			=> 1,
+        #border			=> 6,
+		#fg_color		=>'green',
+		#align           => 'vcenter',
+		#top				=> 1,
+		#left			=> 1,
+		#right			=> 1,
+		#bottom			=> 1,
+		#text_wrap		=> 1
+	#);
+	#return ($heading, $format, $cell_format);
+#}
 
 sub create_excel{
 	my $workbook  = Excel::Writer::XLSX->new($file_name);
@@ -523,6 +518,7 @@ sub create_excel{
 		my $border_text = '';
 		my $host_hash = $parsed_hash->{$user};	
 		foreach my $host (keys %$host_hash) {
+			#my ($ip, $host) = (split("_", $ip_host))[0, 1];
 			
 			my $ip_hash = $parsed_hash->{$user}->{$host};
 			foreach my $ip (keys %$ip_hash) {
@@ -532,17 +528,18 @@ sub create_excel{
 				my $inp_hash = $parsed_hash->{$user}->{$host}->{$ip};
 				my $fail_col = keys %$inp_hash;
 				foreach my $inp_name (keys %$inp_hash) {	
+					#$col_num++;
 					my ($status, $fail_reason) = (split('\^\^', $parsed_hash->{$user}->{$host}->{$ip}->{$inp_name}))[0, 1];
 					$status = 'Done' if ($status =~ /Success/ig);
 					$status = 'Not Done' if ($status =~ /Fail/ig);
-					$status = 'Connection Failure' if ($status =~ /connection_fail/ig);
+					#print "$row_num, $inp_name, $status, $ip\n";
 					$fail_reason = 'N/A' if ($fail_reason eq '');
 
 					$worksheet->write($row_num, 0, uc($host), $format6);
 					$worksheet->write($row_num, 1, $ip, $format6);					
 
 					my $temp_ref = $users_details->{$user};
-					my $j = 0; my $fail_flag = 0;
+					my $j = 0; my $fail_flag = 1;
 					foreach my $col_name (@$temp_ref) {
 						$j++;
 						$col_name = trim($col_name);
@@ -641,6 +638,7 @@ sub set_sheet_headers{
 	$col_num++;
 	$worksheet->write($row_num, $col_num, 'Node-IP', $format4);
 	my $header_ref = $users_details->{$user};
+
 	foreach my $inp_name (@$header_ref) {
 		my $col_name = uc($inp_name);
 		$col_name =~ s/\.inp//ig;
@@ -753,6 +751,7 @@ sub set_users_conf{
 		chomp $_;
 		my ($user, $inp_names) = (split("=", $_))[0, 1];
 		if (defined($inp_names)) {
+			#$user =~ s/$opco_name\_//ig;
 			my $user_upper = uc($user);
 			my @temp_array = my @temp_array2 = sort {$a cmp $b} (split(",", $inp_names));
 			$users_details->{$user} = \@temp_array;
