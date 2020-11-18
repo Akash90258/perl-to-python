@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%Y%m%d"`*.log | grep -i "Filesyst em backup ended"
+cat: /var/log/cfbackup*20201117*.log: No such file or directory
+[amsro@vs031 ~]$ 
+cmd-6-end

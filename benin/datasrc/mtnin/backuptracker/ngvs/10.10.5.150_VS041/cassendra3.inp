@@ -1,0 +1,7 @@
+cmd-12-start
+ls -lrt /var/backup/cassandra/vsuser/ |egrep -i "users|global|g roups"| awk -F" " '{print $6, $7, $8}'
+Nov 17 02:06
+Nov 17 02:06
+Nov 17 02:08
+[amsro@vs041 ~]$ 
+cmd-12-end

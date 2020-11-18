@@ -1,0 +1,5 @@
+cmd-14-start
+ls -lrt /var/backup/cassandra/mvnoDetails/|egrep -i "mvno"| awk  -F" " '{print $6, $7, $8}'
+Nov 17 01:02
+[amsro@vs031 ~]$ 
+cmd-14-end

@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%d"`*.log|grep -i "Filesystem bac kup ended"
+cat: /var/log/cfbackup*17*.log: Permission denied
+[amsro@occ10 ~]$ 
+cmd-6-end

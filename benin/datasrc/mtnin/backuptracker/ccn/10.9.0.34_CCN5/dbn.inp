@@ -1,0 +1,5 @@
+cmd-4-start
+ls -lrt /opt/telorb/axe/loadingGroup01_1/backups/active
+lrwxrwxrwx 1 telorb tspPlatformAdmin 43 Nov 17 05:18 /opt/telorb/axe/loadingGroup01_1/backups/active -> Manual_Backup_Post_Activity_2020-11-17_0001
+Proc_m0_s11$ 
+cmd-4-end

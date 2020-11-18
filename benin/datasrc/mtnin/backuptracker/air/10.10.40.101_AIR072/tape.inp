@@ -1,0 +1,6 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%d"`*.log|grep -i "Filesystem ba ckup ended"
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-04-17 00:36:56
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-07-17 00:44:46
+[amsro@air072 ~]$ 
+cmd-6-end

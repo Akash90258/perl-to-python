@@ -1,0 +1,12 @@
+cmd-8-start
+ls -lrt /var/backup/cassandra/main_vs/ | egrep -i "vouchers|vsh ash|voucherHistory|vouchersByPurgeDate|encryptionKey|batchids|keyCounter|batchId Definition" | awk -F" " '{print $6, $7, $8}'
+Nov 17 01:00
+Nov 17 01:04
+Nov 17 01:07
+Nov 17 01:08
+Nov 17 01:09
+Nov 17 01:09
+Nov 17 01:10
+Nov 17 01:10
+[amsro@vs033 ~]$ 
+cmd-8-end

@@ -1,0 +1,26 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%d"`*.log|grep -i "Filesystem b ackup ended"
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2019-12-17 03:01:47
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-01-03 13:17:21
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-01-17 02:55:28
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-02-17 02:25:53
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-03-17 01:34:12
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-03-19 01:36:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-04-05 03:33:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-04-17 02:59:19
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-04-29 03:09:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-05-09 10:17:55
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-05-14 01:47:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-05-17 03:49:14
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-06-17 03:38:53
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-07-17 04:02:23
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-08-17 03:39:36
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-09-13 04:00:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-09-17 03:50:27
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-10-06 04:17:51
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-10-17 05:05:05
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-10-31 03:56:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-11-03 05:13:17
+INFO:root:[01;31m[KFilesystem backup ended[m[K at 2020-11-17 05:20:45
+[amsro@sdp0142 ~]$ 
+cmd-6-end

@@ -1,0 +1,5 @@
+cmd-16-start
+ls -lrt /var/backup/zookeeper/snapshots/|grep -i --color=never  Zookeeper_Backup_`date "+%Y%m%d"`
+-rw-r--r--. 1 vs vs 1292276 Nov 17 04:19 Zookeeper_Backup_20201117041955.tar
+[amsro@vs032 ~]$ 
+cmd-16-end
