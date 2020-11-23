@@ -1,0 +1,5 @@
+cmd-6-start
+ls -lrth /var/sog/backups/proclog/|tail -1
+drwxrwxrwx 2 sogadm sog 236K Aug 12  2019 20180313
+amsro@ASEMA-BL0:~> 
+cmd-6-end

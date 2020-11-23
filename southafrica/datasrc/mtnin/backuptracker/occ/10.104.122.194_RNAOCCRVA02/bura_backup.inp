@@ -1,0 +1,6 @@
+cmd-6-start
+cat /var/log/cfbackup*`date +%Y%m%d`*| egrep ":Filesystem 
+|CRITICAL"
+cat: /var/log/cfbackup*20201122*: Permission denied
+[amsro@RNAOCCRVA02 ~]$ 
+cmd-6-end

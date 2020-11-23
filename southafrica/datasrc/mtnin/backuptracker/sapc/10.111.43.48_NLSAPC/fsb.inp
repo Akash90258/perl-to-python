@@ -1,0 +1,5 @@
+cmd-6-start
+ls -lrth /cluster/brf/backup|grep "NLSAPC_Backup_`date +%Y-%m-%d`" [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K"
+drwxr-xr-x 2 root root 4.0K Nov 20 07:01 NLSAPC_Backup_2020-11-20T07-00-02
+amsro@SC-2:~> 
+cmd-6-end

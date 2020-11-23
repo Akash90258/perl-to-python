@@ -1,0 +1,6 @@
+cmd-7-start
+h /var/sog/backups/proclog/|tail -1
+drwxrwxrwx 2 sogadm sog 4.0K Jun  4 06:10 20200604
+amsro@ASEMA-BL4:~> 
+amsro@ASEMA-BL4:~> 
+cmd-7-end

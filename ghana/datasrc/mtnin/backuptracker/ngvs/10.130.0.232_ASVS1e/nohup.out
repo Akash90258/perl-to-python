@@ -1,0 +1,253 @@
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+hanging ip :
+couldn't open "/home/ghana/PM-Automation/datasrc/mtnin/backuptracker/air/10.130.0.172_ASAIR13/bash.inp": no such file or directory
+    while executing
+"log_file -noappend -a $tdest"
+    (procedure "cmdexec" line 53)
+    invoked from within
+"cmdexec $lgfileh"
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 65)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+can't read "herenow": no such variable
+    while executing
+"puts $lgfileh "$herenow : closing log...""
+    invoked from within
+"if {$RETRY == 0 } {
+      if {$LOGINSUCC != 1} {
+      puts $lgfileh "Fatal : Login failure : aborting !"
+      puts $lgfileh "$herenow : closing log...."
+    (file "/home/ghana/PM-Automation/bin/prod/smartex.exp" line 56)
+hanging ip :
+sh: /usr/local/bin/mailsend: No such file or directory

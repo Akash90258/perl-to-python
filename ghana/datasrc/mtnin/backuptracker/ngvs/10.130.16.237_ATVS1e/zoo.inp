@@ -1,0 +1,9 @@
+cmd-16-start
+ls -lrt /var/backup/zookeeper/snapshots/|grep -i zookprbkp_`da te "+%Y%m%d"`
+-rw-r--r--. 1 vs vs 3212387 Nov 18 02:01 [01;31m[Kzookprbkp_20201118[m[K020141_1.tar
+-rw-r--r--. 1 vs vs 3212332 Nov 18 02:01 [01;31m[Kzookprbkp_20201118[m[K020141_3.tar
+-rw-r--r--. 1 vs vs 3212308 Nov 18 02:01 [01;31m[Kzookprbkp_20201118[m[K020141_2.tar
+-rw-r--r--. 1 vs vs 3212457 Nov 18 02:01 [01;31m[Kzookprbkp_20201118[m[K020141.tar
+-rw-r--r--. 1 vs vs 3212327 Nov 18 02:01 [01;31m[Kzookprbkp_20201118[m[K020141_4.tar
+[amsro@ATVS1E ~]$ 
+cmd-16-end

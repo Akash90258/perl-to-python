@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%Y%m%d"`*.log | grep -i "Filesy stem backup ended"
+cat: /var/log/cfbackup*20201118*.log: No such file or directory
+[amsro@ASAIR18 ~]$ 
+cmd-6-end

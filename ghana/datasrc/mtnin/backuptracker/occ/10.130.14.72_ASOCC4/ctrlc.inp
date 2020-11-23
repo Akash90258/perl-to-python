@@ -1,0 +1,5 @@
+cmd-3-start
+export TERM=xterm
+[amsro@ASOCC4 ~]$ ^C
+[amsro@ASOCC4 ~]$ 
+cmd-3-end

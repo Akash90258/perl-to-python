@@ -1,0 +1,5 @@
+cmd-4-start
+ls -lrt /opt/telorb/axe/loadingGroup01_1/backups/active |grep -i Sc heduledBackup_`date +'%Y_%m_%d'`
+lrwxrwxrwx 1 telorb tspPlatformAdmin 35 Nov 18 06:00 /opt/telorb/axe/loadingGroup01_1/backups/active -> ScheduledBackup_2020_11_18_05:59:58
+Proc_m0_s11$ 
+cmd-4-end

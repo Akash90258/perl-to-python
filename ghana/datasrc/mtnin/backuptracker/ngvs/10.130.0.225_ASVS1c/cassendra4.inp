@@ -1,0 +1,5 @@
+cmd-14-start
+ls -lrt /var/backup/cassandra/mvnoDetails/|egrep -i "mvno"| aw k -F" " '{print $6, $7, $8}'
+ls: cannot access /var/backup/cassandra/mvnoDetails/: Permission denied
+[amsro@ASVS1C ~]$ 
+cmd-14-end

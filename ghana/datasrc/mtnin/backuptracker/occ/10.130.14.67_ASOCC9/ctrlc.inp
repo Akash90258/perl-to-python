@@ -1,0 +1,6 @@
+cmd-7-start
+| grep -i "Filesys tem backup ended"
+cat: /var/log/cfbackup*20200606*.log: Permission denied
+[amsro@ASOCC9 ~]$ ^C
+[amsro@ASOCC9 ~]$ 
+cmd-7-end

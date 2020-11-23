@@ -1,0 +1,5 @@
+cmd-12-start
+ls -lrt /var/backup/cassandra/vsuser/ |egrep -i "users|global| groups"| awk -F" " '{print $6, $7, $8}'
+ls: cannot access /var/backup/cassandra/vsuser/: Permission denied
+[amsro@ASVS1A ~]$ 
+cmd-12-end

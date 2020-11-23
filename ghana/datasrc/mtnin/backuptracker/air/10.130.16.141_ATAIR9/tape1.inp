@@ -1,0 +1,5 @@
+cmd-8-start
+cat /var/log/backuplog`date "+%d"`*|grep -i "there is no tape in drive "
+No backup made as there is no tape in drive
+bash-3.2$ 
+cmd-8-end

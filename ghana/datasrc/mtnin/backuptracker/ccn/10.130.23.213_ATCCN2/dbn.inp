@@ -1,0 +1,4 @@
+cmd-4-start
+ls -lrt /opt/telorb/axe/loadingGroup01_1/backups/active |grep -i Sch eduledBackup_`date +'%Y_%m_%d'`
+Proc_m2_s1$ 
+cmd-4-end

@@ -1,0 +1,5 @@
+cmd-8-start
+ls -lrt /var/backup/cassandra/main_vs/ | egrep -i "vouchers|vs hash|voucherHistory|vouchersByPurgeDate|encryptionKey|batchids|keyCounter|batchI dDefinition" | awk -F" " '{print $6, $7, $8}'
+ls: cannot access /var/backup/cassandra/main_vs/: Permission denied
+[amsro@ATVS1A ~]$ 
+cmd-8-end

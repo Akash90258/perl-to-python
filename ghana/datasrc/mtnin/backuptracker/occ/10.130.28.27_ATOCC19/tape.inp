@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%Y%m%d"`*.log | grep -i --color =never "Filesystem backup ended"
+cat: /var/log/cfbackup*20201118*.log: Permission denied
+[amsro@ATOCC19 ~]$ 
+cmd-6-end

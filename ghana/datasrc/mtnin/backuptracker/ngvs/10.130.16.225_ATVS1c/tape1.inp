@@ -1,0 +1,5 @@
+cmd-18-start
+cat /tmp/cfbackup.log|grep -i "CRITICAL"
+cat: /tmp/cfbackup.log: No such file or directory
+[amsro@ATVS1C ~]$ 
+cmd-18-end
