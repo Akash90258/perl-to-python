@@ -1,0 +1,5 @@
+cmd-6-start
+ls -lrth /cluster/brf/backup|grep "BACKUP_`date -d '1 day ago' +%Y -%m-%d`"
+drwxr-xr-x 2 root root 4.0K Nov 23 00:16 BACKUP_2020-11-23T00-15-01
+AMSRO@SC-1:~> 
+cmd-6-end

@@ -1,0 +1,32 @@
+cmd-8-start
+tail -500 /var/opt/fds/logs/TTMonitorStandby.log | grep -i "S tandby database replication OK"
+2020-03-29 04:00:08 Standby database replication OK
+2020-03-29 05:00:07 Standby database replication OK
+2020-03-29 06:00:07 Standby database replication OK
+2020-03-29 07:00:07 Standby database replication OK
+2020-03-29 08:00:07 Standby database replication OK
+2020-03-29 09:00:07 Standby database replication OK
+2020-03-29 10:00:07 Standby database replication OK
+2020-03-29 11:00:07 Standby database replication OK
+2020-03-29 12:00:07 Standby database replication OK
+2020-03-29 13:00:08 Standby database replication OK
+2020-03-29 14:00:07 Standby database replication OK
+2020-03-29 15:00:07 Standby database replication OK
+2020-03-29 16:00:07 Standby database replication OK
+2020-03-29 17:00:07 Standby database replication OK
+2020-03-29 18:00:07 Standby database replication OK
+2020-03-29 19:00:07 Standby database replication OK
+2020-03-29 20:00:07 Standby database replication OK
+2020-03-29 21:00:07 Standby database replication OK
+2020-03-29 22:00:07 Standby database replication OK
+2020-03-29 23:00:08 Standby database replication OK
+2020-03-30 01:00:07 Standby database replication OK
+2020-03-30 02:00:07 Standby database replication OK
+2020-03-30 03:00:07 Standby database replication OK
+2020-03-30 04:00:07 Standby database replication OK
+2020-03-30 05:00:08 Standby database replication OK
+2020-03-30 06:00:08 Standby database replication OK
+2020-03-30 07:00:07 Standby database replication OK
+2020-03-30 08:00:07 Standby database replication OK
+[AMSRO@LGSDPG2 ~]$ 
+cmd-8-end

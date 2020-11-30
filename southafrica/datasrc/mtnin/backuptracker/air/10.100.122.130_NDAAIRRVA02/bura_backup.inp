@@ -1,6 +1,0 @@
-cmd-6-start
-cat /var/log/cfbackup*`date +%Y%m%d`*| egrep ":Filesystem |CRITICAL"
-INFO:root[01;31m[K:Filesystem[m[K backup started at 2020-11-22 02:00:02
-INFO:root[01;31m[K:Filesystem[m[K backup ended at 2020-11-22 02:14:03
-[amsro@ndaairrva02 ~]$ 
-cmd-6-end

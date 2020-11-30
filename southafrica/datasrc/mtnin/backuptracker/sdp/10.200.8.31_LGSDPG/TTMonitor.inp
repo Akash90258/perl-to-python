@@ -1,0 +1,4 @@
+cmd-8-start
+tail -5000 /var/opt/fds/logs/TTMonitor.log |grep -i info
+[AMSRO@LGSDPG1 ~]$ 
+cmd-8-end

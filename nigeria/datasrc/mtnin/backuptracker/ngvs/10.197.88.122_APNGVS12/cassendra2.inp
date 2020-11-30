@@ -1,0 +1,5 @@
+cmd-10-start
+ls -lrt /var/backup/cassandra/main_vuc/ |egrep -i "activatio nCodes|serialNums" | awk -F" " '{print $6, $7, $8}'
+ls: cannot access /var/backup/cassandra/main_vuc/: Permission denied
+[AMSRO@APNGVS12 ~]$ 
+cmd-10-end

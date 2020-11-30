@@ -1,0 +1,5 @@
+cmd-8-start
+sudo cat /tmp/cfbackup.log|grep -i "CRITICAL"
+cat: /tmp/cfbackup.log: No such file or directory
+[AMSRO@ASOCCD2 ~]$ 
+cmd-8-end

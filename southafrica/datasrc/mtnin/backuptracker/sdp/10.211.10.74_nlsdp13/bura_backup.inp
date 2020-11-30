@@ -1,7 +1,0 @@
-cmd-6-start
-cat /var/log/cfbackup*`date +%Y%m%d`*| egrep ":Filesystem|CRI TICAL"
-INFO:root[01;31m[K:Filesystem[m[K backup started at 2020-11-22 02:00:02
-[01;31m[KCRITICAL[m[K:root:Backup failed!! Reason: Failed when creating tar file "/vsstore/backup/nlsdp13/20201122_020002.0/sdp_timesten.tar.gz". Check logfile for more information
-[01;31m[KCRITICAL[m[K:root:Trace:
-[amsro@nlsdp13 ~]$ 
-cmd-6-end

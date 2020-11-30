@@ -1,0 +1,6 @@
+cmd-11-start
+fbackup.log|grep -i "CRITICAL"|grep -i "status"|awk  -F" " '{print $(NF-1), $NF}'
+cat: /tmp/cfbackup.log: No such file or directory
+[AMSRO@OJOCCL2 ~]$ ^C
+[AMSRO@OJOCCL2 ~]$ 
+cmd-11-end

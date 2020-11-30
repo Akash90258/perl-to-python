@@ -1,0 +1,5 @@
+cmd-6-start
+cat /var/log/cfbackup*`date "+%Y%m%d"`*.log | grep -i "Filesy stem backup ended"
+INFO:root:Filesystem backup ended at 2019-12-03 02:49:13
+[AMSRO@LGSDPG1 ~]$ 
+cmd-6-end

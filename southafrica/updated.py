@@ -100,10 +100,13 @@ def read_inp(inp_dir_path, user, inp_dir):
     if 'sdp' in user.lower().strip():
         if inp_dir[-1] == 'b' :
             inp_dir = inp_dir[0:-1]+'a'
+        if inp_dir[-1] == '2' :
+            inp_dir = inp_dir[0:-1]+'1'
 
 
     ip, host = inp_dir.split("_")
     array_ref = users_details[user]
+
     user_l = user.lower().strip()
 
     inp_files = []
@@ -144,7 +147,7 @@ def read_inp(inp_dir_path, user, inp_dir):
                 if 'sdp' in user_l:
                     status = ''
                     fail_reason = ''
-                    if ('bura_backup.inp' in inp_name):
+                    if ('tape.inp' in inp_name):
                         status, fail_reason = tape(
                             file_data, curr_date, curr_date5, inp_dir_path
                         )
@@ -332,4 +335,4 @@ def main():
 if __name__ == '__main__':
     parsed_hash = main()
     print("========================================")
-    print(parsed_hash)
+    print(parsed_hash["sdp"])

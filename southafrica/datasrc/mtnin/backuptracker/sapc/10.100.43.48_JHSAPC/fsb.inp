@@ -1,5 +1,0 @@
-cmd-6-start
-ls -lrth /cluster/brf/backup|grep "JHSAPC_Backup_`date +%Y-%m-%d`" [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K"
-drwxr-xr-x 2 root root 4.0K Nov 22 07:04 JHSAPC_Backup_2020-11-22T07-00-03
-amsro@SC-1:~> 
-cmd-6-end

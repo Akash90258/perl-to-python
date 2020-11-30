@@ -1,0 +1,5 @@
+cmd-8-start
+sudo /opt/TimesTen/bin/ttRepAdmin -dsn sdp_db -receiver -list  |grep -i --color=never "SDP"|grep -iv "Start"
+SDP_DB_STANDBY    LGSDPF2                   Auto   Failed     39     0
+[AMSRO@OWSDPI2 ~]$ 
+cmd-8-end

@@ -1,0 +1,4 @@
+cmd-14-start
+cat /tmp/cfbackup.log|grep -i "CRITICAL"
+[AMSRO@PHSDPL1 ~]$ 
+cmd-14-end

@@ -7,13 +7,15 @@ sys.setdefaultencoding('utf8')
 
 import logging
 from datetime import date
-from datetime import datetime
+import datetime
 
 import openpyxl
 import pandas as pd
 from utils import *
 
 print("Process Started")
+day = datetime.datetime.today() 
+day_DD_MON_YYYY = day.strftime("%d-%b-%Y")
 # Initialising Logging module
 log_file_path = "./logs/logs_{}.log".format(str(date.today()))
 logging.basicConfig(
@@ -82,14 +84,6 @@ try:
                 writer, template_df_map, final_data, sheet_name
             )
 
-        if 'CCN' == opco.upper():
-            sheet_name = "CCN(Daily)"
-            final_data = nodes_iterator_ccn(values, updated_pma_dict[opco.lower()])
-
-            template_df_map = append_row_to_excel(
-                writer, template_df_map, final_data, sheet_name
-            )
-
         # ------------------
         if 'OCC' == opco.upper():
             sheet_name = "vOCC"
@@ -105,6 +99,34 @@ try:
             template_df_map = append_row_to_excel(
                 writer, template_df_map, final_data, sheet_name
             )
+
+        # ------------------
+        if 'CCN' == opco.upper():
+            sheet_name = "CCN(Daily)"
+            final_data = nodes_iterator_ccn(values, updated_pma_dict[opco.lower()])
+
+            template_df_map = append_row_to_excel(
+                writer, template_df_map, final_data, sheet_name
+            )
+
+        # ------------------
+        if 'CCN' == opco.upper():
+            sheet_name = "CCN"
+            final_data = nodes_iterator_ccn(values, updated_pma_dict[opco.lower()])
+            for index,row in template_df_map['CCN'].iterrows():
+                for inner_row in final_data:
+                    if (str(row['IO2 IP']) in str(inner_row['IP Address']) and 
+                        inner_row['Daily sheduled DBN backup'] == 'Done'):
+                        
+                        template_df_map['CCN'].loc[index, ['DBN backup(Daily)']]=day_DD_MON_YYYY
+                        break
+            print(template_df_map['CCN'])
+            template_df_map['CCN'].to_excel(writer, sheet_name=sheet_name,index=False)
+            # writer.save()
+            # exit()
+            # template_df_map = append_row_to_excel(
+            #     writer, template_df_map, final_data, sheet_name
+            # )
 
         # # ------------------
 

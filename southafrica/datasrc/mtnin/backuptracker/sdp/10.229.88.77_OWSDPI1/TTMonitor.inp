@@ -1,0 +1,5 @@
+cmd-10-start
+sudo /opt/sdp/TTMonitor/bin/TTRepCheck -c DSN=sdp_db |wc -l >  a.txt
+Alarm from sendAlarm: ERROR The replication on peer is down: [failed], needs syncronization
+[AMSRO@OWSDPI1 ~]$ 
+cmd-10-end

@@ -1,0 +1,5 @@
+cmd-4-start
+ls -lrt /opt/telorb/axe/loadingGroup01_1/backups/active
+lrwxrwxrwx 1 telorb tspPlatformAdmin 35 Jun 15 23:00 /opt/telorb/axe/loadingGroup01_1/backups/active -> ScheduledBackup_2020_06_15_22:59:58
+Proc_m0_s11$ 
+cmd-4-end

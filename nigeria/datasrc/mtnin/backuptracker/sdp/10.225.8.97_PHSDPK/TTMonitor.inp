@@ -1,0 +1,5 @@
+cmd-10-start
+sudo /opt/sdp/TTMonitor/bin/TTRepCheck -c DSN=sdp_db |wc -l >  a.txt
+Alarm from sendAlarm: WARNING PHSDPK1 has not answered in 234978 seconds
+[AMSRO@PHSDPK2 ~]$ 
+cmd-10-end

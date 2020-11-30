@@ -1,0 +1,4 @@
+cmd-10-start
+sudo /opt/sdp/TTMonitor/bin/TTRepCheck -c DSN=sdp_db |wc -l >  a.txt
+[AMSRO@LGSDPF2 ~]$ 
+cmd-10-end

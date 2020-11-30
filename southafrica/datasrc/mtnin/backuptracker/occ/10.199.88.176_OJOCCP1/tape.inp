@@ -1,0 +1,5 @@
+cmd-6-start
+sudo cat /var/log/cfbackup*`date "+%Y%m%d"`*.log | grep -i "F ilesystem backup ended"
+cat: /var/log/cfbackup*20201124*.log: No such file or directory
+[AMSRW@OJOCCP1 ~]$ 
+cmd-6-end

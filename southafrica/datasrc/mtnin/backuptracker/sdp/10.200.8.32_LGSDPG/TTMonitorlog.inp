@@ -1,0 +1,4 @@
+cmd-12-start
+tail -500 /var/opt/fds/logs/TTMonitor.log | egrep `date +%Y-% m-%d` | egrep -i "Replication" | grep -iv OK
+[AMSRO@LGSDPG2 ~]$ 
+cmd-12-end

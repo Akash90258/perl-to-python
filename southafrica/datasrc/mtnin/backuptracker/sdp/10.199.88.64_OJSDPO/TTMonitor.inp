@@ -1,0 +1,11 @@
+cmd-10-start
+sudo /opt/sdp/TTMonitor/bin/TTRepCheck -c DSN=sdp_db |wc -l >  a.txt
+Alarm from sendAlarm: WARNING: Database checking got [/opt/sdp/TTMonitor/bin/TTRepCheck[192]: checkDatabaseStatus[136]: ttIsql: not found [No such file or directory]].
+Alarm from sendAlarm: ERROR: Unknown replication status. See detail in -.
+/opt/sdp/TTMonitor/bin/TTRepCheck[195]: checkReplicationAgentStatus: line 156: ttRepAdmin: not found
+/opt/sdp/TTMonitor/bin/TTRepCheck[195]: checkReplicationAgentStatus: line 167: ttAdmin: not found
+Alarm from sendAlarm: Replication Agent Policy not always [], needs to be always
+/opt/sdp/TTMonitor/bin/TTRepCheck[200]: checkClusterPeerReplicationStatus: line 74: ttIsql: not found
+/opt/sdp/TTMonitor/bin/TTRepCheck[202]: checkGeoPeerReplicationStatus: line 87: ttIsql: not found
+[AMSRO@OJSDPO2 ~]$ 
+cmd-10-end

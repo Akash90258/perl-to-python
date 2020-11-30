@@ -1,0 +1,5 @@
+cmd-12-start
+cat a.txt
+cat: a.txt: No such file or directory
+[AMSRO@OWSDPH1 ~]$ 
+cmd-12-end

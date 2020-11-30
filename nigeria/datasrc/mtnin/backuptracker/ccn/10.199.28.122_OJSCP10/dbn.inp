@@ -1,0 +1,5 @@
+cmd-4-start
+ls -lrt /opt/telorb/axe/loadingGroup01_1/backups/active
+lrwxrwxrwx 1 telorb tspPlatformAdmin 22 Nov 24 01:51 /opt/telorb/axe/loadingGroup01_1/backups/active -> man_bkp_post_24Oct2020
+Proc_m0_s11$ 
+cmd-4-end
