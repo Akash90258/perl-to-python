@@ -8,6 +8,7 @@ from email.utils import formatdate
 import openpyxl
 import pandas as pd
 from updated import *
+import ccn
 
 
 def pma_nw_node_dict(pma_nw_file_path):
@@ -125,21 +126,31 @@ def nodes_iterator_sdp(values, pma_ips):
         final output excel sheet
     """
     final_data = []
+    success_nodes = 0 
     for key, value in values.items():
-        IP = list(value.keys())[0]
-        flag = Is_IP_Exists(IP, pma_ips)
-        if not flag:
-            continue
-        row_data = {}
+        IP1, IP2 = list(value.keys())
+        # flag = Is_IP_Exists(IP, pma_ips)
+        # if not flag:
+        #     continue
+        row_data = []
         node_name = key
-        row_data['Node Name'] = node_name.upper()
-        row_data['IP Address'] = IP
-        temp_status = list(list(value.values())[0].values())[0]
-        status = update_status(temp_status)
-        row_data['Data Protector backup'] = status
-        row_data['Comment'] = temp_status.split('^^')[-1]
+        row_data.append(node_name)
+        if int(IP1.split('.')[-1]) > int(IP2.split('.')[-1]):
+            row_data.append(IP2)
+            row_data.append(IP1)
+            status1 = update_status(list(value[IP1].values())[0])
+            status = update_status(list(value[IP2].values())[0])
+        else:
+            row_data.append(IP1)
+            row_data.append(IP2)
+            status1 = update_status(list(value[IP2].values())[0])
+            status = update_status(list(value[IP1].values())[0])
+        row_data.append(status)
+        row_data.append(status1)
+        if 'not' not in status.lower():
+            success_nodes += 1
         final_data.append(row_data)
-    return final_data
+    return final_data, success_nodes
 
 
 
@@ -150,203 +161,117 @@ def nodes_iterator_air(values, pma_ips):
         final output excel sheet with their corresponding headers
     """
     final_data = []
-
+    success_nodes = 0 
     for key, value in values.items():
         IP = list(value.keys())[0]
         flag = Is_IP_Exists(IP, pma_ips)
         if not flag:
             continue
-        row_data = {}
+        row_data = []
         node_name = key
-        row_data['Node Name'] = node_name.upper()
-        row_data['IP Address'] = IP
+        row_data.append(node_name.upper())
+        row_data.append(IP)
+        # row_data['Node Name'] = node_name.upper()
+        # row_data['IP Address'] = IP
         temp_status = list(list(value.values())[0].values())[0]
         status = update_status(temp_status)
-        row_data['BURA backup'] = status
-        row_data['Comment'] = temp_status.split('^^')[-1]
+        row_data.append(status)
+        # row_data['BURA backup'] = status
+        # row_data['Comment'] = temp_status.split('^^')[-1]
+        if 'not' not in status.lower():
+            success_nodes += 1
         final_data.append(row_data)
-    return final_data
+    return final_data, success_nodes
 
 
-def nodes_iterator_ccn(values, pma_ips):
+def nodes_iterator_ngvs_geo(values, pma_ips):
     """
-        Iterate over each node name of ccn and check if the ip exist in
+        Iterate over each node name of ema and check if the ip exist in
         pma_nw_final.conf file and create a list of node to insert in
         final output excel sheet with their corresponding headers
     """
     final_data = []
+    success_nodes = 0
     for key, value in values.items():
         IP = list(value.keys())[0]
         flag = Is_IP_Exists(IP, pma_ips)
         if not flag:
             continue
-        row_data = {}
-        row_data['IP Address'] = IP
+        row_data = []
         node_name = key
-        row_data['Node Name'] = node_name
-        status = update_status(list(list(value.values())[0].values())[0])
-        row_data['Daily sheduled DBN backup'] = status
+        row_data.append(node_name) # node name
+        row_data.append(IP)        #Ip
+        status = list(list(value.values())[0].values())[0]
+        row_data.append(status)    #VCCN Backup Status
+        if 'not' not in status.lower():
+            success_nodes += 1
         final_data.append(row_data)
-    return final_data
+    return final_data, success_nodes
 
-# def nodes_iterator_ngcrs(values, pma_ips):
-#     """
-#         Iterate over each node name of ccn and check if the ip exist in
-#         pma_nw_final.conf file and create a list of node to insert in
-#         final output excel sheet with their corresponding headers
-#     """
-#     final_data = []
-#     for key, value in values.items():
-#         IP = list(value.keys())[0]
-#         flag = Is_IP_Exists(IP, pma_ips)
-#         if not flag:
-#             continue
-#         row_data = {}
-#         if '10.107.12.42' in IP:
-#             row_data['Node Name'] = "DES Master"
-#         elif '10.107.12.43' in IP:
-#             row_data['Node Name'] = "DES Slave"
-#         elif '10.107.12.51' in IP:
-#             row_data['Node Name'] = "Reporting Node-BI"
-#         else:
-#             row_data['Node Name'] = ""
-#         row_data['Node IP'] = IP
-#         node_name = key
-#         row_data['Host Name'] = node_name
-#         status = update_status(list(value.values())[0]['oradb.inp'])
-#         row_data['Oracle Database(Daily)'] = status
-#         status = update_status(list(value.values())[0]['appfs.inp'])
-#         row_data['Application filesystem(Weekly)'] = status
-#         status = update_status(list(value.values())[0]['cdr.inp'])
-#         row_data['Archived CDR (Daily)'] = status
-#         final_data.append(row_data)
-#     return final_data
+def nodes_iterator_sdp_geo(values, pma_ips):
+    """
+        Iterate over each node name of ema and check if the ip exist in
+        pma_nw_final.conf file and create a list of node to insert in
+        final output excel sheet with their corresponding headers
+    """
+    final_data = []
+    success_nodes = 0 
+    for key, value in values.items():
+        IP1, IP2 = list(value.keys())
+        # flag = Is_IP_Exists(IP, pma_ips)
+        # if not flag:
+        #     continue
+        row_data = []
+        node_name = key
+        row_data.append(node_name)
+        row_data.append(IP1)
+        status = update_status(list(value[IP1].values())[0])
+        row_data.append(status)
+        if 'not' not in status.lower():
+            success_nodes += 1
+        final_data.append(row_data)
 
+        row_data = []
+        row_data.append(node_name)
+        row_data.append(IP2)
+        status1 = update_status(list(value[IP2].values())[0])
+        row_data.append(status1)
+        if 'not' not in status1.lower():
+            success_nodes += 1
+        final_data.append(row_data)
 
-# def nodes_iterator_vs(values, pma_ips):
-#     """
-#         Iterate over each node name of air and check if the ip exist in
-#         pma_nw_final.conf file and create a list of node to insert in
-#         final output excel sheet with their corresponding headers
-#     """
-#     final_data = []
-#     for key, value in values.items():
-#         IP = list(value.keys())[0]
-#         flag = Is_IP_Exists(IP, pma_ips)
-#         if not flag:
-#             continue
-#         row_data = {}
-#         node_name = key
-#         row_data['Node Name'] = node_name
-#         row_data['Hostname'] = IP
-#         status = update_status(list(value.values())[0]['tape.inp'])
-#         row_data['Tape Backup  status'] = status
-#         status = update_status(list(value.values())[0]['cassendra.inp'])
-#         row_data['Cassandra status'] = status
-#         status = update_status(list(value.values())[0]['zoo.inp'])
-#         row_data['Zookeper  status'] = status
-#         final_data.append(row_data)
-#     return final_data
+    return final_data, success_nodes
+    
 
 
-# def nodes_iterator_crs(values, pma_ips):
-#     """
-#         Iterate over each node name of air and check if the ip exist in
-#         pma_nw_final.conf file and create a list of node to insert in
-#         final output excel sheet with their corresponding headers
-#     """
-#     final_data = []
-#     for key, value in values.items():
-#         IP = list(value.keys())[0]
-#         flag = Is_IP_Exists(IP, pma_ips)
-#         if not flag:
-#             continue
-#         row_data = {}
-#         node_name = key
-#         row_data['Node Name'] = node_name
-#         row_data['Node IP'] = IP
-#         status = update_status(list(value.values())[0]['db.inp'])
-#         row_data['DB backup status at Storage'] = status
-#         final_data.append(row_data)
-#     return final_data
-
-
-# def nodes_iterator_minsat(values, pma_ips):
-#     """
-#         Iterate over each node name of minsat and check if the ip exist in
-#         pma_nw_final.conf file and create a list of node to insert in
-#         final output excel sheet with their corresponding headers
-#     """
-#     final_data = []
-#     for key, value in values.items():
-#         IP = list(value.keys())[0]
-#         flag = Is_IP_Exists(IP, pma_ips)
-#         if not flag:
-#             continue
-#         row_data = {}
-#         node_name = key
-#         row_data['Node Name'] = node_name
-#         row_data['Node IP'] = IP
-#         status = update_status(list(value.values())[0]['db.inp'])
-#         row_data['DB DUMP backup at NFS server'] = status
-#         status = update_status(list(value.values())[0]['fs.inp'])
-#         row_data['Daily FS dump status at Node'] = status
-#         final_data.append(row_data)
-#     return final_data
-
-
-
-# def nodes_iterator_ngvs(values, pma_ips):
-#     """
-#         Iterate over each node name of ema and check if the ip exist in
-#         pma_nw_final.conf file and create a list of node to insert in
-#         final output excel sheet with their corresponding headers
-#     """
-#     final_data = []
-#     for key, value in values.items():
-#         IP = list(value.keys())[0]
-#         flag = Is_IP_Exists(IP, pma_ips)
-#         if not flag:
-#             continue
-#         row_data = {}
-#         node_name = key
-#         row_data['Node Name'] = node_name
-#         row_data['Hostname'] = IP
-#         temp_status = list(value.values())[0]['tape.inp']
-#         status = update_status(temp_status)
-#         row_data['Backup'] = status
-#         row_data['Remarks'] = temp_status.split('^^')[-1]
-#         status1 = update_status(list(value.values())[0]['cassendra.inp'])
-#         row_data['Cassandra status(Weekly)'] = status1
-#         status1 = update_status(list(value.values())[0]['zoo.inp'])
-#         row_data['Zookeper  status'] = status1
-#         final_data.append(row_data)
-#     return final_data
-
-
-# def nodes_iterator_ema(values, pma_ips):
-#     """
-#         Iterate over each node name of ema and check if the ip exist in
-#         pma_nw_final.conf file and create a list of node to insert in
-#         final output excel sheet with their corresponding headers
-#     """
-#     final_data = []
-#     for key, value in values.items():
-#         IP = list(value.keys())[0]
-#         flag = Is_IP_Exists(IP, pma_ips)
-#         if not flag:
-#             continue
-#         row_data = {}
-#         node_name = key
-#         row_data['Node Name'] = node_name
-#         row_data['Node IP'] = IP
-#         status = update_status(list(value.values())[0]['proclog.inp'])
-#         row_data['Proclog'] = status
-#         status1 = update_status(list(value.values())[0]['sogconfig.inp'])
-#         row_data['Sogconfig'] = status1
-#         final_data.append(row_data)
-#     return final_data
-
+def nodes_iterator_ngvs(values, pma_ips):
+    """
+        Iterate over each node name of ema and check if the ip exist in
+        pma_nw_final.conf file and create a list of node to insert in
+        final output excel sheet with their corresponding headers
+    """
+    final_data = []
+    success_nodes_cassendra = 0
+    success_nodes_tape = 0
+    for key, value in values.items():
+        IP = list(value.keys())[0]
+        flag = Is_IP_Exists(IP, pma_ips)
+        if not flag:
+            continue
+        row_data = []
+        node_name = key
+        row_data.append(node_name) # node name
+        row_data.append(IP)        #Ip
+        status = update_status(list(value.values())[0]['tape.inp'])
+        row_data.append(status)    #VCCN Backup Status
+        if 'not' not in status.lower():
+            success_nodes_tape += 1
+        status = update_status(list(value.values())[0]['cassendra.inp'])
+        row_data.append(status)    #VCCN Backup Status
+        if 'not' not in status.lower():
+            success_nodes_cassendra += 1
+        final_data.append(row_data)
+    return final_data, success_nodes_cassendra, success_nodes_tape
 
 def nodes_iterator_vccn(values, pma_ips):
     """
@@ -367,7 +292,34 @@ def nodes_iterator_vccn(values, pma_ips):
         row_data.append(IP)        #Ip
         status = update_status(list(value.values())[0]['Vccn_config_backup.inp'])
         row_data.append(status)    #VCCN Backup Status
-        if 'done' in status.lower():
+        if 'not' not in status.lower():
+            success_nodes += 1
+        final_data.append(row_data)
+    return final_data, success_nodes
+
+
+def nodes_iterator_ccn(values, pma_ips):
+    """
+        Iterate over each node name of ccn and check if the ip exist in
+        pma_nw_final.conf file and create a list of node to insert in
+        final output excel sheet with their corresponding headers
+    """
+    final_data = []
+    success_nodes = 0
+    for key, value in values.items():
+        IP = list(value.keys())[0]
+        flag = Is_IP_Exists(IP, pma_ips)
+        if not flag:
+            continue
+        row_data = []
+        node_name = key
+        row_data.append(node_name)
+        if node_name.upper() in ccn.ccn_list:
+            row_data.extend(ccn.ccn_list[node_name.upper()])
+        row_data.insert(-2, IP)
+        status = update_status(list(list(value.values())[0].values())[0])
+        row_data.append(status)
+        if 'not' not in status.lower():
             success_nodes += 1
         final_data.append(row_data)
     return final_data, success_nodes
@@ -380,29 +332,30 @@ def nodes_iterator_occ(values, pma_ips):
         final output excel sheet with their corresponding headers
     """
     final_data = []
+    success_nodes = 0
     for key, value in values.items():
         IP = list(value.keys())[0]
         flag = Is_IP_Exists(IP, pma_ips)
         if not flag:
             continue
-        row_data = {}
+        row_data = []
         node_name = key
-        row_data['Server name'] = node_name.upper()
-        row_data['OAM IP'] = IP
+        row_data.append(node_name.upper())   #Server name
         temp_status = list(list(value.values())[0].values())[0]
         status = update_status(temp_status)
-        row_data['BURA backup'] = status
-        if 'NDA' in node_name.upper():    
-            row_data['Site'] = 'Jo-burg'
-        if 'NLA' in node_name.upper():    
-            row_data['Site'] = 'Newlands'
-        if 'GEA' in node_name.upper():    
-            row_data['Site'] = 'Germiston'
-        if 'RNA' in node_name.upper():    
-            row_data['Site'] = 'Jo-burg'
-        row_data['Failed Reason (If any)'] = temp_status.split('^^')[-1]
+        if 'OJO' in node_name.upper():
+            row_data.append('Ojota')
+        if 'AB' in node_name.upper():
+            row_data.append('ABUJA')
+        if 'AS' in node_name.upper():
+            row_data.append('ASABA')
+        row_data.append(IP)                  #ip
+        row_data.append(status)
+        if 'not' not in status.lower():
+            success_nodes += 1
+        # row_data['Failed Reason (If any)'] = temp_status.split('^^')[-1]
         final_data.append(row_data)
-    return final_data
+    return final_data, success_nodes
 
 
 def append_row_to_excel(writer, template_df_map, final_data, sheet_name):
