@@ -72,16 +72,6 @@ try:
         # Continue if opco is commented in pma_nw-final.cong
         if opco.lower() not in updated_pma_dict.keys():
             continue
-
-
-        # # ------------------
-        # if 'OCC' == opco.upper():
-        #     sheet_name = "vOCC"
-        #     final_data = nodes_iterator_occ(values, updated_pma_dict[opco.lower()])
-        #     template_df_map = append_row_to_excel(
-        #         writer, template_df_map, final_data, sheet_name
-        #     )
-
         
         # # ------------------
         if 'SDP' == opco.upper():
@@ -264,26 +254,57 @@ try:
         )
 
  
-    # # Flattening Json and return a list of nodes of NotDone cases for Logs sheet.
-    # logging.info("Flatting Dataframe")
-    # log_rows = json_flatten_for_logs(parsed_hash, updated_pma_dict, Base_path)
+    # Flattening Json and return a list of nodes of NotDone cases for Logs sheet.
+    logging.info("Flatting Dataframe")
+    log_rows = json_flatten_for_logs(parsed_hash, updated_pma_dict, Base_path)
 
-    # logging.info("Writting Data to Logs sheet in output excel file")
-    # if len(log_rows) > 0:
-    #     template_df_map['Logs'] = template_df_map['Logs'] \
-    #         .append(log_rows, ignore_index=True)
+    logging.info("Writting Data to Logs sheet in output excel file")
+    if len(log_rows) > 0:
+        template_df_map['Logs'] = template_df_map['Logs'] \
+            .append(log_rows, ignore_index=True)
 
-    #     template_df_map['Logs'].to_excel(
-    #         writer, 'Logs', index=False, startrow=1, startcol=0, header=False
-    #     )
+        template_df_map['Logs'].to_excel(
+            writer, 'Logs', index=False, startrow=1, startcol=0, header=False
+        )
 
     print("===================================")
     # print(summary_data)
-    performence_per = round((overall_success_nodes/float(overall_nodes))*100,2)
-    print(overall_nodes, overall_success_nodes, performence_per)
-    performence.create_performence_csv(overall_nodes, overall_success_nodes, performence_per)
-    # print(template_df_map["NGVS_Geo Redundancy_status"])
+    print(template_df_map["Logs"])
     print("===================================")
+
+
+
+
+    performence_per = overall_success_nodes/float(overall_nodes)
+    performence.create_performence_csv(overall_nodes, overall_success_nodes, performence_per)
+
+
+    # Preparing Dashboard for Performence ==============
+    sheet_name = "Dashboard_Performance"
+    final_data = performence.read_performence_csv()
+    total_nodes = len(final_data)
+    final_data = pd.DataFrame (final_data)
+    template_df_map[sheet_name] = final_data
+    template_df_map[sheet_name].to_excel(
+        writer, sheet_name, index=False, startrow=1,startcol=0, header=False
+        )
+    # Preparing Dashboard for success and fail =========
+    sheet_name = "Dashboard_Backup_Success_Fail"
+    final_data = performence.read_success_fail_csv()
+    total_nodes = len(final_data)
+    final_data = pd.DataFrame (final_data)
+    template_df_map[sheet_name] = final_data
+    template_df_map[sheet_name].to_excel(
+        writer, sheet_name, index=False, startrow=1,startcol=0, header=False
+        )
+
+
+
+
+
+
+
+
     writer.save()
     logging.info("Sending mail")
     flag=False
