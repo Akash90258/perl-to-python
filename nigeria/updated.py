@@ -11,7 +11,7 @@ cassendra_arr = []
 issue1 = 'Connectivity/Password Issue'
 
 one_day_delta = datetime.timedelta(1)
-todays_datetime = datetime.datetime.today() - datetime.timedelta(7)
+todays_datetime = datetime.datetime.today() - datetime.timedelta(8)
 
 day1 = str(todays_datetime.strftime('%d'))
 day2 = str(todays_datetime.strftime('%e'))

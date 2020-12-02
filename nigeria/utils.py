@@ -127,6 +127,7 @@ def nodes_iterator_sdp(values, pma_ips):
     """
     final_data = []
     success_nodes = 0 
+    success_nodes_without_pair = 0 
     for key, value in values.items():
         IP1, IP2 = list(value.keys())
         # flag = Is_IP_Exists(IP, pma_ips)
@@ -147,10 +148,14 @@ def nodes_iterator_sdp(values, pma_ips):
             status = update_status(list(value[IP1].values())[0])
         row_data.append(status)
         row_data.append(status1)
-        if 'not' not in status.lower():
+        if ('not' not in status.lower() and 'Issue' not in status ):
             success_nodes += 1
+        if 'not' not in status.lower() and 'Issue' not in status:
+            success_nodes_without_pair += 1
+        if 'not' not in status1.lower()  and 'Issue' not in status1:
+            success_nodes_without_pair += 1
         final_data.append(row_data)
-    return final_data, success_nodes
+    return final_data, success_nodes, success_nodes_without_pair
 
 
 
@@ -178,7 +183,7 @@ def nodes_iterator_air(values, pma_ips):
         row_data.append(status)
         # row_data['BURA backup'] = status
         # row_data['Comment'] = temp_status.split('^^')[-1]
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         final_data.append(row_data)
     return final_data, success_nodes
@@ -203,7 +208,7 @@ def nodes_iterator_ngvs_geo(values, pma_ips):
         row_data.append(IP)        #Ip
         status = list(list(value.values())[0].values())[0]
         row_data.append(status)    #VCCN Backup Status
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         final_data.append(row_data)
     return final_data, success_nodes
@@ -227,7 +232,7 @@ def nodes_iterator_sdp_geo(values, pma_ips):
         row_data.append(IP1)
         status = update_status(list(value[IP1].values())[0])
         row_data.append(status)
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         final_data.append(row_data)
 
@@ -236,7 +241,7 @@ def nodes_iterator_sdp_geo(values, pma_ips):
         row_data.append(IP2)
         status1 = update_status(list(value[IP2].values())[0])
         row_data.append(status1)
-        if 'not' not in status1.lower():
+        if 'not' not in status1.lower() and 'Issue' not in status1:
             success_nodes += 1
         final_data.append(row_data)
 
@@ -264,11 +269,11 @@ def nodes_iterator_ngvs(values, pma_ips):
         row_data.append(IP)        #Ip
         status = update_status(list(value.values())[0]['tape.inp'])
         row_data.append(status)    #VCCN Backup Status
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes_tape += 1
         status = update_status(list(value.values())[0]['cassendra.inp'])
         row_data.append(status)    #VCCN Backup Status
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes_cassendra += 1
         final_data.append(row_data)
     return final_data, success_nodes_cassendra, success_nodes_tape
@@ -292,7 +297,7 @@ def nodes_iterator_vccn(values, pma_ips):
         row_data.append(IP)        #Ip
         status = update_status(list(value.values())[0]['Vccn_config_backup.inp'])
         row_data.append(status)    #VCCN Backup Status
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         final_data.append(row_data)
     return final_data, success_nodes
@@ -319,7 +324,7 @@ def nodes_iterator_ccn(values, pma_ips):
         row_data.insert(-2, IP)
         status = update_status(list(list(value.values())[0].values())[0])
         row_data.append(status)
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         final_data.append(row_data)
     return final_data, success_nodes
@@ -351,7 +356,7 @@ def nodes_iterator_occ(values, pma_ips):
             row_data.append('ASABA')
         row_data.append(IP)                  #ip
         row_data.append(status)
-        if 'not' not in status.lower():
+        if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         # row_data['Failed Reason (If any)'] = temp_status.split('^^')[-1]
         final_data.append(row_data)

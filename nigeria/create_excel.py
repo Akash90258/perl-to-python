@@ -12,6 +12,7 @@ import datetime
 import openpyxl
 import pandas as pd
 from utils import *
+import performence
 
 print("Process Started")
 day = datetime.datetime.today() 
@@ -38,6 +39,7 @@ Output_File = config_data['output_file_path'] + \
               str(date.today()) + ".xlsx"
 pma_nw_file_path = config_data['pma_nw_file_path']
 
+
 try:
 
     # reading pma_nw_final.conf and creating dictionary
@@ -59,32 +61,18 @@ try:
     # based on nedate and its corresponding Inp file
     logging.info("Creating dictionary of all node types after parsing ini files")
     parsed_hash = main()
-
+    overall_nodes = 0
+    overall_success_nodes = 0
+    summary_data = []
     # Iterating each node type for Update individual output sheet
     for key, values in parsed_hash.items():
         opco = key
         print(opco)
 
-
         # Continue if opco is commented in pma_nw-final.cong
         if opco.lower() not in updated_pma_dict.keys():
-            # if 'ngvs-geo-red' not in updated_pma_dict.keys() or 'sdp-geo-red' not in updated_pma_dict.keys():
             continue
 
-        # # ------------------
-        # if 'SDP' == opco.upper():
-        #     sheet_name = "SDP(Daily)"
-        #     final_data = nodes_iterator_sdp(values, updated_pma_dict[opco.lower()])
-        #     template_df_map = append_row_to_excel(
-        #         writer, template_df_map, final_data, sheet_name
-        #     )
-        # # ------------------
-        # if 'AIR' == opco.upper():
-        #     sheet_name = "AIR(Daily)"
-        #     final_data = nodes_iterator_air(values, updated_pma_dict[opco.lower()])
-        #     template_df_map = append_row_to_excel(
-        #         writer, template_df_map, final_data, sheet_name
-        #     )
 
         # # ------------------
         # if 'OCC' == opco.upper():
@@ -94,59 +82,11 @@ try:
         #         writer, template_df_map, final_data, sheet_name
         #     )
 
-        #         # ------------------
-        # if 'SAPC' == opco.upper():
-        #     sheet_name = "SAPC"
-        #     final_data = nodes_iterator_sapc(values, updated_pma_dict[opco.lower()])
-        #     template_df_map = append_row_to_excel(
-        #         writer, template_df_map, final_data, sheet_name
-        #     )
-
-        # # ------------------
-        # if 'CCN' == opco.upper():
-        #     sheet_name = "CCN(Daily)"
-        #     final_data = nodes_iterator_ccn(values, updated_pma_dict[opco.lower()])
-
-        #     template_df_map = append_row_to_excel(
-        #         writer, template_df_map, final_data, sheet_name
-        #     )
-
-        # # ------------------
-        # if 'CCN' == opco.upper():
-        #     sheet_name = "CCN"
-        #     final_data = nodes_iterator_ccn(values, updated_pma_dict[opco.lower()])
-        #     for index,row in template_df_map['CCN'].iterrows():
-        #         for inner_row in final_data:
-        #             if (str(row['IO2 IP']) in str(inner_row['IP Address']) and 
-        #                 inner_row['Daily sheduled DBN backup'] == 'Done'):
-                        
-        #                 template_df_map['CCN'].loc[index, ['DBN backup(Daily)']]=day_DD_MON_YYYY
-        #                 break
-        #     print(template_df_map['CCN'])
-        #     template_df_map['CCN'].to_excel(writer, sheet_name=sheet_name,index=False)
-
-
-            # # ------------------
-            # writer.save()
-            # exit()
-            # template_df_map = append_row_to_excel(
-            #     writer, template_df_map, final_data, sheet_name
-            # )
-
-        # # ------------------
-
-        # # ------------------
-        # if 'EMA' == opco.upper():
-        #     sheet_name = "NGVS_Geo Redundancy_status"
-        #     final_data = nodes_iterator_ema(values, updated_pma_dict[opco.lower()])
-        #     template_df_map = append_row_to_excel(
-        #         writer, template_df_map, final_data, sheet_name
-        #     )
         
         # # ------------------
         if 'SDP' == opco.upper():
             sheet_name = "SDP_Daily"
-            final_data, success_nodes = nodes_iterator_sdp(
+            final_data, success_nodes, success_nodes_without_pair = nodes_iterator_sdp(
                 values, updated_pma_dict[opco.lower()]
                 )
             total_nodes = len(final_data)
@@ -158,7 +98,12 @@ try:
             template_df_map[sheet_name] = final_data
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=6,startcol=0, header=False
-                )        
+                )
+            summary = ['SDP','Tape Backup',total_nodes*2,success_nodes_without_pair, total_nodes*2-success_nodes_without_pair ]
+            summary_data.append(summary)
+            overall_nodes = overall_nodes+total_nodes*2
+            overall_success_nodes = overall_success_nodes+success_nodes_without_pair
+            
 
             # SDP geo-----------------
             values  = parsed_hash["sdp-geo-red"]
@@ -174,6 +119,8 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=1,startcol=0, header=False
                 )
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
 
 
         # # ------------------
@@ -192,6 +139,10 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=6,startcol=0, header=False
                 )
+            summary = ['AIR','Tape Backup',total_nodes,success_nodes, total_nodes-success_nodes ]
+            summary_data.append(summary)
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
 
         # # ------------------
         if 'CCN' == opco.upper():
@@ -209,6 +160,10 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=6,startcol=0, header=False
                 )
+            summary = ['CCN','DBN Backup',total_nodes,success_nodes, total_nodes-success_nodes ]
+            summary_data.append(summary)
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
 
         # ------------------
         if 'NGVS' == opco.upper():
@@ -229,6 +184,11 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=5,startcol=0, header=False
                 )
+            summary = ['NGVS','FS backup/DB Backup',total_nodes,success_nodes, total_nodes-success_nodes ]
+            summary_data.append(summary)
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
+
 
             # NGVS geo-----------------
             values  = parsed_hash["ngvs-geo-red"]
@@ -244,6 +204,8 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=1,startcol=0, header=False
                 )
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
 
         # # ------------------
         if 'OCC' == opco.upper():
@@ -262,6 +224,10 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=5,startcol=0, header=False
                 )
+            summary = ['OCC','FS Backup',total_nodes,success_nodes, total_nodes-success_nodes ]
+            summary_data.append(summary)
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
 
 
         # ------------------
@@ -281,11 +247,23 @@ try:
             template_df_map[sheet_name].to_excel(
                 writer, sheet_name, index=False, startrow=6,startcol=0, header=False
                 )
+            summary = ['VCCN','VCCN Backup',total_nodes,success_nodes, total_nodes-success_nodes ]
+            summary_data.append(summary)
+            overall_nodes = overall_nodes+total_nodes
+            overall_success_nodes = overall_success_nodes+success_nodes
 
+    #  Writting data in summary sheet
+    sheet_name = "Summary"
+    total_nodes = len(summary_data)
+    writer.sheets[sheet_name].cell(1,5).value  = day_DD_MON_YYYY
 
+    summary_data = pd.DataFrame (summary_data)
+    template_df_map[sheet_name] = summary_data
+    template_df_map[sheet_name].to_excel(
+        writer, sheet_name, index=False, startrow=2,startcol=0, header=False
+        )
 
-
-
+ 
     # # Flattening Json and return a list of nodes of NotDone cases for Logs sheet.
     # logging.info("Flatting Dataframe")
     # log_rows = json_flatten_for_logs(parsed_hash, updated_pma_dict, Base_path)
@@ -300,7 +278,11 @@ try:
     #     )
 
     print("===================================")
-    print(template_df_map["NGVS_Geo Redundancy_status"])
+    # print(summary_data)
+    performence_per = round((overall_success_nodes/float(overall_nodes))*100,2)
+    print(overall_nodes, overall_success_nodes, performence_per)
+    performence.create_performence_csv(overall_nodes, overall_success_nodes, performence_per)
+    # print(template_df_map["NGVS_Geo Redundancy_status"])
     print("===================================")
     writer.save()
     logging.info("Sending mail")
