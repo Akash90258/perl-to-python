@@ -67,27 +67,80 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
         Flattening Json and return a list of nodes having not done cases
         with its .inp file Data.
     """
+
     log_rows = []
     for key, values in parsed_hash.items():
         for key1, values1 in values.items():
             for key2, values2 in values1.items():
                 for key3, values3 in values2.items():
-                    if 'Success' not in values3 and 'Password Issue' not in values3:
+                    geo_flag = 0
+                    if 'Success' not in values3 and 'Password Issue' not in values3 :
                         if key.lower() not in updated_pma_dict:
+                            if "geo-red" not in key.lower():
+                                continue
+                        if "geo-red"  in key.lower():
+                            if "sdp" in key.lower():
+                                key = "sdp"
+                            if "ngvs" in key.lower():
+                                key = "ngvs"
+                            geo_flag = 1
+                        else:
+                            flag = Is_IP_Exists(key2, updated_pma_dict[key.lower()])
+                            if not flag:
+                                continue
+
+
+                        if geo_flag == 1 and key.lower()=="sdp":
+                            # print(key, key1, key2, full_path,"=======================","in sDP")
+                            dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, "TTMonitorStandby.inp")
+                            full_path = basepath + dynamic_path
+                            file_data = read_file(full_path)
+                            geo_str = file_data.strip().split('\n')
+                            arr_len = len(geo_str)
+                            if arr_len > 4:
+                                file_data = read_file_encoaded(full_path)
+                                log_row = ["SDP-GEO-RED", key1, key2, "TTMonitorStandby.inp", file_data]
+                                log_rows.append(log_row)
+
+                            dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, "TTMonitorlog.inp")
+                            full_path = basepath + dynamic_path
+                            file_data = read_file_encoaded(full_path)
+                            if '9' not in file_data:
+                                log_row = ["SDP-GEO-RED", key1, key2, "TTMonitorlog.inp", file_data]
+                                log_rows.append(log_row)
                             continue
-                        flag = Is_IP_Exists(key2, updated_pma_dict[key.lower()])
-                        if not flag:
+
+                        if geo_flag == 1 and key.lower()=="ngvs":
+                            # print("pppppppppppppppppxxxxxxxxxx iam in ",geo_flag,key)
+                            dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, "geo.inp")
+                            full_path = basepath + dynamic_path
+                            file_data = read_file(full_path)
+                            status = ngvs_geo(file_data)
+                            if 'Success' not in status:
+                                log_row = ["NGVS-GEO-RED", key1, key2, "geo.inp", file_data]
+                                log_rows.append(log_row)
                             continue
+                        if geo_flag == 0 and key.lower()=="ngvs":
+                            print(key3,"]]]]]]]]]]]]]")
+                            dynamic_path = '{}/{}_{}/'.format(key, key2, key1)
+                            full_path = basepath + dynamic_path
+                            log_row = ["NGVS-GEO-RED", key1, key2]
+                            print(ngvs_cassendra_logs(full_path,log_row))
+                            logs = ngvs_cassendra_logs(full_path,log_row)
+                            for log in logs:
+                                log_rows.append(log)
+
+
+                          
+
                         dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, key3)
                         full_path = basepath + dynamic_path
                         try:
                             file_data = read_file_encoaded(full_path)
-                        except:
+                        except Exception as e:
                             continue
                         log_row = [key, key1, key2, key3, file_data]
                         log_rows.append(log_row)
-    # print(key,key1,key2,key3,values3)
-    # occ pnrocc2 10.52.160.39 fs_occ_backup.inp Connectivity/Password Issue
     return log_rows
 
 
@@ -130,9 +183,9 @@ def nodes_iterator_sdp(values, pma_ips):
     success_nodes_without_pair = 0 
     for key, value in values.items():
         IP1, IP2 = list(value.keys())
-        # flag = Is_IP_Exists(IP, pma_ips)
-        # if not flag:
-        #     continue
+        flag = Is_IP_Exists(IP1, pma_ips)
+        if not flag:
+            continue
         row_data = []
         node_name = key
         row_data.append(node_name)
@@ -176,13 +229,9 @@ def nodes_iterator_air(values, pma_ips):
         node_name = key
         row_data.append(node_name.upper())
         row_data.append(IP)
-        # row_data['Node Name'] = node_name.upper()
-        # row_data['IP Address'] = IP
         temp_status = list(list(value.values())[0].values())[0]
         status = update_status(temp_status)
         row_data.append(status)
-        # row_data['BURA backup'] = status
-        # row_data['Comment'] = temp_status.split('^^')[-1]
         if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes += 1
         final_data.append(row_data)
@@ -223,9 +272,9 @@ def nodes_iterator_sdp_geo(values, pma_ips):
     success_nodes = 0 
     for key, value in values.items():
         IP1, IP2 = list(value.keys())
-        # flag = Is_IP_Exists(IP, pma_ips)
-        # if not flag:
-        #     continue
+        flag = Is_IP_Exists(IP1, pma_ips)
+        if not flag:
+            continue
         row_data = []
         node_name = key
         row_data.append(node_name)
@@ -389,6 +438,21 @@ def get_dynamic_function_dict():
         "nodes_iterator_crs": nodes_iterator_crs
     }
     return mapping
+
+
+def ngvs_cassendra_logs(basepath, cass_log_row):                    
+    status = ''
+    fail_reason = ''
+    logs = []
+    inp_array = ['cassendra1.inp','cassendra2.inp','cassendra3.inp']
+    for inp_file_name in inp_array:
+        full_path = basepath + inp_file_name
+        file_data = read_file_encoaded(full_path)
+        temp_row = cass_log_row[:]
+        temp_row.append(inp_file_name)
+        temp_row.append(file_data)
+        logs.append(temp_row)
+    return logs
 
 
 def Send_Email_SMTP(Attachment_Full_Path, flag):

@@ -11,7 +11,7 @@ cassendra_arr = []
 issue1 = 'Connectivity/Password Issue'
 
 one_day_delta = datetime.timedelta(1)
-todays_datetime = datetime.datetime.today() - datetime.timedelta(8)
+todays_datetime = datetime.datetime.today() - datetime.timedelta(9)
 
 day1 = str(todays_datetime.strftime('%d'))
 day2 = str(todays_datetime.strftime('%e'))
@@ -158,35 +158,32 @@ def read_inp(inp_dir_path, user, inp_dir):
                 if 'sdp' in user_l:
                     status = ''
                     fail_reason = ''
+
+                    # if 'TTMonitor.inp' in inp_name or 'TTMonitorlog.inp' in inp_name:
+                    if 'TTMonitorStandby.inp' in inp_name:
+                        sdp_geo_check += 1
+                        geo_str = file_data.strip().split('\n')
+                        arr_len = len(geo_str)
+                        # print(ip, arr_len)
+                        if arr_len > 4:
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
+                        else:
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
+
+                    if 'TTMonitorlog.inp' in inp_name:
+                        if '9' in file_data:
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
+                        else:
+                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
+                        
+
                     if ('tape.inp' in inp_name):
                         status, fail_reason = tape(
                             file_data, curr_date, curr_date5, inp_dir_path
                         )
                         parsed_hash[user][host][ip][inp_name] = (status + "^^" + fail_reason)
 
-                    if 'TTMonitor.inp' in inp_name or 'TTMonitorlog.inp' in inp_name:
-                        # print("--------i am in ")
-                        sdp_geo_check += 1
-                        geo_str = file_data.strip().split('\n')
-                        arr_len = len(geo_str)
-                        # print(geo_str)
-                        # print(arr_len,"===================")
-                        if arr_len > 5:
-                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
-                        else:
-                            parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
-
-                    # regex = "({}.*?Standby database replication OK)".format(curr_date)
-                    # if 'TTMonitorStandby.inp' in inp_name and parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] == 'N/A':
-                    #     # print("///////////////////////////////////////////",regex)
-                    #     if len(re.findall(regex, file_data)) > 0:
-                    #         # print("//////////////////////////-------------")
-                    #         parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Success'
-                    #     else:
-                    #         # print("//////////////////////////-------------===============")
-                    #         parsed_hash[user + "-geo-red"][host][ip]['geo-redundancy.inp'] = 'Fail'
-
-
+                
                 ##-- AIR Backup Check --##
                 if 'air' == user_l:
                     status = ''
@@ -194,12 +191,12 @@ def read_inp(inp_dir_path, user, inp_dir):
                     if ('tape.inp' in inp_name):
                         try:
                             temp_value = pre_day_hash[user_l][host.lower()][ip]['tape']
-                            # print("--------///////////",temp_value, pre_date4, pre_date3)
                             flag  = 1
                         except:
                             # print("----------------------temp_value")
                             flag = 0
                         if flag:
+                            regex4 = '(KFilesystem.*backup.*ended.*?at {})'.format(pre_date4)
                             status, fail_reason = tape(file_data, pre_date4, pre_date3, inp_dir_path)
                         else:
                             status, fail_reason = tape(file_data, curr_date, curr_date5, inp_dir_path)
@@ -294,7 +291,10 @@ def tape(data, date1, date2, inp_dir_path):
     regex3 = '(INFO:root.*?Filesystem.*backup started.*?at {})'.format(curr_date)
 
     regex4 = '(Filesystem.*backup.*ended.*?at {})'.format(date1)
+    regex5 = '(KFilesystem.*backup.*ended.*?at {})'.format(date1)
     # print(regex4, inp_dir_path)
+    # if len(re.findall(regex5, data)) > 0:
+    #     status = 'Success'
     if len(re.findall(regex4, data)) > 0:
         status = 'Success'
     elif len(re.findall(regex1, data)) > 0 or len(re.findall(regex2, data)) > 0:
@@ -430,7 +430,7 @@ def pre_day_hash_dict():
                     'tape' : 1
                 }
             },
-            'asair8' : {
+            'apair11' : {
                 '10.197.8.225' : {
                     'tape' : 1
                 }
@@ -443,7 +443,9 @@ def pre_day_hash_dict():
             'asair6' : {
                 '10.226.8.157' : {
                     'tape' : 1
-                },
+                }
+            },
+            'apair6' : {
                 '10.197.88.27' : {
                     'tape' : 1
                 }
@@ -490,4 +492,4 @@ def main():
 if __name__ == '__main__':
     parsed_hash = main()
     print("========================================")
-    print(parsed_hash["sdp-geo-red"])
+    print(parsed_hash["ngvs"])

@@ -1,6 +1,7 @@
 cmd-14-start
-sudo /usr/share/cassandra/bin/nodetool -u cassmgmt -pw Su0p ra2bat7@MTN -p 9192 status
-Datacenter: DC1
+sudo /usr/share/cassandra/bin/nodetool -u cassmgmt -pw Su0p 
+ra2bat7@MTN -p 9192 status
+Datacenter: DC3
 ===============
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving

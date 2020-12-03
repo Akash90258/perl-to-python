@@ -1,5 +1,0 @@
-cmd-8-start
-tail -20 /backup1/dbdumps/PPLE_SYB.`date +%Y.%m.%d`*/dump.log|grep -i  "DUMP is complete"
-Backup Server: 3.42.1.1: DUMP is complete (database master).
-bash-3.00$ 
-cmd-8-end

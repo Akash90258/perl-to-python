@@ -1,4 +1,7 @@
 cmd-8-start
-sudo /opt/TimesTen/bin/ttRepAdmin -dsn sdp_db -receiver -list  |grep -i --color=never "SDP"|grep -iv "Start"
+sudo /opt/TimesTen/bin/ttRepAdmin -dsn sdp_db -receiver -list 
+ |grep -i --color=never "SDP"|grep -iv "Start"
 [AMSRO@APSDPC1 ~]$ 
 cmd-8-end
+adfa
+adfa
