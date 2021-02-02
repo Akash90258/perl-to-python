@@ -61,6 +61,20 @@ def Is_IP_Exists(IP, pma_ips):
             break
     return flag
 
+def check_path_for_SDP(basepath,node_key, key2, key1, inp_name):
+    dynamic_path = '{}/{}_{}'.format(node_key, key2, key1)
+    full_path = basepath + dynamic_path
+    # print(full_path)
+    #print(full_path,"==============")
+    isDir = os.path.isdir(full_path)  
+    if not isDir:
+        if key1[-1] == 'a' :
+            key1 = key1[0:-1]+'b'
+        if key1[-1] == '1' :
+            key1 = key1[0:-1]+'2'
+    return key1
+
+
 
 def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
     """
@@ -75,14 +89,15 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
                 for key3, values3 in values2.items():
                     geo_flag = 0
                     if 'Success' not in values3 and 'Password Issue' not in values3 :
+                        node_key = ""
                         if key.lower() not in updated_pma_dict:
                             if "geo-red" not in key.lower():
                                 continue
                         if "geo-red"  in key.lower():
                             if "sdp" in key.lower():
-                                key = "sdp"
+                                node_key = "sdp"
                             if "ngvs" in key.lower():
-                                key = "ngvs"
+                                node_key = "ngvs"
                             geo_flag = 1
                         else:
                             flag = Is_IP_Exists(key2, updated_pma_dict[key.lower()])
@@ -90,29 +105,30 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
                                 continue
 
 
-                        if geo_flag == 1 and key.lower()=="sdp":
-                            # print(key, key1, key2, full_path,"=======================","in sDP")
-                            dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, "TTMonitorStandby.inp")
+                        if geo_flag == 1 and node_key.lower()=="sdp":
+                            # print(key, key1, key2,key3 ,full_path,"=======================","in sDP")
+                            node_key1 = check_path_for_SDP(basepath,node_key, key2, key1, "TTMonitorStandby.inp")
+                            dynamic_path = '{}/{}_{}/{}'.format(node_key, key2, node_key1, "TTMonitorStandby.inp")
                             full_path = basepath + dynamic_path
                             file_data = read_file(full_path)
+
                             geo_str = file_data.strip().split('\n')
                             arr_len = len(geo_str)
                             if arr_len > 4:
                                 file_data = read_file_encoaded(full_path)
-                                log_row = ["SDP-GEO-RED", key1, key2, "TTMonitorStandby.inp", file_data]
+                                log_row = ["SDP-GEO-RED", node_key1, key2, "TTMonitorStandby.inp", file_data]
                                 log_rows.append(log_row)
-
-                            dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, "TTMonitorlog.inp")
+                            node_key1 = check_path_for_SDP(basepath,node_key, key2, key1, "TTMonitorlog.inp")
+                            dynamic_path = '{}/{}_{}/{}'.format(node_key, key2, node_key1, "TTMonitorlog.inp")
                             full_path = basepath + dynamic_path
                             file_data = read_file_encoaded(full_path)
                             if '9' not in file_data:
-                                log_row = ["SDP-GEO-RED", key1, key2, "TTMonitorlog.inp", file_data]
+                                log_row = ["SDP-GEO-RED", node_key1, key2, "TTMonitorlog.inp", file_data]
                                 log_rows.append(log_row)
                             continue
 
-                        if geo_flag == 1 and key.lower()=="ngvs":
-                            # print("pppppppppppppppppxxxxxxxxxx iam in ",geo_flag,key)
-                            dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, "geo.inp")
+                        if geo_flag == 1 and node_key.lower()=="ngvs":
+                            dynamic_path = '{}/{}_{}/{}'.format(node_key, key2, key1, "geo.inp")
                             full_path = basepath + dynamic_path
                             file_data = read_file(full_path)
                             status = ngvs_geo(file_data)
@@ -120,9 +136,8 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
                                 log_row = ["NGVS-GEO-RED", key1, key2, "geo.inp", file_data]
                                 log_rows.append(log_row)
                             continue
-                        if geo_flag == 0 and key.lower()=="ngvs":
-                            print(key3,"]]]]]]]]]]]]]")
-                            dynamic_path = '{}/{}_{}/'.format(key, key2, key1)
+                        if geo_flag == 0 and node_key.lower()=="ngvs":
+                            dynamic_path = '{}/{}_{}/'.format(node_key, key2, key1)
                             full_path = basepath + dynamic_path
                             log_row = ["NGVS-GEO-RED", key1, key2]
                             print(ngvs_cassendra_logs(full_path,log_row))
@@ -131,13 +146,23 @@ def json_flatten_for_logs(parsed_hash, updated_pma_dict, basepath):
                                 log_rows.append(log)
 
 
-                          
-
                         dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, key3)
                         full_path = basepath + dynamic_path
                         try:
                             file_data = read_file_encoaded(full_path)
                         except Exception as e:
+                            if 'ngvs' in key.lower() and 'cassendra' in full_path:
+                                cass = ['cassendra1.inp','cassendra2.inp','cassendra3.inp']
+                                try:
+                                    for cass_file in cass:
+                                        dynamic_path = '{}/{}_{}/{}'.format(key, key2, key1, cass_file)
+                                        full_path = basepath + dynamic_path
+                                        file_data = read_file_encoaded(full_path)
+                                        log_row = [key, key1, key2, cass_file, file_data]
+                                        log_rows.append(log_row)
+                                        
+                                except:
+                                    continue
                             continue
                         log_row = [key, key1, key2, key3, file_data]
                         log_rows.append(log_row)
@@ -316,14 +341,14 @@ def nodes_iterator_ngvs(values, pma_ips):
         node_name = key
         row_data.append(node_name) # node name
         row_data.append(IP)        #Ip
-        status = update_status(list(value.values())[0]['tape.inp'])
-        row_data.append(status)    #VCCN Backup Status
-        if 'not' not in status.lower() and 'Issue' not in status:
-            success_nodes_tape += 1
         status = update_status(list(value.values())[0]['cassendra.inp'])
         row_data.append(status)    #VCCN Backup Status
         if 'not' not in status.lower() and 'Issue' not in status:
             success_nodes_cassendra += 1
+        status = update_status(list(value.values())[0]['tape.inp'])
+        row_data.append(status)    #VCCN Backup Status
+        if 'not' not in status.lower() and 'Issue' not in status:
+            success_nodes_tape += 1
         final_data.append(row_data)
     return final_data, success_nodes_cassendra, success_nodes_tape
 

@@ -11,7 +11,7 @@ cassendra_arr = []
 issue1 = 'Connectivity/Password Issue'
 
 one_day_delta = datetime.timedelta(1)
-todays_datetime = datetime.datetime.today() - datetime.timedelta(9)
+todays_datetime = datetime.datetime.today() #- datetime.timedelta(50)
 
 day1 = str(todays_datetime.strftime('%d'))
 day2 = str(todays_datetime.strftime('%e'))
@@ -492,4 +492,4 @@ def main():
 if __name__ == '__main__':
     parsed_hash = main()
     print("========================================")
-    print(parsed_hash["ngvs"])
+    print(parsed_hash['ngvs']['APNGVS12'])
